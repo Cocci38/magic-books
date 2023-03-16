@@ -112,18 +112,14 @@ class Categories {
     }
 
     /**
-     * Pour lire la liste des categories
-     * 
+     * Pour lire toutes les catégories
+     *
+     * @return query
      */
     public function readAll(){
-        // On écrit la requête
-        // $query = $this->connexion->prepare("SELECT b.title, b.author, b.editor, b.summary, b.release_date, b.cover, c.name FROM $this->table c 
-        //                                     LEFT JOIN books b ON c.id = b.categories_id ORDER BY c.name ASC");
+        // On  prépare et on écrit la requête
 
         $query = $this->connexion->prepare("SELECT name FROM " . $this->table . " ORDER BY name ASC");
-        
-        // On prépare la requête
-        //$query = $this->connexion->prepare($sql);
 
         //On execute la requête
         $query->execute();
@@ -135,15 +131,13 @@ class Categories {
     /**
      * Pour lire la liste des categories
      * 
+     * @return
      */
     public function readById(){
-        // On écrit la requête
-        //$query = $this->connexion->prepare("SELECT b.title, b.author, b.editor, b.summary, b.release_date, b.cover, c.name FROM " . $this->table . " c LEFT JOIN books b ON c.id = b.categories_id WHERE c.id = :id");
+        // On prépare et on écrit la requête
 
         $query = $this->connexion->prepare("SELECT name FROM " . $this->table . " WHERE id = :id");
         
-        // On prépare la requête
-        //$query = $this->connexion->prepare($sql);
         $this->id = $this->valid_data($this->id);
 
         $query->bindParam(":id", $this->id, PDO::PARAM_INT);
