@@ -43,8 +43,7 @@ class Router
                     $route->execute(); // Cette fonction appelle le bon controlleur avec la bonne fonction
                 }
             }
-        }
-        else {
+        } else {
             http_response_code(405);
             echo json_encode(["message" => "La methode n'est pas autorisee"]);
         }
