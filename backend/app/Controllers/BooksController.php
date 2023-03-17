@@ -91,6 +91,99 @@ class BooksController
         }
     }
 
+    public function create()
+    {
+        // Méthode autorisée
+        header("Access-Control-Allow-Methods: POST");
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            // On instancie la base de données
+            $database = new Database();
+            $db = $database->getConnexion();
+
+            // On instancie l'objet Books
+            $book = new Books($db);
+
+            // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+            $data = json_decode(file_get_contents("php://input"));
+            //var_dump($data);
+            $cover = $book->uploadImage();
+            var_dump($cover);
+            if (!empty($data->title) && !empty($data->author_id) && !empty($data->editor) && !empty($data->summary)) {
+                // On hydrate l'objet book
+                $book->setTitle($data->title);
+                $book->setAuthorId($data->author_id);
+                $book->setEditor($data->editor);
+                $book->setSummary($data->summary);
+                $book->setReleaseDate($data->release_date);
+                $book->setCover($cover);
+                $book->setCategoryId($data->category_id);
+                //var_dump($book);
+                $result = $book->create();
+                if ($result) {
+                    http_response_code(201);
+                    echo json_encode(["message" => "Le livre a été ajouté avec succès"]);
+                } else {
+                    http_response_code(503);
+                    echo json_encode(["message" => "L'ajout du livre a échoué"]);
+                }
+            } else {
+                //http_response_code(503);
+                echo json_encode(["message" => "Les données ne sont pas complètes"]);
+            }
+        } else {
+            http_response_code(405);
+            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+        }
+    }
+
+    public function update()
+    {
+        // Méthode autorisée
+        header("Access-Control-Allow-Methods: PUT");
+
+        if ($_SERVER["REQUEST_METHOD"] === "PUT") {
+            // On instancie la base de données
+            $database = new Database();
+            $db = $database->getConnexion();
+
+            // On instancie l'objet Books
+            $book = new Books($db);
+
+            // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+            $data = json_decode(file_get_contents("php://input"));
+            $cover = $book->uploadImage();
+            //var_dump($cover);
+            if(!empty($data->id) && !empty($data->title) && !empty($data->author_id) && !empty($data->editor) && !empty($data->summary)){
+            //On hydrate l'objet book
+            $book->setId($data->id);
+            $book->setTitle($data->title);
+            $book->setAuthorId($data->author_id);
+            $book->setEditor($data->editor);
+            $book->setSummary($data->summary);
+            $book->setReleaseDate($data->release_date);
+            $book->setCover($cover);
+            $book->setCategoryId($data->category_id);
+
+            $result = $book->update();
+            if ($result) {
+                http_response_code(201);
+                echo json_encode(["message" => "Le livre a été modifié avec succès"]);
+            } else {
+                http_response_code(503);
+                echo json_encode(["message" => "La modification du livre a échoué"]);
+            }
+            }else{
+                //http_response_code(503);
+                echo json_encode(["message"=>"Les données ne sont pas complètes"]);
+            }
+
+        } else {
+            http_response_code(405);
+            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+        }
+    }
+
     public function delete()
     {
         // Méthode autorisée

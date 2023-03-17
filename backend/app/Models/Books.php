@@ -404,6 +404,7 @@ class Books {
      */
     public function uploadImage()
     {
+        var_dump($_FILES);
         if (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
             // On a reçu l'image
             // On procède aux vérifications
@@ -433,7 +434,7 @@ class Books {
             // On génère un nom unique pour le fichier
             $newName = md5(uniqid());
             // On génère le complet
-            $newFilename = "C:\laragon\www\biblio\assets" . DIRECTORY_SEPARATOR . $newName . "." . $extension;
+            $newFilename = "C:\laragon\www\magic-books\backend\public\pictures" . DIRECTORY_SEPARATOR . $newName . "." . $extension;
             //var_dump($newFilename);
             // On déplace le fichier de tmp à assets en le renommant
             if (!move_uploaded_file($_FILES["image"]["tmp_name"], $newFilename)) {
