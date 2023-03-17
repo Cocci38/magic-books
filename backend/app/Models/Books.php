@@ -11,12 +11,12 @@ class Books {
     
     private $id;
     private $title;
-    private $author;
+    private $author_id;
     private $editor;
     private $summary;
     private $release_date;
     private $cover;
-    private $categories_id;
+    private $category_id;
     private $categories_name;
 
     /**
@@ -105,17 +105,17 @@ class Books {
     /**
      * Get the value of author
      */
-    public function getAuthor()
+    public function getAuthorId()
     {
-        return $this->author;
+        return $this->author_id;
     }
 
     /**
      * Set the value of author
      */
-    public function setAuthor($author): self
+    public function setAuthorId($author_id): self
     {
-        $this->author = $author;
+        $this->author_id = $author_id;
 
         return $this;
     }
@@ -195,17 +195,17 @@ class Books {
     /**
      * Get the value of categories_id
      */
-    public function getCategoriesId()
+    public function getCategoryId()
     {
-        return $this->categories_id;
+        return $this->category_id;
     }
 
     /**
      * Set the value of categories_id
      */
-    public function setCategoriesId($categories_id): self
+    public function setCategoryId($category_id): self
     {
-        $this->categories_id = $categories_id;
+        $this->category_id = $category_id;
 
         return $this;
     }
@@ -253,8 +253,9 @@ class Books {
      */
     public function readAll(){
         // On écrit la requête
-        $query = $this->connexion->prepare("SELECT b.title, b.author, b.editor, b.summary, b.release_date, b.cover, c.name FROM $this->table b 
-                                            LEFT JOIN categories c ON b.categories_id = c.id ORDER BY b.title ASC");
+        $query = $this->connexion->prepare("SELECT b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name FROM $this->table b 
+                                            LEFT JOIN categories c ON b.category_id = c.id 
+                                            LEFT JOIN authors a ON b.author_id = a.id ORDER BY b.title ASC");
         
         // On prépare la requête
         //$query = $this->connexion->prepare($sql);
@@ -265,12 +266,18 @@ class Books {
         // On retourne le résultat
         return $query;
     }
-
+    
+    /**
+     * Pour lire un lvre selon son id
+     *
+     * @return id
+     */
     public function readById(){
         // On écrit la requête
         //$query = $this->connexion->prepare("SELECT id, title, author, editor, summary, release_date, cover FROM " . $this->table . " WHERE id = :id");
-        $query = $this->connexion->prepare("SELECT b.title, b.author, b.editor, b.summary, b.release_date, b.cover, c.name as categories_name FROM " . $this->table . " b 
-                                            LEFT JOIN categories c ON b.categories_id = c.id 
+        $query = $this->connexion->prepare("SELECT b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name as categories_name FROM " . $this->table . " b 
+                                            LEFT JOIN categories c ON b.category_id = c.id 
+                                            LEFT JOIN authors a ON b.author_id = a.id
                                             WHERE b.id = :id");
         //$query = $this->connexion->prepare($sql);
         //$query->bindParam(1, $this->id);
@@ -280,5 +287,165 @@ class Books {
         $query->execute();
 
         return $query;
+    }
+
+    /**
+     * Pour insérer un livre dans la base données
+     *
+     * @return void
+     */
+    public function create()
+    {
+        if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->title)) {
+            if (preg_match("/^[a-zA-Z0-9-\' \æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->editor)) {
+                if (preg_match("/^[a-zA-Z0-9-\' ,.?!:æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,500}$/", $this->summary)) {
+                    $query = $this->connexion->prepare("INSERT INTO $this->table(title, author_id, editor, summary, release_date, cover, category_id)
+                                                            VALUES(:title, :author_id, :editor, :summary, :release_date, :cover, :category_id)");
+
+                    // Préparation de la requête
+                    //$query = $this->connexion->prepare($sql);
+
+                    // Protection contre les injections
+                    $this->title = $this->valid_data($this->title);
+                    $this->author_id = $this->valid_data($this->author_id);
+                    $this->editor = $this->valid_data($this->editor);
+                    $this->summary = $this->valid_data($this->summary);
+                    $this->release_date = $this->valid_data($this->release_date);
+                    $this->cover = $this->valid_data($this->cover);
+                    $this->category_id = $this->valid_data($this->category_id);
+
+                    $query->bindParam(":title", $this->title, PDO::PARAM_STR);
+                    $query->bindParam(":author_id", $this->author_id, PDO::PARAM_INT);
+                    $query->bindParam(':editor', $this->editor, PDO::PARAM_STR);
+                    $query->bindParam(":summary", $this->summary, PDO::PARAM_STR);
+                    $query->bindParam(":release_date", $this->release_date, PDO::PARAM_STR);
+                    $query->bindParam(":cover", $this->cover, PDO::PARAM_STR);
+                    $query->bindParam(":category_id", $this->category_id, PDO::PARAM_INT);
+
+                    //On execute la requête
+                    if ($query->execute()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Pour la modification d'un livre
+     *
+     * @return void
+     */
+    public function update()
+    {
+        if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->title)) {
+            if (preg_match("/^[a-zA-Z0-9-\' æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->editor)) {
+                if (preg_match("/^[a-zA-Z0-9-\' ,.?!:æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,500}$/", $this->summary)) {
+
+                    $query = $this->connexion->prepare("UPDATE " . $this->table . " SET title = :title, author_id = :author_id, editor = :editor, summary = :summary, release_date = :release_date, cover = :cover, category_id = :category_id WHERE id=:id");
+
+                    // Protection contre les injections
+                    $this->title = $this->valid_data($this->title);
+                    $this->author_id = $this->valid_data($this->author_id);
+                    $this->editor = $this->valid_data($this->editor);
+                    $this->summary = $this->valid_data($this->summary);
+                    $this->release_date = $this->valid_data($this->release_date);
+                    $this->cover = $this->valid_data($this->cover);
+                    $this->category_id = $this->valid_data($this->category_id);
+                    $this->id = $this->valid_data($this->id);
+
+                    $query->bindParam(":title", $this->title, PDO::PARAM_STR);
+                    $query->bindParam(":author_id", $this->author_id, PDO::PARAM_INT);
+                    $query->bindParam(":editor", $this->editor, PDO::PARAM_STR);
+                    $query->bindParam(":summary", $this->summary, PDO::PARAM_STR);
+                    $query->bindParam(":release_date", $this->release_date, PDO::PARAM_STR);
+                    $query->bindParam(":cover", $this->cover, PDO::PARAM_STR);
+                    $query->bindParam(":category_id", $this->category_id, PDO::PARAM_INT);
+                    $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+
+                    //On execute la requête
+                    if ($query->execute()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Pour supprimer un livre
+     *
+     * @return void
+     */
+    public function delete()
+    {
+        $query = $this->connexion->prepare("DELETE FROM " . $this->table . " WHERE id = :id");
+
+        $this->id = $this->valid_data($this->id);
+
+        $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+
+        //On execute la requête
+        if ($query->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Pour l'upload d'un fichier
+     *
+     * @return $newName . "." . $extension
+     */
+    public function uploadImage()
+    {
+        if (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
+            // On a reçu l'image
+            // On procède aux vérifications
+            // On vérifie toujours l'extension et le type MIME
+            $allowed = [
+                "jpg" => "image/jpeg",
+                "jpeg" => "image/jpeg",
+                "png" => "image/png"
+            ];
+
+            $filename = $_FILES["image"]["name"];
+            $filetype = $_FILES["image"]["type"];
+            $filesize = $_FILES["image"]["size"];
+
+            $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            // On vérifie l'absence de l'extension dans les clés de $allowed ou l'absence du type MIME dans les valeurs
+            if (!array_key_exists($extension, $allowed) || !in_array($filetype, $allowed)) {
+                // Ici l'extension ou le type est incorrect
+                die("Erreur : format de fichier incorrect");
+            }
+            // Ici le type est correct
+            // On limite à 1Mo
+            if ($filesize > 1024 * 1024) {
+                die("Erreur : Fichier trop volumineux");
+            }
+
+            // On génère un nom unique pour le fichier
+            $newName = md5(uniqid());
+            // On génère le complet
+            $newFilename = "C:\laragon\www\biblio\assets" . DIRECTORY_SEPARATOR . $newName . "." . $extension;
+            //var_dump($newFilename);
+            // On déplace le fichier de tmp à assets en le renommant
+            if (!move_uploaded_file($_FILES["image"]["tmp_name"], $newFilename)) {
+                die("L'upload a échoué");
+            }
+
+            // On interdit l'exécution du fichier
+            // Notre fichier une fois uploader ne pourra pas être exécuter. Le groupe et les autres pourront seulement le lire 
+            chmod($newFilename, 0644);
+            
+            return $newName . "." . $extension;
+        }
+        
     }
 }

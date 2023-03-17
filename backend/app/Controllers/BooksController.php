@@ -5,25 +5,13 @@ namespace App\Controllers;
 use Config\Database;
 use App\Models\Books;
 
-class BooksController{
+class BooksController
+{
 
     public function readAll()
     {
-        // Les entêtes requis
-        // Accès depuis n'importe quel site ou appareil (*)
-        header("Access-Control-Allow-Origin: *");
-
-        // Format des données envoyées
-        header("Content-Type: application/json; charset=UTF-8");
-
         // Méthode autorisée
         header("Access-Control-Allow-Methods: GET");
-
-        // Durée de vie de la requête
-        header("Access-Control-Max-Age: 3600");
-
-        // Entêtes autorisées
-        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
         if ($_SERVER["REQUEST_METHOD"] === "GET") {
             // On instancie la base de données
@@ -54,23 +42,9 @@ class BooksController{
 
     public function readById(int $id)
     {
-        // Les entêtes requis
-        // Accès depuis n'importe quel site ou appareil (*)
-        header("Access-Control-Allow-Origin: *");
-
-        // Format des données envoyées
-        header("Content-Type: application/json; charset=UTF-8");
-
         // Méthode autorisée
         header("Access-Control-Allow-Methods: GET");
 
-        // Durée de vie de la requête
-        header("Access-Control-Max-Age: 3600");
-
-        // Entêtes autorisées
-        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
-        
         if ($_SERVER["REQUEST_METHOD"] === "GET") {
             // On instancie la base de données
             $database = new Database();
@@ -116,9 +90,40 @@ class BooksController{
             echo json_encode(["message" => "La méthode n'est pas autorisée"]);
         }
     }
+
+    public function delete()
+    {
+        // Méthode autorisée
+        header("Access-Control-Allow-Methods: DELETE");
+
+        if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
+            // On instancie la base de données
+            $database = new Database();
+            $db = $database->getConnexion();
+
+            // On instancie l'objet Books
+            $book = new Books($db);
+
+            // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+            $data = json_decode(file_get_contents("php://input"));
+
+            if (!empty($data->id)) {
+                $book->setId($data->id);
+
+                $result = $book->delete();
+                if ($result) {
+                    http_response_code(200);
+                    echo json_encode(["message" => "La suppression du livre a été effectué avec succès"]);
+                } else {
+                    http_response_code(503);
+                    echo json_encode(["message" => "La suppression du livre a échoué"]);
+                }
+            } else {
+                echo json_encode(["message" => "Vous devez précisé l'identifiant de la catégorie"]);
+            }
+        } else {
+            http_response_code(405);
+            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+        }
+    }
 }
-
-
-
-
-?>
