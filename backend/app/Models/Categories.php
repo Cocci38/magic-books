@@ -4,7 +4,8 @@ namespace App\Models;
 
 use PDO;
 
-class Categories {
+class Categories
+{
 
     private $table = "categories";
     private $connexion = null;
@@ -17,7 +18,8 @@ class Categories {
      *
      * @param $db
      */
-    public function __construct($db){
+    public function __construct($db)
+    {
         if ($this->connexion == null) {
             $this->connexion = $db;
         }
@@ -94,18 +96,19 @@ class Categories {
 
         return $this;
     }
-    
+
     /**
      * Fonction pour nettoyer les données qui arrivent
      *
      * @param [type] $data
      * @return void
      */
-    private function valid_data($data){
+    private function valid_data($data)
+    {
         //$data = ($data != null) ? trim(stripslashes(strip_tags(htmlspecialchars($data)))) : $data;
         $data = trim($data);            // Supprime les espaces (ou d'autres caractères) en début et fin de chaîne
         $data = stripslashes($data);    // Supprime les antislashs d'une chaîne
-        $data = htmlspecialchars($data);// Convertit les caractères spéciaux en entités HTML
+        $data = htmlspecialchars($data); // Convertit les caractères spéciaux en entités HTML
         $data = strip_tags($data);      // Supprime les balises HTML et PHP d'une chaîne
         //$data = htmlentities($data, ENT_COMPAT);
         return $data;
@@ -116,7 +119,8 @@ class Categories {
      *
      * @return query
      */
-    public function readAll(){
+    public function readAll()
+    {
         // On  prépare et on écrit la requête
 
         $query = $this->connexion->prepare("SELECT name FROM " . $this->table . " ORDER BY name ASC");
@@ -133,11 +137,12 @@ class Categories {
      * 
      * @return
      */
-    public function readById(){
+    public function readById()
+    {
         // On prépare et on écrit la requête
 
         $query = $this->connexion->prepare("SELECT name FROM " . $this->table . " WHERE id = :id");
-        
+
         $this->id = $this->valid_data($this->id);
 
         $query->bindParam(":id", $this->id, PDO::PARAM_INT);
@@ -147,5 +152,81 @@ class Categories {
 
         // On retourne le résultat
         return $query;
+    }
+
+    /**
+     * Pour insérer une catégorie dans la base données
+     *
+     * @return void
+     */
+    public function create()
+    {
+        if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->name)) {
+            $query = $this->connexion->prepare("INSERT INTO $this->table(name)
+                                                            VALUES(:name)");
+
+            // Préparation de la requête
+            //$query = $this->connexion->prepare($sql);
+
+            // Protection contre les injections
+            $this->name = $this->valid_data($this->name);
+
+            $query->bindParam(":name", $this->name, PDO::PARAM_STR);
+
+            //On execute la requête
+            if ($query->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
+     * Pour la modification d'une catégorie
+     *
+     * @return void
+     */
+    public function update()
+    {
+        if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->name)) {
+
+            $query = $this->connexion->prepare("UPDATE " . $this->table . " SET name = :name WHERE id=:id");
+
+            // Protection contre les injections
+            $this->name = $this->valid_data($this->name);
+            $this->id = $this->valid_data($this->id);
+
+            $query->bindParam(":name", $this->name, PDO::PARAM_STR);
+            $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+
+            //On execute la requête
+            if ($query->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
+     * Pour supprimer une catégorie
+     *
+     * @return void
+     */
+    public function delete()
+    {
+        $query = $this->connexion->prepare("DELETE FROM " . $this->table . " WHERE id = :id");
+
+        $this->id = $this->valid_data($this->id);
+
+        $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+
+        //On execute la requête
+        if ($query->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
