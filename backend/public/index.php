@@ -33,6 +33,13 @@ $router->post('/create/category', 'App\Controllers\CategoriesController@create')
 $router->put('/update/category/:id', 'App\Controllers\CategoriesController@update');
 $router->delete('/delete/category/:id', 'App\Controllers\CategoriesController@delete');
 
+// On appelle les fonctions readAll, readById, create, update and delete dans le bloc AuthorsController
+$router->get('/authors', 'App\Controllers\AuthorsController@readAll'); // Un chemin '/' et une action AuthorsController@readAll' (le controller @ la méthode)
+$router->get('/author/:id', 'App\Controllers\AuthorsController@readById'); // Dans l'url on écrit authors/id
+$router->post('/create/author', 'App\Controllers\AuthorsController@create');
+$router->put('/update/author/:id', 'App\Controllers\AuthorsController@update');
+$router->delete('/delete/author/:id', 'App\Controllers\AuthorsController@delete');
+
 // On appelle les fonctions signUp, signIn, updateAccount and deleteAccount dans le bloc UsersController
 $router->post('/signup', 'App\Controllers\UsersController@signUp');
 $router->post('/signin', 'App\Controllers\UsersController@signIn');

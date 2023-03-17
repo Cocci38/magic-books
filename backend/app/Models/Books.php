@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use PDO;
+use PDOException;
 
-class Books {
+class Books
+{
 
     private $table = "books";
     private $connexion = null;
-    
+
     private $id;
     private $title;
     private $author_id;
@@ -24,7 +26,8 @@ class Books {
      *
      * @param $db
      */
-    public function __construct($db){
+    public function __construct($db)
+    {
         if ($this->connexion == null) {
             $this->connexion = $db;
         }
@@ -234,14 +237,15 @@ class Books {
      * @param [type] $data
      * @return void
      */
-    private function valid_data($data){
+    private function valid_data($data)
+    {
         //$data = ($data != null) ? trim($data) : $data;
         //$data = ($data != null) ? stripslashes($data) : $data;
         //$data = ($data != null) ? strip_tags($data) : $data;
         //$data = ($data != null) ? htmlspecialchars($data, ENT_COMPAT,'ISO-8859-1', true) : $data;
         $data = trim($data);            // Supprime les espaces (ou d'autres caractères) en début et fin de chaîne
         $data = stripslashes($data);    // Supprime les antislashs d'une chaîne
-        $data = htmlspecialchars($data, ENT_COMPAT,'ISO-8859-1', true);// Convertit les caractères spéciaux en entités HTML
+        $data = htmlspecialchars($data, ENT_COMPAT, 'ISO-8859-1', true); // Convertit les caractères spéciaux en entités HTML
         $data = strip_tags($data);      // Supprime les balises HTML et PHP d'une chaîne
         //$data = htmlentities($data, ENT_COMPAT);
         return $data;
@@ -251,36 +255,38 @@ class Books {
      * Pour lire la liste des livres
      * 
      */
-    public function readAll(){
-        // On écrit la requête
-        $query = $this->connexion->prepare("SELECT b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name FROM $this->table b 
+    public function readAll()
+    {
+        try {
+            // On écrit la requête préparer
+            $query = $this->connexion->prepare("SELECT b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name FROM $this->table b 
                                             LEFT JOIN categories c ON b.category_id = c.id 
                                             LEFT JOIN authors a ON b.author_id = a.id ORDER BY b.title ASC");
-        
-        // On prépare la requête
-        //$query = $this->connexion->prepare($sql);
 
-        //On execute la requête
-        $query->execute();
+            //On execute la requête
+            $query->execute();
 
-        // On retourne le résultat
-        return $query;
+            // On retourne le résultat
+            return $query;
+            
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
+        }
     }
-    
+
     /**
      * Pour lire un lvre selon son id
      *
      * @return id
      */
-    public function readById(){
+    public function readById()
+    {
         // On écrit la requête
-        //$query = $this->connexion->prepare("SELECT id, title, author, editor, summary, release_date, cover FROM " . $this->table . " WHERE id = :id");
         $query = $this->connexion->prepare("SELECT b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name as categories_name FROM " . $this->table . " b 
                                             LEFT JOIN categories c ON b.category_id = c.id 
                                             LEFT JOIN authors a ON b.author_id = a.id
                                             WHERE b.id = :id");
-        //$query = $this->connexion->prepare($sql);
-        //$query->bindParam(1, $this->id);
+
         $this->id = $this->valid_data($this->id);
         $query->bindParam(":id", $this->id, PDO::PARAM_INT);
 
@@ -301,9 +307,6 @@ class Books {
                 if (preg_match("/^[a-zA-Z0-9-\' ,.?!:æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,500}$/", $this->summary)) {
                     $query = $this->connexion->prepare("INSERT INTO $this->table(title, author_id, editor, summary, release_date, cover, category_id)
                                                             VALUES(:title, :author_id, :editor, :summary, :release_date, :cover, :category_id)");
-
-                    // Préparation de la requête
-                    //$query = $this->connexion->prepare($sql);
 
                     // Protection contre les injections
                     $this->title = $this->valid_data($this->title);
@@ -444,9 +447,8 @@ class Books {
             // On interdit l'exécution du fichier
             // Notre fichier une fois uploader ne pourra pas être exécuter. Le groupe et les autres pourront seulement le lire 
             chmod($newFilename, 0644);
-            
+
             return $newName . "." . $extension;
         }
-        
     }
 }
