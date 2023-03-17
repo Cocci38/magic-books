@@ -268,7 +268,6 @@ class Books
 
             // On retourne le résultat
             return $query;
-            
         } catch (PDOException $exception) {
             echo "Erreur de connexion : " . $exception->getMessage();
         }
@@ -281,18 +280,22 @@ class Books
      */
     public function readById()
     {
-        // On écrit la requête
-        $query = $this->connexion->prepare("SELECT b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name as categories_name FROM " . $this->table . " b 
+        try {
+            // On écrit la requête
+            $query = $this->connexion->prepare("SELECT b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name as categories_name FROM " . $this->table . " b 
                                             LEFT JOIN categories c ON b.category_id = c.id 
                                             LEFT JOIN authors a ON b.author_id = a.id
                                             WHERE b.id = :id");
 
-        $this->id = $this->valid_data($this->id);
-        $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+            $this->id = $this->valid_data($this->id);
+            $query->bindParam(":id", $this->id, PDO::PARAM_INT);
 
-        $query->execute();
+            $query->execute();
 
-        return $query;
+            return $query;
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
+        }
     }
 
     /**
@@ -305,31 +308,36 @@ class Books
         if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->title)) {
             if (preg_match("/^[a-zA-Z0-9-\' \æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->editor)) {
                 if (preg_match("/^[a-zA-Z0-9-\' ,.?!:æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,500}$/", $this->summary)) {
-                    $query = $this->connexion->prepare("INSERT INTO $this->table(title, author_id, editor, summary, release_date, cover, category_id)
+
+                    try {
+                        $query = $this->connexion->prepare("INSERT INTO $this->table(title, author_id, editor, summary, release_date, cover, category_id)
                                                             VALUES(:title, :author_id, :editor, :summary, :release_date, :cover, :category_id)");
 
-                    // Protection contre les injections
-                    $this->title = $this->valid_data($this->title);
-                    $this->author_id = $this->valid_data($this->author_id);
-                    $this->editor = $this->valid_data($this->editor);
-                    $this->summary = $this->valid_data($this->summary);
-                    $this->release_date = $this->valid_data($this->release_date);
-                    $this->cover = $this->valid_data($this->cover);
-                    $this->category_id = $this->valid_data($this->category_id);
+                        // Protection contre les injections
+                        $this->title = $this->valid_data($this->title);
+                        $this->author_id = $this->valid_data($this->author_id);
+                        $this->editor = $this->valid_data($this->editor);
+                        $this->summary = $this->valid_data($this->summary);
+                        $this->release_date = $this->valid_data($this->release_date);
+                        $this->cover = $this->valid_data($this->cover);
+                        $this->category_id = $this->valid_data($this->category_id);
 
-                    $query->bindParam(":title", $this->title, PDO::PARAM_STR);
-                    $query->bindParam(":author_id", $this->author_id, PDO::PARAM_INT);
-                    $query->bindParam(':editor', $this->editor, PDO::PARAM_STR);
-                    $query->bindParam(":summary", $this->summary, PDO::PARAM_STR);
-                    $query->bindParam(":release_date", $this->release_date, PDO::PARAM_STR);
-                    $query->bindParam(":cover", $this->cover, PDO::PARAM_STR);
-                    $query->bindParam(":category_id", $this->category_id, PDO::PARAM_INT);
+                        $query->bindParam(":title", $this->title, PDO::PARAM_STR);
+                        $query->bindParam(":author_id", $this->author_id, PDO::PARAM_INT);
+                        $query->bindParam(':editor', $this->editor, PDO::PARAM_STR);
+                        $query->bindParam(":summary", $this->summary, PDO::PARAM_STR);
+                        $query->bindParam(":release_date", $this->release_date, PDO::PARAM_STR);
+                        $query->bindParam(":cover", $this->cover, PDO::PARAM_STR);
+                        $query->bindParam(":category_id", $this->category_id, PDO::PARAM_INT);
 
-                    //On execute la requête
-                    if ($query->execute()) {
-                        return true;
-                    } else {
-                        return false;
+                        //On execute la requête
+                        if ($query->execute()) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    } catch (PDOException $exception) {
+                        echo "Erreur de connexion : " . $exception->getMessage();
                     }
                 }
             }
@@ -347,32 +355,36 @@ class Books
             if (preg_match("/^[a-zA-Z0-9-\' æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->editor)) {
                 if (preg_match("/^[a-zA-Z0-9-\' ,.?!:æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,500}$/", $this->summary)) {
 
-                    $query = $this->connexion->prepare("UPDATE " . $this->table . " SET title = :title, author_id = :author_id, editor = :editor, summary = :summary, release_date = :release_date, cover = :cover, category_id = :category_id WHERE id=:id");
+                    try {
+                        $query = $this->connexion->prepare("UPDATE " . $this->table . " SET title = :title, author_id = :author_id, editor = :editor, summary = :summary, release_date = :release_date, cover = :cover, category_id = :category_id WHERE id=:id");
 
-                    // Protection contre les injections
-                    $this->title = $this->valid_data($this->title);
-                    $this->author_id = $this->valid_data($this->author_id);
-                    $this->editor = $this->valid_data($this->editor);
-                    $this->summary = $this->valid_data($this->summary);
-                    $this->release_date = $this->valid_data($this->release_date);
-                    $this->cover = $this->valid_data($this->cover);
-                    $this->category_id = $this->valid_data($this->category_id);
-                    $this->id = $this->valid_data($this->id);
+                        // Protection contre les injections
+                        $this->title = $this->valid_data($this->title);
+                        $this->author_id = $this->valid_data($this->author_id);
+                        $this->editor = $this->valid_data($this->editor);
+                        $this->summary = $this->valid_data($this->summary);
+                        $this->release_date = $this->valid_data($this->release_date);
+                        $this->cover = $this->valid_data($this->cover);
+                        $this->category_id = $this->valid_data($this->category_id);
+                        $this->id = $this->valid_data($this->id);
 
-                    $query->bindParam(":title", $this->title, PDO::PARAM_STR);
-                    $query->bindParam(":author_id", $this->author_id, PDO::PARAM_INT);
-                    $query->bindParam(":editor", $this->editor, PDO::PARAM_STR);
-                    $query->bindParam(":summary", $this->summary, PDO::PARAM_STR);
-                    $query->bindParam(":release_date", $this->release_date, PDO::PARAM_STR);
-                    $query->bindParam(":cover", $this->cover, PDO::PARAM_STR);
-                    $query->bindParam(":category_id", $this->category_id, PDO::PARAM_INT);
-                    $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+                        $query->bindParam(":title", $this->title, PDO::PARAM_STR);
+                        $query->bindParam(":author_id", $this->author_id, PDO::PARAM_INT);
+                        $query->bindParam(":editor", $this->editor, PDO::PARAM_STR);
+                        $query->bindParam(":summary", $this->summary, PDO::PARAM_STR);
+                        $query->bindParam(":release_date", $this->release_date, PDO::PARAM_STR);
+                        $query->bindParam(":cover", $this->cover, PDO::PARAM_STR);
+                        $query->bindParam(":category_id", $this->category_id, PDO::PARAM_INT);
+                        $query->bindParam(":id", $this->id, PDO::PARAM_INT);
 
-                    //On execute la requête
-                    if ($query->execute()) {
-                        return true;
-                    } else {
-                        return false;
+                        //On execute la requête
+                        if ($query->execute()) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    } catch (PDOException $exception) {
+                        echo "Erreur de connexion : " . $exception->getMessage();
                     }
                 }
             }
@@ -386,17 +398,21 @@ class Books
      */
     public function delete()
     {
-        $query = $this->connexion->prepare("DELETE FROM " . $this->table . " WHERE id = :id");
+        try {
+            $query = $this->connexion->prepare("DELETE FROM " . $this->table . " WHERE id = :id");
 
-        $this->id = $this->valid_data($this->id);
+            $this->id = $this->valid_data($this->id);
 
-        $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+            $query->bindParam(":id", $this->id, PDO::PARAM_INT);
 
-        //On execute la requête
-        if ($query->execute()) {
-            return true;
-        } else {
-            return false;
+            //On execute la requête
+            if ($query->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
         }
     }
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use PDO;
+use PDOException;
 
 class Categories
 {
@@ -108,7 +109,7 @@ class Categories
         //$data = ($data != null) ? trim(stripslashes(strip_tags(htmlspecialchars($data)))) : $data;
         $data = trim($data);            // Supprime les espaces (ou d'autres caractères) en début et fin de chaîne
         $data = stripslashes($data);    // Supprime les antislashs d'une chaîne
-        $data = htmlspecialchars($data, ENT_COMPAT,'ISO-8859-1', true); // Convertit les caractères spéciaux en entités HTML
+        $data = htmlspecialchars($data, ENT_COMPAT, 'ISO-8859-1', true); // Convertit les caractères spéciaux en entités HTML
         $data = strip_tags($data);      // Supprime les balises HTML et PHP d'une chaîne
         //$data = htmlentities($data, ENT_COMPAT);
         return $data;
@@ -121,15 +122,18 @@ class Categories
      */
     public function readAll()
     {
-        // On  prépare et on écrit la requête
+        try {
+            // On  prépare et on écrit la requête
+            $query = $this->connexion->prepare("SELECT name FROM " . $this->table . " ORDER BY name ASC");
 
-        $query = $this->connexion->prepare("SELECT name FROM " . $this->table . " ORDER BY name ASC");
+            //On execute la requête
+            $query->execute();
 
-        //On execute la requête
-        $query->execute();
-
-        // On retourne le résultat
-        return $query;
+            // On retourne le résultat
+            return $query;
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
+        }
     }
 
     /**
@@ -139,19 +143,22 @@ class Categories
      */
     public function readById()
     {
-        // On prépare et on écrit la requête
+        try {
+            // On prépare et on écrit la requête
+            $query = $this->connexion->prepare("SELECT name FROM " . $this->table . " WHERE id = :id");
 
-        $query = $this->connexion->prepare("SELECT name FROM " . $this->table . " WHERE id = :id");
+            $this->id = $this->valid_data($this->id);
 
-        $this->id = $this->valid_data($this->id);
+            $query->bindParam(":id", $this->id, PDO::PARAM_INT);
 
-        $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+            //On execute la requête
+            $query->execute();
 
-        //On execute la requête
-        $query->execute();
-
-        // On retourne le résultat
-        return $query;
+            // On retourne le résultat
+            return $query;
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
+        }
     }
 
     /**
@@ -162,22 +169,22 @@ class Categories
     public function create()
     {
         if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->name)) {
-            $query = $this->connexion->prepare("INSERT INTO $this->table(name)
-                                                            VALUES(:name)");
+            try {
+                $query = $this->connexion->prepare("INSERT INTO $this->table(name) VALUES(:name)");
 
-            // Préparation de la requête
-            //$query = $this->connexion->prepare($sql);
+                // Protection contre les injections
+                $this->name = $this->valid_data($this->name);
 
-            // Protection contre les injections
-            $this->name = $this->valid_data($this->name);
+                $query->bindParam(":name", $this->name, PDO::PARAM_STR);
 
-            $query->bindParam(":name", $this->name, PDO::PARAM_STR);
-
-            //On execute la requête
-            if ($query->execute()) {
-                return true;
-            } else {
-                return false;
+                //On execute la requête
+                if ($query->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (PDOException $exception) {
+                echo "Erreur de connexion : " . $exception->getMessage();
             }
         }
     }
@@ -191,20 +198,24 @@ class Categories
     {
         if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->name)) {
 
-            $query = $this->connexion->prepare("UPDATE " . $this->table . " SET name = :name WHERE id=:id");
+            try {
+                $query = $this->connexion->prepare("UPDATE " . $this->table . " SET name = :name WHERE id=:id");
 
-            // Protection contre les injections
-            $this->name = $this->valid_data($this->name);
-            $this->id = $this->valid_data($this->id);
+                // Protection contre les injections
+                $this->name = $this->valid_data($this->name);
+                $this->id = $this->valid_data($this->id);
 
-            $query->bindParam(":name", $this->name, PDO::PARAM_STR);
-            $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+                $query->bindParam(":name", $this->name, PDO::PARAM_STR);
+                $query->bindParam(":id", $this->id, PDO::PARAM_INT);
 
-            //On execute la requête
-            if ($query->execute()) {
-                return true;
-            } else {
-                return false;
+                //On execute la requête
+                if ($query->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (PDOException $exception) {
+                echo "Erreur de connexion : " . $exception->getMessage();
             }
         }
     }
@@ -216,17 +227,21 @@ class Categories
      */
     public function delete()
     {
-        $query = $this->connexion->prepare("DELETE FROM " . $this->table . " WHERE id = :id");
+        try {
+            $query = $this->connexion->prepare("DELETE FROM " . $this->table . " WHERE id = :id");
 
-        $this->id = $this->valid_data($this->id);
+            $this->id = $this->valid_data($this->id);
 
-        $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+            $query->bindParam(":id", $this->id, PDO::PARAM_INT);
 
-        //On execute la requête
-        if ($query->execute()) {
-            return true;
-        } else {
-            return false;
+            //On execute la requête
+            if ($query->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
         }
     }
 }
