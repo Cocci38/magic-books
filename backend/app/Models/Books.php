@@ -259,7 +259,7 @@ class Books
     {
         try {
             // On écrit la requête préparer
-            $query = $this->connexion->prepare("SELECT b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name FROM $this->table b 
+            $query = $this->connexion->prepare("SELECT b.id, b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name FROM $this->table b 
                                             LEFT JOIN categories c ON b.category_id = c.id 
                                             LEFT JOIN authors a ON b.author_id = a.id ORDER BY b.title ASC");
 
@@ -282,7 +282,7 @@ class Books
     {
         try {
             // On écrit la requête
-            $query = $this->connexion->prepare("SELECT b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name as categories_name FROM " . $this->table . " b 
+            $query = $this->connexion->prepare("SELECT b.id, b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name as categories_name FROM " . $this->table . " b 
                                             LEFT JOIN categories c ON b.category_id = c.id 
                                             LEFT JOIN authors a ON b.author_id = a.id
                                             WHERE b.id = :id");

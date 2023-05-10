@@ -5,6 +5,9 @@ namespace App\Controllers;
 use Config\Database;
 use App\Models\Categories;
 
+
+
+
 class CategoriesController
 {
 
@@ -87,7 +90,7 @@ class CategoriesController
     public function create()
     {
         // Méthode autorisée
-        header("Access-Control-Allow-Methods: POST");
+        //header("Access-Control-Allow-Methods: POST");
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -97,9 +100,9 @@ class CategoriesController
 
             // On instancie l'objet Categories
             $category = new Categories($db);
-
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
+            error_log(print_r($data)); //file_get_contents("php://input"),1));
             if (!empty($data->name)) {
                 // On hydrate l'objet category
                 $category->setName($data->name);
@@ -113,7 +116,7 @@ class CategoriesController
                     echo json_encode(["message" => "L'ajout de la catégorie a échoué"]);
                 }
             } else {
-                //http_response_code(503);
+                //http_response_code(409);
                 echo json_encode(["message" => "Les données ne sont pas complètes"]);
             }
         } else {

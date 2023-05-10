@@ -1,23 +1,29 @@
 <?php
+if ($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
+    header("Access-Control-Allow-Headers: Content-Type");
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
+    exit;
+}
+// Entêtes autorisées
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
+// Les entêtes requis
+// Accès depuis n'importe quel site ou appareil (*)
+header("Access-Control-Allow-Origin: *");
+// Format des données envoyées
+header("Content-Type: application/json; charset=UTF-8");
+// Durée de vie de la requête
+header("Access-Control: no-cache, max-age=0, private");
+header("Pragma: no-cache");
 
 use Router\Router;
 
 require '../vendor/autoload.php';
 
-// Les entêtes requis
-// Accès depuis n'importe quel site ou appareil (*)
-header("Access-Control-Allow-Origin: *");
-
-// Format des données envoyées
-header("Content-Type: application/json; charset=UTF-8");
-
-// Durée de vie de la requête
-header("Access-Control-Max-Age: 3600");
-
-// Entêtes autorisées
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
-$router = new Router($_GET['url']);
+//print_r($_SERVER);
+$url = "/".substr($_SERVER["QUERY_STRING"],4);
+$router = new Router($url);
 
 // On appelle les fonctions readAll, readById, create, update and delete dans le bloc BooksController
 $router->get('/books', 'App\Controllers\BooksController@readAll'); // Un chemin '/' et une action BooksController@readAll' (le controller @ la méthode)

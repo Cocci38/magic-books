@@ -69,7 +69,7 @@ class BooksController
                 //var_dump($result);
                 if ($result->rowCount() > 0) {
                     //$data = [];
-                    $donnees = $result->fetch();
+                    $donnees = $result->fetchAll();
                     // On vérifie si le livre existe
                     //if ($book->getId() != null) {
 
@@ -153,7 +153,7 @@ class BooksController
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
             $cover = $book->uploadImage();
-            //var_dump($cover);
+            var_dump($data);
             if(!empty($data->id) && !empty($data->title) && !empty($data->author_id) && !empty($data->editor) && !empty($data->summary)){
             //On hydrate l'objet book
             $book->setId($data->id);
