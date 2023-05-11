@@ -18,6 +18,25 @@
     -webkit-text-size-adjust: 100%;
 }
 
+header {
+    @include flexRow;
+    align-items: center;
+    img {
+        width: 12%;
+    }
+    ul {
+        list-style: none;
+        justify-self: center;
+        a {
+            text-decoration: none;
+            color: $dark-blue;
+        }
+    }
+    .activeLink {
+        color: $dark-blue;
+    }
+}
+
 .paragraphFlex {
     @include flexColumn;
     .paragraphName{

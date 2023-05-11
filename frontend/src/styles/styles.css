@@ -13,6 +13,26 @@
   -webkit-text-size-adjust: 100%;
 }
 
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+header img {
+  width: 12%;
+}
+header ul {
+  list-style: none;
+  justify-self: center;
+}
+header ul a {
+  text-decoration: none;
+  color: #2D3250;
+}
+header .activeLink {
+  color: #2D3250;
+}
+
 .paragraphFlex {
   display: flex;
   flex-direction: column;
