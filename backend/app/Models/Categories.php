@@ -124,7 +124,7 @@ class Categories
     {
         try {
             // On  prépare et on écrit la requête
-            $query = $this->connexion->prepare("SELECT name FROM " . $this->table . " ORDER BY name ASC");
+            $query = $this->connexion->prepare("SELECT id, name FROM " . $this->table . " ORDER BY name ASC");
 
             //On execute la requête
             $query->execute();

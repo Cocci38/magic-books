@@ -1,9 +1,97 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative&display=swap"); /**
+ * Page du style pour les formulaires
+ */
+.container, h2 {
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  color: #2D3250;
+}
+
+form {
+  width: 100%;
+  padding: 30px;
+  border: 1px solid #2D3250;
+  border-radius: 10px;
+  background: #f6f6ee;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+input[type=email], input[type=password], input[type=tel], input[type=text], input[type=number], input[type=date], input[type=search] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #F8B179;
+  box-sizing: border-box;
+}
+
+input[type=submit], button {
+  background-color: #2D3250;
+  color: #f6f6ee;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type=submit]:hover, button:hover {
+  background-color: #f6f6ee;
+  color: #2D3250;
+  border: 1px solid #2D3250;
+}
+
+input[type=button] {
+  background-color: #f6f6ee;
+  color: #2D3250;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: 1px solid #2D3250;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button {
+  text-decoration: none;
+  background-color: #2D3250;
+  color: #f6f6ee;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: 1px solid #f6f6ee;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #676F9D;
+  border: 1px solid #2D3250;
+  border-radius: 10px;
+}
+
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #f6f6ee;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #f6f6ee;
+  box-sizing: border-box;
+}
+
 :root {
   font-family: "Lustria";
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
   color: #2D3250;
   background-color: #f6f6ee;
   font-synthesis: none;
@@ -22,6 +110,9 @@ header img {
   width: 12%;
 }
 header ul {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
   list-style: none;
   justify-self: center;
 }
@@ -30,7 +121,7 @@ header ul a {
   color: #2D3250;
 }
 header .activeLink {
-  color: #2D3250;
+  color: #F8B179;
 }
 
 .paragraphFlex {

@@ -7,6 +7,7 @@ export const Menu = () => {
             <nav>
                 <ul>
                     <li><NavLink to='/' className={({isActive}) => (isActive ? "activeLink" : undefined)}>Accueil</NavLink></li>
+                    <li><NavLink to='/dashboard' className={({isActive}) => (isActive ? "activeLink" : undefined)}>Tableau de bord</NavLink></li>
                 </ul>
             </nav>
         </header>
