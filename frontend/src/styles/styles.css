@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative&display=swap"); /**
  * Page du style pour les formulaires
  */
-.container, h2 {
+.container, .h2Form {
   width: 50%;
   text-align: center;
   margin: 0 auto;
@@ -27,7 +27,7 @@ input[type=email], input[type=password], input[type=tel], input[type=text], inpu
   box-sizing: border-box;
 }
 
-input[type=submit], button {
+input[type=submit] {
   background-color: #2D3250;
   color: #f6f6ee;
   padding: 14px 20px;
@@ -37,7 +37,7 @@ input[type=submit], button {
   width: 100%;
 }
 
-input[type=submit]:hover, button:hover {
+input[type=submit]:hover {
   background-color: #f6f6ee;
   color: #2D3250;
   border: 1px solid #2D3250;
@@ -86,6 +86,48 @@ textarea {
   display: inline-block;
   border: 1px solid #f6f6ee;
   box-sizing: border-box;
+}
+
+/**
+ * Feuille de style pour le dashboard de l'administrateur
+ */
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+.dashboard .boxContainer {
+  border: 1px solid #2D3250;
+  border-radius: 10px;
+  height: -moz-min-content;
+  height: min-content;
+}
+.dashboard .boxContainer .boxLien {
+  display: flex;
+  flex-direction: column;
+}
+.dashboard .boxContainer .boxLien h2 {
+  text-decoration: underline;
+  text-align: center;
+}
+.dashboard .boxContainer .boxLien .buttonAdmin {
+  text-decoration: none;
+  text-align: center;
+  color: #2D3250;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+}
+.dashboard .boxContainer hr {
+  border: 0;
+  height: 1px;
+  background: #2D3250;
+  background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
+}
+.dashboard .infoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 :root {

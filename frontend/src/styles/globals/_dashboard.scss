@@ -1,0 +1,38 @@
+/**
+ * Feuille de style pour le dashboard de l'administrateur
+ */
+
+.dashboard {
+    @include flexRow;
+    gap: 50px;
+    .boxContainer {
+        border: 1px solid $dark-blue;
+        border-radius: 10px;
+        height: min-content;
+        .boxLien {
+            @include flexColumn;
+            h2 {
+                text-decoration: underline;
+                text-align: center;
+            }
+            .buttonAdmin {
+                text-decoration: none;
+                text-align: center;
+                color: $dark-blue;
+                padding: 14px 20px;
+                border: none;
+                cursor: pointer;
+            }
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #2D3250;
+            background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
+        }
+    }
+    .infoContainer {
+        @include flexRow;
+        justify-content: space-between;
+    }
+}

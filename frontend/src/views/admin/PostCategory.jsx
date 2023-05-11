@@ -44,7 +44,7 @@ export const PostCategory = () => {
     return (
         <div className="container">
             <form onSubmit={handlSubmit}>
-                <h2> Ajouter une catégorie</h2>
+                <h2 className="h2Form"> Ajouter une catégorie</h2>
                 <label htmlFor="nameCategory">Nom de la catégorie</label>
                 <input type="text" name="nameCategory" id="nameCategory" />
                 <span style={{ color: "red" }}>{errors.nameCategory}</span>

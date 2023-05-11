@@ -31,6 +31,7 @@ export const Categories = () => {
                     {/* <Link to={'/category/' + category.id} className="button">Voir le livre</Link> */}
                 </div>
 
-            ))}</section>
+            ))}
+        </section>
     )
 }

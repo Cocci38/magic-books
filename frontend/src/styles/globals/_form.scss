@@ -3,7 +3,7 @@
  */
 
 // Bordure des formulaires 
-.container, h2{
+.container, .h2Form{
     width: 50%;
     text-align: center;
     margin: 0 auto;
@@ -30,7 +30,7 @@ input[type=email], input[type=password],  input[type=tel], input[type=text], inp
 }
 
 // Pour définir un style pour tous les boutons
-input[type=submit], button {
+input[type=submit] {
     background-color: $dark-blue;
     color: $light;
     padding: 14px 20px;
@@ -39,7 +39,7 @@ input[type=submit], button {
     cursor: pointer;
     width: 100%;
 }
-input[type=submit]:hover, button:hover {
+input[type=submit]:hover {
     background-color: $light;
     color: $dark-blue;
     border: 1px solid $dark-blue;
@@ -53,7 +53,7 @@ input[type=button] {
     cursor: pointer;
     width: 100%;
 }
-.button {
+.button{
     text-decoration: none;
     background-color: $dark-blue;
     color: $light;
@@ -63,7 +63,7 @@ input[type=button] {
     border-radius: 10px;
     cursor: pointer;
 }
-.button:hover {
+.button:hover{
     background-color: $light-blue;
     border: 1px solid $dark-blue;
     border-radius: 10px;
