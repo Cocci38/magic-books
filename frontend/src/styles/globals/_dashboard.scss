@@ -4,7 +4,8 @@
 
 .dashboard {
     @include flexRow;
-    gap: 50px;
+    gap: 60px;
+    justify-content: center;
     .boxContainer {
         border: 1px solid $dark-blue;
         border-radius: 10px;
@@ -33,6 +34,16 @@
     }
     .infoContainer {
         @include flexRow;
+        flex-wrap: wrap;
         justify-content: space-between;
+    }
+    .containerFlex {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    @media screen and (max-width: 900px) {
+        gap: 10px;
     }
 }

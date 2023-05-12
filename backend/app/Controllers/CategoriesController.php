@@ -178,13 +178,13 @@ class CategoriesController
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
 
-            if (!empty($data->id)) {
-                $category->setId($data->id);
-
+            //echo json_encode($data);
+            if (!empty($data)) {
+                $category->setId($data);
                 $result = $category->delete();
                 if ($result) {
                     http_response_code(200);
-                    echo json_encode(["message" => "La suppression de la catégorie a été effectué avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "La suppression de la catégorie a été effectué avec succès"]);
                 } else {
                     http_response_code(503);
                     echo json_encode(["message" => "La suppression de la catégorie a échoué"]);

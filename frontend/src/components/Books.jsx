@@ -33,7 +33,7 @@ export const Books = () => {
                             <p className="paragraphFlex"><span className="paragraphName">Date de sortie</span><span> { new Date(book.release_date).toLocaleDateString("fr-FR") }</span> </p>
                             <p className="paragraphFlex"><span className="paragraphName">Catégorie</span><span>{ book.name }</span></p>
                         </div>
-                        <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{ book.summary.substring(0, 100) + " ..." }</span></p>
+                        <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{ book.summary.substring(0, 70) + " ..." }</span></p>
                         <Link to={'/book/' + book.id} className="button">Voir le livre</Link>
                     </div>
                     

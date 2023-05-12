@@ -94,7 +94,8 @@ textarea {
 .dashboard {
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  gap: 60px;
+  justify-content: center;
 }
 .dashboard .boxContainer {
   border: 1px solid #2D3250;
@@ -127,7 +128,19 @@ textarea {
 .dashboard .infoContainer {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
+}
+.dashboard .containerFlex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+@media screen and (max-width: 900px) {
+  .dashboard {
+    gap: 10px;
+  }
 }
 
 :root {
