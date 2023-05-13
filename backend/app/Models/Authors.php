@@ -203,9 +203,9 @@ class Authors
      */
     public function create()
     {
-        if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->name)) {
+        if (preg_match("/^[a-zA-Z0-9-\' :,.-?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->name)) {
             if (preg_match("/^[a-zA-Z0-9-\' :,.-?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->nationality)) {
-                if (preg_match("/^[a-zA-Z0-9-\' ,.?!:æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,500}$/", $this->biography)) {
+                if (preg_match("/^[a-zA-Z0-9-\' ,.-?!:()«»æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,}$/", $this->biography)) {
 
                     try {
                         $query = $this->connexion->prepare("INSERT INTO $this->table(name, nationality, biography)

@@ -22,6 +22,27 @@ export const Authors = () => {
         fetchAuthors()
     },[]);
 
+    const deleteAuthor = async (id) => {
+        if (window.confirm("Voulez-vous supprimer cet auteur ?")) {
+            // console.log(id);
+            await axios
+                .delete('http://localhost/magic-books/backend/delete/author/' + id, {
+                    data: id,
+                })
+                .then((res) => {
+                    //console.log(res.data.result);
+                    if (res.data.result === "Ok") {
+                        fetchAuthors();
+                    } else {
+                        console.log('erreur');
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
+    }
+
     return (
         <section>{!authors ? '' : authors
                     .map((author) => (
@@ -39,6 +60,7 @@ export const Authors = () => {
                         </div>
                         
                         <Link to={'/author/' + author.id} className="button">Voir l'auteur</Link>
+                        <button onClick={() => { deleteAuthor(author.id) }}>Supprimer</button>
                     </div>
                     
             ))}

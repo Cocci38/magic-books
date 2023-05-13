@@ -10,39 +10,26 @@ export const Dashboard = () => {
     const [showCategories, setShowCategories] = useState(false);
     const [showAuthors, setShowAuthors] = useState(false);
 
-    // Fonction pour afficher la liste des livres et cacher la liste des catégories
+    // Fonction pour afficher la liste des livres et cacher la liste des catégories et des auteurs
     const displayBook = () => {
         //console.log('livres');
-        if (showBooks == true) {
-            setShowBooks(false)
-            setShowCategories(true)
-        } else {
-            //console.log(showBooks);
+        if (showBooks == false) {
             setShowBooks(true)
             setShowCategories(false)
             setShowAuthors(false)
         }
     }
-    // Fonction pour afficher la liste des catégories et cacher la liste des livres
+    // Fonction pour afficher la liste des catégories et cacher la liste des livres et des auteurs
     const displayCategory = () => {
-        //console.log('catégorie');
-        if (showCategories == true) {
-            setShowCategories(false)
-            setShowBooks(true)
-        } else {
+        if (showCategories == false) {
             setShowCategories(true)
             setShowBooks(false)
             setShowAuthors(false)
         }
     }
-
-    // Fonction pour afficher la liste des catégories et cacher la liste des livres
+    // Fonction pour afficher la liste des auteurs et cacher la liste des livres et des catégories
     const displayAuthor = () => {
-        //console.log('catégorie');
-        if (showAuthors == true) {
-            setShowAuthors(false)
-            setShowBooks(true)
-        } else {
+        if (showAuthors == false) {
             setShowAuthors(true)
             setShowBooks(false)
             setShowCategories(false)

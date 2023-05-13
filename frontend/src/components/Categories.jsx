@@ -37,28 +37,29 @@ export const Categories = () => {
         console.log(nameCategory);
         setCategories({
             ...data,
-            "name":nameCategory
+            "name": nameCategory
         })
     }
 
     const deleteCategory = async (id) => {
-
-        // console.log(id);
-        await axios
-            .delete('http://localhost/magic-books/backend/delete/category/' + id, {
-            data: id,
-            })
-            .then((res) => {
-                //console.log(res.data.result);
-                if (res.data.result === "Ok") {
-                    fetchCategories();
-                } else {
-                    console.log('erreur');
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        if (window.confirm("Voulez-vous supprimer cet article ?")) {
+            // console.log(id);
+            await axios
+                .delete('http://localhost/magic-books/backend/delete/category/' + id, {
+                    data: id,
+                })
+                .then((res) => {
+                    //console.log(res.data.result);
+                    if (res.data.result === "Ok") {
+                        fetchCategories();
+                    } else {
+                        console.log('erreur');
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
     }
     return (
 
@@ -69,16 +70,14 @@ export const Categories = () => {
                         <span className="paragraphName">Nom de la catégorie</span>
                         {!showCategory && <span>{category.name}</span>}
                         {showCategory && <input type="text" name="nameCategory" defaultValue={category.name} onChange={changeHandler} ref={nomInput}></input>}
-                        </p>
+                    </p>
                     {/* <Link to={'/category/' + category.id} className="button">Voir le livre</Link> */}
                     {/* <Link to={'/category/'+category.id} className="buttonAdmin" onClick={updateCategory(category.id)}>Modifier</Link> */}
-                    <button onClick={() => {updateCategory(category.id)}}>Modifier</button>
-                    <button onClick={() => {
-                        if (window.confirm("Voulez-vous supprimer cet article ?")) {deleteCategory(category.id)}}}>Supprimer</button>
+                    <button onClick={() => { updateCategory(category.id) }}>Modifier</button>
+                    <button onClick={() => { deleteCategory(category.id) }}>Supprimer</button>
                 </div>
-
             ))
         }
-        </section >
+        </section>
     )
 }
