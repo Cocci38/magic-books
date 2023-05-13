@@ -2,7 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const PostCategory = () => {
+export const PostCategory = (props) => {
+    const url = window.location.pathname.slice(10);
+    console.log(props);
+
+    //const [showBooks, setShowBooks] = useState(true);
 
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();

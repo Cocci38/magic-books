@@ -27,7 +27,7 @@ export const Books = () => {
         <section>{!books ? '' : books
                     .map((book) => (
                     <div key={book.id} className="bookContainer">
-                        <h2>{ book.title }</h2>
+                        <h3>{ book.title }</h3>
                         <div className="infoContainer">
                             <p className="paragraphFlex"><span className="paragraphName">Auteur</span><span>{ book.author }</span></p>
                             <p className="paragraphFlex"><span className="paragraphName">Date de sortie</span><span> { new Date(book.release_date).toLocaleDateString("fr-FR") }</span> </p>

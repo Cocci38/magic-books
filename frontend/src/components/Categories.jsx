@@ -1,10 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Categories = () => {
 
     const [categories, setCategories] = useState([]);
+    const [showCategory, setShowCategory] = useState(false);
+
+    const nomInput = useRef();
 
     const fetchCategories = async () => {
         await axios
@@ -23,9 +26,24 @@ export const Categories = () => {
         fetchCategories()
     }, []);
 
+    const updateCategory = (idCat) => {
+        setShowCategory((showCategory) => !showCategory)
+        console.log(idCat);
+    }
+
+    const changeHandler = () => {
+        console.log('coucou');
+        const nameCategory = nomInput.current.value;
+        console.log(nameCategory);
+        setCategories({
+            ...data,
+            "name":nameCategory
+        })
+    }
+
     const deleteCategory = async (id) => {
 
-        //console.log(id);
+        // console.log(id);
         await axios
             .delete('http://localhost/magic-books/backend/delete/category/' + id, {
             data: id,
@@ -47,13 +65,16 @@ export const Categories = () => {
         <section className="containerFlex">{!categories ? '' : categories
             .map((category) => (
                 <div key={category.id} className="categoryContainer">
-                    <p className="paragraphFlex"><span className="paragraphName">Nom de la catégorie</span><span>{category.name}</span></p>
+                    <p className="paragraphFlex">
+                        <span className="paragraphName">Nom de la catégorie</span>
+                        {!showCategory && <span>{category.name}</span>}
+                        {showCategory && <input type="text" name="nameCategory" defaultValue={category.name} onChange={changeHandler} ref={nomInput}></input>}
+                        </p>
                     {/* <Link to={'/category/' + category.id} className="button">Voir le livre</Link> */}
+                    {/* <Link to={'/category/'+category.id} className="buttonAdmin" onClick={updateCategory(category.id)}>Modifier</Link> */}
+                    <button onClick={() => {updateCategory(category.id)}}>Modifier</button>
                     <button onClick={() => {
-                        if (window.confirm("Voulez-vous supprimer cet article ?")) {
-                            deleteCategory(category.id);
-                        }
-                    }}>Supprimer</button>
+                        if (window.confirm("Voulez-vous supprimer cet article ?")) {deleteCategory(category.id)}}}>Supprimer</button>
                 </div>
 
             ))

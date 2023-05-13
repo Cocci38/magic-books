@@ -110,7 +110,7 @@ class CategoriesController
                 $result = $category->create();
                 if ($result) {
                     http_response_code(201);
-                    echo json_encode(["message" => "La catégorie a été ajouté avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "La catégorie a été ajouté avec succès"]);
                 } else {
                     http_response_code(503);
                     echo json_encode(["message" => "L'ajout de la catégorie a échoué"]);
@@ -147,7 +147,7 @@ class CategoriesController
                 $result = $category->update();
                 if ($result) {
                     http_response_code(201);
-                    echo json_encode(["message" => "La catégorie a été modifié avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "La catégorie a été modifié avec succès"]);
                 } else {
                     http_response_code(503);
                     echo json_encode(["message" => "La modification de la catégorie a échoué"]);

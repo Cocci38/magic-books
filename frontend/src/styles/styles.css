@@ -106,6 +106,7 @@ textarea {
 .dashboard .boxContainer .boxLien {
   display: flex;
   flex-direction: column;
+  width: 210px;
 }
 .dashboard .boxContainer .boxLien h2 {
   text-decoration: underline;
@@ -129,7 +130,7 @@ textarea {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 20px;
 }
 .dashboard .containerFlex {
   display: flex;

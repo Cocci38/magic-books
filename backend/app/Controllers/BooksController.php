@@ -122,7 +122,7 @@ class BooksController
                 $result = $book->create();
                 if ($result) {
                     http_response_code(201);
-                    echo json_encode(["message" => "Le livre a été ajouté avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "Le livre a été ajouté avec succès"]);
                 } else {
                     http_response_code(503);
                     echo json_encode(["message" => "L'ajout du livre a échoué"]);
@@ -168,7 +168,7 @@ class BooksController
             $result = $book->update();
             if ($result) {
                 http_response_code(201);
-                echo json_encode(["message" => "Le livre a été modifié avec succès"]);
+                echo json_encode(["result" => "Ok", "message" => "Le livre a été modifié avec succès"]);
             } else {
                 http_response_code(503);
                 echo json_encode(["message" => "La modification du livre a échoué"]);
@@ -206,7 +206,7 @@ class BooksController
                 $result = $book->delete();
                 if ($result) {
                     http_response_code(200);
-                    echo json_encode(["message" => "La suppression du livre a été effectué avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "La suppression du livre a été effectué avec succès"]);
                 } else {
                     http_response_code(503);
                     echo json_encode(["message" => "La suppression du livre a échoué"]);

@@ -52,15 +52,17 @@ class AuthorsController
             // On instancie l'objet Authors
             $author = new Authors($db);
             // file_get_contents => c'est le fichier d'entrée php
-            $data = json_decode(file_get_contents("php://input"));
-
-            $author->setId($data->id);
+            //$data = json_decode(file_get_contents("php://input"));
+            $url = $_GET['url'];
+            $id = basename(parse_url($url, PHP_URL_PATH));
+            //$author->setId($data->id);
+            $author->setId($id);
             // On récupère les données
             $result = $author->readById();
 
             if ($result->rowCount() > 0) {
                 //$data = [];
-                $donnees = $result->fetch();
+            $donnees = $result->fetchAll();
 
                 // On renvoie les données au format JSON
                 http_response_code(200);
@@ -100,7 +102,7 @@ class AuthorsController
                 $result = $author->create();
                 if ($result) {
                     http_response_code(201);
-                    echo json_encode(["message" => "L'auteur' a été ajouté avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "L'auteur' a été ajouté avec succès"]);
                 } else {
                     http_response_code(503);
                     echo json_encode(["message" => "L'ajout de l'auteur' a échoué"]);
@@ -139,7 +141,7 @@ class AuthorsController
                 $result = $author->update();
                 if ($result) {
                     http_response_code(201);
-                    echo json_encode(["message" => "L'auteur a été modifié avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "L'auteur a été modifié avec succès"]);
                 } else {
                     http_response_code(503);
                     echo json_encode(["message" => "La modification de l'auteur a échoué"]);
@@ -176,7 +178,7 @@ class AuthorsController
                 $result = $author->delete();
                 if ($result) {
                     http_response_code(200);
-                    echo json_encode(["message" => "La suppression de l'auteur a été effectué avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "La suppression de l'auteur a été effectué avec succès"]);
                 } else {
                     http_response_code(503);
                     echo json_encode(["message" => "La suppression de l'auteur a échoué"]);

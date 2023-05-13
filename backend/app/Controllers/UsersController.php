@@ -34,7 +34,7 @@ class UsersController
                 $result = $users->signUp();
                 if ($result) {
                     http_response_code(201);
-                    echo json_encode(["message" => "L'utilisateur' a été ajouté avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "L'utilisateur' a été ajouté avec succès"]);
                 } else {
                     http_response_code(503);
                     echo json_encode(["message" => "L'ajout de l'utilisateur' a échoué"]);
@@ -75,7 +75,7 @@ class UsersController
                 if (password_verify($user->getPassword(),  $data['password']) && $data['email'] == $user->getEmail()) {
                     // On renvoie les données au format JSON
                     http_response_code(200);
-                    echo json_encode(["message" => "l'utilisateur " . $data['username'] . " est connecté"]);
+                    echo json_encode(["result" => "Ok", "message" => "l'utilisateur " . $data['username'] . " est connecté"]);
                     //echo json_encode($data['username']);
                 } else {
                     echo json_encode(["message" => "Aucun compte n'a été trouvé"]);
@@ -114,7 +114,7 @@ class UsersController
                 $result = $users->updateAccount();
                 if ($result) {
                     http_response_code(201);
-                    echo json_encode(["message" => "L'utilisateur' a été modifié avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "L'utilisateur' a été modifié avec succès"]);
                 } else {
                     http_response_code(503);
                     echo json_encode(["message" => "La modification de l'utilisateur' a échoué"]);
@@ -151,7 +151,7 @@ class UsersController
                 $result = $users->deleteAccount();
                 if ($result) {
                     http_response_code(200);
-                    echo json_encode(["message" => "La suppression de l'utilisateur' a été effectué avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "La suppression de l'utilisateur' a été effectué avec succès"]);
                 } else {
                     http_response_code(503);
                     echo json_encode(["message" => "La suppression de l'utilisateur' a échoué"]);

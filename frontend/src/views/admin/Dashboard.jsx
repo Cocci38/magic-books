@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Books } from '../../components/Books';
 import { Categories } from '../../components/Categories';
+import { Authors } from '../../components/Authors';
 
 export const Dashboard = () => {
 
     const [showBooks, setShowBooks] = useState(true);
     const [showCategories, setShowCategories] = useState(false);
+    const [showAuthors, setShowAuthors] = useState(false);
 
     // Fonction pour afficher la liste des livres et cacher la liste des catégories
     const displayBook = () => {
@@ -15,8 +17,10 @@ export const Dashboard = () => {
             setShowBooks(false)
             setShowCategories(true)
         } else {
+            //console.log(showBooks);
             setShowBooks(true)
             setShowCategories(false)
+            setShowAuthors(false)
         }
     }
     // Fonction pour afficher la liste des catégories et cacher la liste des livres
@@ -28,6 +32,20 @@ export const Dashboard = () => {
         } else {
             setShowCategories(true)
             setShowBooks(false)
+            setShowAuthors(false)
+        }
+    }
+
+    // Fonction pour afficher la liste des catégories et cacher la liste des livres
+    const displayAuthor = () => {
+        //console.log('catégorie');
+        if (showAuthors == true) {
+            setShowAuthors(false)
+            setShowBooks(true)
+        } else {
+            setShowAuthors(true)
+            setShowBooks(false)
+            setShowCategories(false)
         }
     }
 
@@ -45,6 +63,12 @@ export const Dashboard = () => {
                     <a className="buttonAdmin" onClick={displayCategory}>Afficher les catégories</a>
                     <Link to={'/category'} className="buttonAdmin">Ajouter une catégorie</Link>
                 </div>
+                <hr></hr>
+                <div className='boxLien'>
+                    <h2>Auteurs</h2>
+                    <a className="buttonAdmin" onClick={displayAuthor}>Afficher les auteurs</a>
+                    <Link to={'/author'} className="buttonAdmin">Ajouter un auteur</Link>
+                </div>
             </section>
 
             {
@@ -52,6 +76,9 @@ export const Dashboard = () => {
             }
             {
                 showCategories && (<Categories />)
+            }
+            {
+                showAuthors && (<Authors />)
             }
 
         </main>
