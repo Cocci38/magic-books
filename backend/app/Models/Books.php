@@ -423,7 +423,7 @@ class Books
      */
     public function uploadImage()
     {
-        var_dump($_FILES);
+        //var_dump($_FILES);
         if (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
             // On a reçu l'image
             // On procède aux vérifications

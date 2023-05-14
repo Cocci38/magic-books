@@ -18,7 +18,7 @@ form {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-input[type=email], input[type=password], input[type=tel], input[type=text], input[type=number], input[type=date], input[type=search] {
+input[type=email], input[type=password], input[type=tel], input[type=text], input[type=number], input[type=date], input[type=search], input[type=file] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -75,8 +75,9 @@ select {
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #f6f6ee;
+  border: 1px solid #F8B179;
   box-sizing: border-box;
+  text-align: center;
 }
 
 textarea {
