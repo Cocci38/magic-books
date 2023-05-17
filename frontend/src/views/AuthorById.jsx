@@ -6,7 +6,7 @@ export const AuthorById = () => {
 
     const { id } = useParams();
     //console.log(id);
-    const [authors, setAuthor] = useState([]);
+    const [author, setAuthor] = useState([]);
 
     useEffect(() => {
         const fetchAuthor = async () => {
@@ -25,15 +25,13 @@ export const AuthorById = () => {
     //console.log(authors);
     return (
         <main>
-            <section>{!authors ? '' : authors
-                    .map((author) => (
-                    <div key={author.id} className="bookContainer">
+            <section>
+                    <div className="bookContainer">
                         <h2>{ author.name }</h2>
                         <p className="paragraphFlex"><span className="paragraphName">Nationalité</span><span>{ author.nationality }</span></p>
                         <p className="paragraphFlex"><span className="paragraphName">Biographie</span><span>{ author.biography }</span></p>
                     </div>
-                    
-            ))}</section>
+                </section>
         </main>
     )
 }

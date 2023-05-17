@@ -60,6 +60,7 @@ export const Authors = () => {
                         </div>
                         
                         <Link to={'/author/' + author.id} className="button">Voir l'auteur</Link>
+                        <Link to={'/author/update/' + author.id} className="buttonAdmin">Modifier</Link>
                         <button onClick={() => { deleteAuthor(author.id) }}>Supprimer</button>
                     </div>
                     

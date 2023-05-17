@@ -62,7 +62,7 @@ class AuthorsController
 
             if ($result->rowCount() > 0) {
                 //$data = [];
-                $donnees = $result->fetchAll();
+                $donnees = $result->fetch();
 
                 // On renvoie les données au format JSON
                 http_response_code(200);

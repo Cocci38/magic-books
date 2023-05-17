@@ -69,7 +69,7 @@ class BooksController
                 //var_dump($result);
                 if ($result->rowCount() > 0) {
                     //$data = [];
-                    $donnees = $result->fetchAll();
+                    $donnees = $result->fetch();
                     // On vérifie si le livre existe
                     //if ($book->getId() != null) {
 

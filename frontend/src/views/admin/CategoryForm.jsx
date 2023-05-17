@@ -2,15 +2,16 @@ import axios from "axios";
 import { useState,useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-export const PostCategory = () => {
+export const CategoryForm = () => {
 
-    //const [showBooks, setShowBooks] = useState(true);
-    const id = useParams().id;
-    //console.log(id);
+    // Je récupère l'id, useParams la paires clé/valeur des paramètres de l'url qui ont été mis en correspondance par le <Route path>.
+    const { id } = useParams();
+    // console.log(id);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     const [category, setCategory] = useState({name:''});
 
+    // Si je l'id est présent, je récupère la catégorie pour l'afficher dans le formulaire de modification
     if (id !== undefined) {
         useEffect(() => {
             const fetchCategory = async () => {
@@ -29,15 +30,14 @@ export const PostCategory = () => {
     }
     
 
-    
-    const handlSubmit = (e) => {
+    // Fonction qui récupère les données transmis par le formulaire et qui l'envoie vers le serveur
+    const handlSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
 
-        // const elements = form.elements;
-        // const nameCategory = elements.nameCategory.value;
         const formData = new FormData(form);
         const nameCategory = formData.get("nameCategory");
+
         const validateData = () => {
             let errors = {};
             if (!nameCategory) {
@@ -46,38 +46,41 @@ export const PostCategory = () => {
             return errors;
         };
         const errors = validateData();
+
         if (Object.keys(errors).length) {
             setErrors(errors);
         } else {
             //console.log(nameCategory);
+            // Si l'id est indéfini, j'envoie le formulaire de création
             if (id === undefined) {
                 //console.log('je passe ici');
-                axios
+                await axios
                 .post(
                     'http://localhost/magic-books/backend/create/category', {
                     name: nameCategory,
                 })
                 .then(res => {
-                    console.log(res.data);
-                    //navigate("/dashboard");
+                    // console.log(res.data);
+                    navigate("/dashboard");
                 })
                 .catch(error => { console.log(error.data) });
+            // Sinon j'envoie le formulaire de modification
             } else {
-                axios
+                await axios
                 .put(
                     'http://localhost/magic-books/backend/update/category/'+id, {
                     id: id,
                     name: nameCategory,
                 })
                 .then(res => {
-                    console.log(res.data);
-                    //navigate("/dashboard");
+                    // console.log(res.data);
+                    navigate("/dashboard");
                 })
                 .catch(error => { console.log(error.data) });
             }
             
         }
-        //form.reset();
+        form.reset();
     }
 
     return (

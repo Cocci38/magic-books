@@ -6,7 +6,7 @@ export const BookById = () => {
 
     const { id } = useParams();
     //console.log(id);
-    const [books, setBook] = useState([]);
+    const [book, setBook] = useState([]);
 
     useEffect(() => {
         const fetchBook = async () => {
@@ -25,9 +25,8 @@ export const BookById = () => {
     //console.log(books);
     return (
         <main>
-            <section>{!books ? '' : books
-                    .map((book) => (
-                    <div key={book.id} className="bookContainer">
+            <section>
+                    <div className="bookContainer">
                         <h2>{ book.title }</h2>
                         <p className="paragraphFlex"><span className="paragraphName">Auteur</span><span>{ book.author }</span></p>
                         <p className="paragraphFlex"><span className="paragraphName">Date de sortie</span><span> { new Date(book.release_date).toLocaleDateString("fr-FR") }</span> </p>
@@ -35,8 +34,7 @@ export const BookById = () => {
                         <p className="paragraphFlex"><span className="paragraphName">Catégorie</span><span>{ book.categories_name }</span></p>
                         <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{ book.summary }</span></p>
                     </div>
-                    
-            ))}</section>
+                </section>
         </main>
     )
 }
