@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const PostBook = () => {
 
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
-
+    const [id, setId] = useState(useParams().id);
+    console.log(id);
     const [categories, setCategories] = useState([]);
     const [authors, setAuthors] = useState([]);
 
@@ -22,9 +23,9 @@ export const PostBook = () => {
             })
     }
     // Le useEffect se joue lorsque le composant est monté
-    useEffect(() =>{
+    useEffect(() => {
         fetchAuthors()
-    },[]);
+    }, []);
 
     const fetchCategories = async () => {
         await axios
@@ -48,15 +49,18 @@ export const PostBook = () => {
         const form = e.target;
         //console.log(e.target);
         const formData = new FormData(form);
-        
-        const title = formData.get("title");
-        const authorId = formData.get("authorId");
-        const editor = formData.get("editor");
-        const releaseDate = formData.get("releaseDate");
-        //const cover = formData.get("cover");
-        //console.log([...formData]);
-        const categoryId = formData.get("categoryId");
-        const summary = formData.get("summary");
+
+        //const cover = formData.append("image", File);
+        console.log([...formData]);
+        const bookForm = {
+            title: formData.get("title"),
+            author_id: formData.get("authorId"),
+            editor: formData.get("editor"),
+            summary: formData.get("summary"),
+            release_date: formData.get("releaseDate"),
+            category_id: formData.get("categoryId")
+        }
+        // formData.append("json", JSON.stringify(bookForm));
         // formData.append(title, title)
         // const validateData = () => {
         //     let errors = {};
@@ -74,8 +78,8 @@ export const PostBook = () => {
         //const errors = validateData();
         if (Object.keys(errors).length) {
             setErrors(errors);
-        }else {
-        axios
+        } else {
+            axios
                 // .post(
                 //     'http://localhost/magic-books/backend/create/book', {
                 //     title: title,
@@ -84,23 +88,27 @@ export const PostBook = () => {
                 //     summary: summary,
                 //     release_date: releaseDate,
                 //     category_id: categoryId,
+                //     image: document.querySelector('#fileInput').files
+                // }, {
                 //     headers: {
-                //         "Content-Type": "multipart/form-data"
+                //         'Content-Type': 'multipart/form-data'
                 //     }
                 // })
-                .post(
-                    'http://localhost/magic-books/backend/create/book', formData, {
-                            title: title,
-                            author_id: authorId,
-                            editor: editor,
-                            summary: summary,
-                            release_date: releaseDate,
-                            category_id: categoryId,
-                        })
-                .then(res => {
+                // .all([
+                //     axios.post(
+                //         'http://localhost/magic-books/backend/create/book', bookForm),
+                //     axios.post(
+                //         'http://localhost/magic-books/backend/create/book', formData),
+                // ])
+                axios.post(
+                    'http://localhost/magic-books/backend/create/book', formData)
+                .then(
+                    axios.spread((res, image) => {
                     console.log(res.data);
+                    console.log(image.data);
                     //navigate("/dashboard");
-                })
+                    })
+                )
                 .catch(error => { console.log(error.data) });
         }
         //form.reset();
@@ -108,7 +116,7 @@ export const PostBook = () => {
 
     return (
         <div className="container">
-            <form onSubmit={handlSubmit} enctype="multipart/form-data">
+            <form onSubmit={handlSubmit}>
                 <h2 className="h2Form"> Ajouter un livre</h2>
                 <label htmlFor="title">Titre</label>
                 <input type="text" name="title" id="title" />
@@ -116,8 +124,8 @@ export const PostBook = () => {
 
                 <label htmlFor="authorId">Auteur
                     <select name="authorId" >
-                    {!authors ? '' : authors
-                    .map((author) => (
+                        {!authors ? '' : authors
+                            .map((author) => (
                                 <option key={author.id} value={author.id}>{author.name} </option>
                             ))
                         }
@@ -134,7 +142,7 @@ export const PostBook = () => {
                 <span style={{ color: "red" }}>{errors.releaseDate}</span><br></br>
 
                 <label htmlFor="image">Couverture</label>
-                <input type="file" name="image" id="image" />
+                <input type="file" name="image" id="fileInput" />
 
                 <label htmlFor="categoryId">Catégorie
                     <select name="categoryId" >

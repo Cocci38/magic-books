@@ -29,8 +29,8 @@ export const AuthorById = () => {
                     .map((author) => (
                     <div key={author.id} className="bookContainer">
                         <h2>{ author.name }</h2>
-                        <p className="paragraphFlex"><span className="paragraphName">Auteur</span><span>{ author.nationality }</span></p>
-                        <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{ author.biography }</span></p>
+                        <p className="paragraphFlex"><span className="paragraphName">Nationalité</span><span>{ author.nationality }</span></p>
+                        <p className="paragraphFlex"><span className="paragraphName">Biographie</span><span>{ author.biography }</span></p>
                     </div>
                     
             ))}</section>

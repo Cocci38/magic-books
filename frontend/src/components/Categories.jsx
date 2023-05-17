@@ -72,8 +72,8 @@ export const Categories = () => {
                         {showCategory && <input type="text" name="nameCategory" defaultValue={category.name} onChange={changeHandler} ref={nomInput}></input>}
                     </p>
                     {/* <Link to={'/category/' + category.id} className="button">Voir le livre</Link> */}
-                    {/* <Link to={'/category/'+category.id} className="buttonAdmin" onClick={updateCategory(category.id)}>Modifier</Link> */}
-                    <button onClick={() => { updateCategory(category.id) }}>Modifier</button>
+                    <Link to={`/category/${category.id}`} className="buttonAdmin">Modifier</Link>
+                    {/* <button onClick={() => { updateCategory(category.id) }}>Modifier</button> */}
                     <button onClick={() => { deleteCategory(category.id) }}>Supprimer</button>
                 </div>
             ))

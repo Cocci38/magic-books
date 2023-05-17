@@ -58,11 +58,11 @@ class CategoriesController
             // file_get_contents => c'est le fichier d'entrée php
             $data = json_decode(file_get_contents("php://input"));
 
-            // $url = $_GET['url'];
-            // $id = basename(parse_url($url, PHP_URL_PATH));
-            if (isset($data->id) && $data->id !== null) {
+            $url = $_GET['url'];
+            $id = basename(parse_url($url, PHP_URL_PATH));
+            if (isset($id) && $id !== null) {
 
-                $category->setId($data->id);
+                $category->setId($id);
                 // On récupère les données
                 $result = $category->readById();
 

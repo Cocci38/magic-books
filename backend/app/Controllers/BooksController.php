@@ -106,18 +106,18 @@ class BooksController
 
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
-            //var_dump($data);
+            var_dump($_REQUEST);
             $cover = $book->uploadImage();
             var_dump($cover);
-            if (!empty($data->title) && !empty($data->author_id) && !empty($data->editor) && !empty($data->summary)) {
+            // if (!empty($data->title) && !empty($data->author_id) && !empty($data->editor) && !empty($data->summary)) {
                 // On hydrate l'objet book
-                $book->setTitle($data->title);
-                $book->setAuthorId($data->author_id);
-                $book->setEditor($data->editor);
-                $book->setSummary($data->summary);
-                $book->setReleaseDate($data->release_date);
+                $book->setTitle($_REQUEST['title']);
+                $book->setAuthorId($_REQUEST['authorId']);
+                $book->setEditor($_REQUEST['editor']);
+                $book->setSummary($_REQUEST['summary']);
+                $book->setReleaseDate($_REQUEST['releaseDate']);
                 $book->setCover($cover);
-                $book->setCategoryId($data->category_id);
+                $book->setCategoryId($_REQUEST['categoryId']);
                 //var_dump($book);
                 $result = $book->create();
                 if ($result) {
@@ -127,10 +127,10 @@ class BooksController
                     http_response_code(503);
                     echo json_encode(["message" => "L'ajout du livre a échoué"]);
                 }
-            } else {
-                //http_response_code(503);
-                echo json_encode(["message" => "Les données ne sont pas complètes"]);
-            }
+            // } else {
+            //     //http_response_code(503);
+            //     echo json_encode(["message" => "Les données ne sont pas complètes"]);
+            // }
         } else {
             http_response_code(405);
             echo json_encode(["message" => "La méthode n'est pas autorisée"]);
