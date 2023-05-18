@@ -12,6 +12,7 @@ export const Dashboard = () => {
 
     // Fonction pour afficher la liste des livres et cacher la liste des catégories et des auteurs
     const displayBook = () => {
+
         //console.log('livres');
         if (showBooks == false) {
             setShowBooks(true)
@@ -21,6 +22,7 @@ export const Dashboard = () => {
     }
     // Fonction pour afficher la liste des catégories et cacher la liste des livres et des auteurs
     const displayCategory = () => {
+
         if (showCategories == false) {
             setShowCategories(true)
             setShowBooks(false)
@@ -29,6 +31,7 @@ export const Dashboard = () => {
     }
     // Fonction pour afficher la liste des auteurs et cacher la liste des livres et des catégories
     const displayAuthor = () => {
+
         if (showAuthors == false) {
             setShowAuthors(true)
             setShowBooks(false)
@@ -41,19 +44,25 @@ export const Dashboard = () => {
             <section className='boxContainer'>
                 <div className='boxLien'>
                     <h2>Livres</h2>
-                    <a className="buttonAdmin" onClick={displayBook}>Afficher les livres</a>
+                    <a style={{
+                        color: !showBooks ? '#2D3250' : '#F8B179',
+                    }} className="buttonAdmin" onClick={displayBook}>Afficher les livres</a>
                     <Link to={'/book'} className="buttonAdmin">Ajouter un livre</Link>
                 </div>
                 <hr></hr>
                 <div className='boxLien'>
                     <h2>Catégories</h2>
-                    <a className="buttonAdmin" onClick={displayCategory}>Afficher les catégories</a>
+                    <a style={{
+                        color: !showCategories ? '#2D3250' : '#F8B179',
+                    }} className="buttonAdmin" onClick={displayCategory}>Afficher les catégories</a>
                     <Link to={'/category'} className="buttonAdmin">Ajouter une catégorie</Link>
                 </div>
                 <hr></hr>
                 <div className='boxLien'>
                     <h2>Auteurs</h2>
-                    <a className="buttonAdmin" onClick={displayAuthor}>Afficher les auteurs</a>
+                    <a style={{
+                        color: !showAuthors ? '#2D3250' : '#F8B179',
+                    }} className="buttonAdmin" onClick={displayAuthor}>Afficher les auteurs</a>
                     <Link to={'/author'} className="buttonAdmin">Ajouter un auteur</Link>
                 </div>
             </section>
@@ -67,7 +76,7 @@ export const Dashboard = () => {
             {
                 showAuthors && (<Authors />)
             }
-            
+
 
         </main>
 
