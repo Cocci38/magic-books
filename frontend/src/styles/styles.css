@@ -138,11 +138,45 @@ textarea {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 20px;
+  width: 75%;
 }
 @media screen and (max-width: 900px) {
   .dashboard {
     gap: 10px;
   }
+}
+.dashboard .iconButton {
+  text-decoration: none;
+  width: 50px;
+  height: 50px;
+  color: #f6f6ee;
+  padding: 14px 14px;
+  margin: 8px 0;
+  border: 1px solid #f6f6ee;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.dashboard .eye {
+  background-color: #676F9D;
+  padding: 14px 13px;
+}
+.dashboard .eye:hover {
+  background-color: #2D3250;
+}
+.dashboard .pen {
+  background-color: #F8B179;
+}
+.dashboard .pen:hover {
+  background-color: #f48730;
+}
+.dashboard .trash {
+  background-color: #CD5C5C;
+}
+.dashboard .trash:hover {
+  background-color: #A62C31;
+}
+.dashboard .bookContainer {
+  width: 75%;
 }
 
 :root {

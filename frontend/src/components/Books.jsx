@@ -1,6 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 export const Books = () => {
 
@@ -57,9 +61,9 @@ export const Books = () => {
                             {book.cover ? <img src={urlImage + book.cover}/> : ""}
                         </div>
                         <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{ book.summary.substring(0, 70) + " ..." }</span></p>
-                        <Link to={'/book/' + book.id} className="button">Voir le livre</Link>
-                        <Link to={'/book/update/' + book.id} className="buttonAdmin">Modifier</Link>
-                        <button onClick={() => { deleteBook(book.id) }}>Supprimer</button>
+                        <Link to={'/book/' + book.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
+                        <Link to={'/book/update/' + book.id} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                        <button onClick={() => { deleteBook(book.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl"/></button>
                     </div>
                     
             ))}
