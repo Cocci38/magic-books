@@ -140,8 +140,8 @@ class BooksController
     public function update()
     {
         // Méthode autorisée
-        header("Access-Control-Allow-Methods: PUT");
-
+        //header("Access-Control-Allow-Methods: PUT");
+        
         if ($_SERVER["REQUEST_METHOD"] === "PUT") {
             // On instancie la base de données
             $database = new Database();
@@ -153,7 +153,8 @@ class BooksController
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
             $cover = $book->uploadImage();
-            var_dump($data);
+            print_r($data);
+            print_r($_REQUEST);
             if(!empty($data->id) && !empty($data->title) && !empty($data->author_id) && !empty($data->editor) && !empty($data->summary)){
             //On hydrate l'objet book
             $book->setId($data->id);
@@ -200,8 +201,8 @@ class BooksController
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
 
-            if (!empty($data->id)) {
-                $book->setId($data->id);
+            if (!empty($data)) {
+                $book->setId($data);
 
                 $result = $book->delete();
                 if ($result) {
@@ -212,7 +213,7 @@ class BooksController
                     echo json_encode(["message" => "La suppression du livre a échoué"]);
                 }
             } else {
-                echo json_encode(["message" => "Vous devez précisé l'identifiant de la catégorie"]);
+                echo json_encode(["message" => "Vous devez précisé l'identifiant du livre"]);
             }
         } else {
             http_response_code(405);

@@ -12,7 +12,6 @@ export const Dashboard = () => {
 
     // Fonction pour afficher la liste des livres et cacher la liste des catégories et des auteurs
     const displayBook = () => {
-
         //console.log('livres');
         if (showBooks == false) {
             setShowBooks(true)
@@ -20,18 +19,18 @@ export const Dashboard = () => {
             setShowAuthors(false)
         }
     }
+
     // Fonction pour afficher la liste des catégories et cacher la liste des livres et des auteurs
     const displayCategory = () => {
-
         if (showCategories == false) {
             setShowCategories(true)
             setShowBooks(false)
             setShowAuthors(false)
         }
     }
+    
     // Fonction pour afficher la liste des auteurs et cacher la liste des livres et des catégories
     const displayAuthor = () => {
-
         if (showAuthors == false) {
             setShowAuthors(true)
             setShowBooks(false)

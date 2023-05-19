@@ -21,7 +21,7 @@ use Router\Router;
 
 require '../vendor/autoload.php';
 
-//print_r($_SERVER);
+// print_r($_SERVER);
 $url = "/".substr($_SERVER["QUERY_STRING"],4);
 $router = new Router($url);
 

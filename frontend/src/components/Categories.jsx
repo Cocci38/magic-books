@@ -18,7 +18,6 @@ export const Categories = () => {
             })
             .catch((err) => {
                 console.log(err)
-
             })
     }
     // Le useEffect se joue lorsque le composant est monté
@@ -26,20 +25,20 @@ export const Categories = () => {
         fetchCategories()
     }, []);
 
-    const updateCategory = (idCat) => {
-        setShowCategory((showCategory) => !showCategory)
-        console.log(idCat);
-    }
+    // const updateCategory = (idCat) => {
+    //     setShowCategory((showCategory) => !showCategory)
+    //     console.log(idCat);
+    // }
 
-    const changeHandler = () => {
-        console.log('coucou');
-        const nameCategory = nomInput.current.value;
-        console.log(nameCategory);
-        setCategories({
-            ...data,
-            "name": nameCategory
-        })
-    }
+    // const changeHandler = () => {
+    //     console.log('coucou');
+    //     const nameCategory = nomInput.current.value;
+    //     console.log(nameCategory);
+    //     setCategories({
+    //         ...data,
+    //         "name": nameCategory
+    //     })
+    // }
 
     const deleteCategory = async (id) => {
         if (window.confirm("Voulez-vous supprimer cet article ?")) {

@@ -24,6 +24,7 @@ function App() {
         <Route path='/author' element={<AuthorForm />} />
         <Route path='/author/update/:id' element={<AuthorForm />} />
         <Route path='/book' element={<PostBook />} />
+        <Route path='/book/update/:id' element={<PostBook />} />
       </Routes>
     </>
   )
