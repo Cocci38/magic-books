@@ -106,10 +106,11 @@ class BooksController
 
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
-            var_dump($_REQUEST);
+            // var_dump($data);
+            // var_dump($_REQUEST);
             $cover = $book->uploadImage();
-            var_dump($cover);
-            // if (!empty($data->title) && !empty($data->author_id) && !empty($data->editor) && !empty($data->summary)) {
+            //var_dump($cover);
+            if(!empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])){
                 // On hydrate l'objet book
                 $book->setTitle($_REQUEST['title']);
                 $book->setAuthorId($_REQUEST['authorId']);
@@ -127,10 +128,10 @@ class BooksController
                     http_response_code(503);
                     echo json_encode(["message" => "L'ajout du livre a échoué"]);
                 }
-            // } else {
-            //     //http_response_code(503);
-            //     echo json_encode(["message" => "Les données ne sont pas complètes"]);
-            // }
+            } else {
+                //http_response_code(503);
+                echo json_encode(["message" => "Les données ne sont pas complètes"]);
+            }
         } else {
             http_response_code(405);
             echo json_encode(["message" => "La méthode n'est pas autorisée"]);
@@ -142,7 +143,7 @@ class BooksController
         // Méthode autorisée
         //header("Access-Control-Allow-Methods: PUT");
         
-        if ($_SERVER["REQUEST_METHOD"] === "PUT") {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // On instancie la base de données
             $database = new Database();
             $db = $database->getConnexion();
@@ -153,30 +154,39 @@ class BooksController
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
             $cover = $book->uploadImage();
-            print_r($data);
-            print_r($_REQUEST);
-            if(!empty($data->id) && !empty($data->title) && !empty($data->author_id) && !empty($data->editor) && !empty($data->summary)){
-            //On hydrate l'objet book
-            $book->setId($data->id);
-            $book->setTitle($data->title);
-            $book->setAuthorId($data->author_id);
-            $book->setEditor($data->editor);
-            $book->setSummary($data->summary);
-            $book->setReleaseDate($data->release_date);
-            $book->setCover($cover);
-            $book->setCategoryId($data->category_id);
+            //print_r($data);
+            // var_dump($_REQUEST);
+            if(!empty($_REQUEST['id']) && !empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])){
+                //On hydrate l'objet book
+                // $book->setId($data->id);
+                // $book->setTitle($data->title);
+                // $book->setAuthorId($data->author_id);
+                // $book->setEditor($data->editor);
+                // $book->setSummary($data->summary);
+                // $book->setReleaseDate($data->release_date);
+                // $book->setCover($cover);
+                // $book->setCategoryId($data->category_id);
+                // $book->setTitle($_REQUEST['title']);
+                $book->setId($_REQUEST['id']);
+                $book->setTitle($_REQUEST['title']);
+                $book->setAuthorId($_REQUEST['authorId']);
+                $book->setEditor($_REQUEST['editor']);
+                $book->setSummary($_REQUEST['summary']);
+                $book->setReleaseDate($_REQUEST['releaseDate']);
+                $book->setCover($cover);
+                $book->setCategoryId($_REQUEST['categoryId']);
 
-            $result = $book->update();
-            if ($result) {
-                http_response_code(201);
-                echo json_encode(["result" => "Ok", "message" => "Le livre a été modifié avec succès"]);
+                $result = $book->update();
+                if ($result) {
+                    http_response_code(201);
+                    echo json_encode(["result" => "Ok", "message" => "Le livre a été modifié avec succès"]);
+                } else {
+                    http_response_code(503);
+                    echo json_encode(["message" => "La modification du livre a échoué"]);
+                }
             } else {
-                http_response_code(503);
-                echo json_encode(["message" => "La modification du livre a échoué"]);
-            }
-            }else{
                 //http_response_code(503);
-                echo json_encode(["message"=>"Les données ne sont pas complètes"]);
+                echo json_encode(["message" => "Les données ne sont pas complètes"]);
             }
 
         } else {

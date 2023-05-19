@@ -352,7 +352,7 @@ class Books
     public function update()
     {
         if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->title)) {
-            if (preg_match("/^[a-zA-Z0-9-\' æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->editor)) {
+            if (preg_match("/^[a-zA-Z0-9-\' \æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->editor)) {
                 if (preg_match("/^[a-zA-Z0-9-\' ,.?!:æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,500}$/", $this->summary)) {
 
                     try {

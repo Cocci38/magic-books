@@ -3,7 +3,7 @@ import { BookById } from './views/BookById';
 import { AuthorById } from './views/AuthorById';
 import { Home } from './views/Home';
 import { Routes, Route } from 'react-router-dom';
-import { PostBook } from './views/admin/PostBook';
+import { BookForm } from './views/admin/BookForm';
 import { CategoryForm } from './views/admin/CategoryForm';
 import { AuthorForm } from './views/admin/AuthorForm';
 import { Dashboard } from './views/admin/Dashboard';
@@ -23,8 +23,8 @@ function App() {
         <Route path='/category/:id' element={<CategoryForm />} />
         <Route path='/author' element={<AuthorForm />} />
         <Route path='/author/update/:id' element={<AuthorForm />} />
-        <Route path='/book' element={<PostBook />} />
-        <Route path='/book/update/:id' element={<PostBook />} />
+        <Route path='/book' element={<BookForm />} />
+        <Route path='/book/update/:id' element={<BookForm />} />
       </Routes>
     </>
   )

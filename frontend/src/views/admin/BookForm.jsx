@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-export const PostBook = () => {
+export const BookForm = () => {
 
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
@@ -29,7 +29,7 @@ export const PostBook = () => {
             fetchBook()
         }, [id])
     }
-    console.log(book);
+    // console.log(book);
 
     const fetchAuthors = async () => {
         await axios
@@ -69,11 +69,8 @@ export const PostBook = () => {
         const form = e.target;
         //console.log(e.target);
         const formData = new FormData(form);
-        if (id) {
-            formData.append('_method', 'put');
-        }
+        
         console.log([...formData]);
-
         const validateData = () => {
             let errors = {};
             if (!title) {
@@ -92,22 +89,11 @@ export const PostBook = () => {
             setErrors(errors);
         } else {
             if (id === undefined) {
-                // axios
-                // axios.post(
-                //     'http://localhost/magic-books/backend/create/book', formData)
-                //     .then(
-                //         axios.spread((res, image) => {
-                //             console.log(res.data);
-                //             console.log(image.data);
-                //             //navigate("/dashboard");
-                //         })
-                //     )
-                //     .catch(error => { console.log(error.data) });
                 axios
                     .post('http://localhost/magic-books/backend/create/book', formData)
                     .then(res => {
                         console.log(res.data);
-                        // navigate("/dashboard");
+                        navigate("/dashboard");
                     })
                     .catch(error => { console.log(error.data) });
             } else {
@@ -115,20 +101,20 @@ export const PostBook = () => {
                     .post('http://localhost/magic-books/backend/update/book/' + id, formData)
                     .then(res => {
                         console.log(res.data);
-                        //navigate("/dashboard");
+                        navigate("/dashboard");
                     })
                     .catch(error => { console.log(error.data) });
             }
         }
-        //form.reset();
+        form.reset();
     }
 
     return (
         <div className="container">
             <form onSubmit={handlSubmit}>
-            {!id ? "" : "@method('PUT')"}
             <h2 className="h2Form">{!id ? "Ajouter un livre" : "Modifier un livre"}</h2>
-
+                <input type="hidden" name="id" defaultValue={!id ? "" : book.id} />
+                
                 <label htmlFor="title">Titre</label>
                 <input type="text" name="title" id="title" defaultValue={!id ? "" : book.title} />
                 <span style={{ color: "red" }}>{errors.title}</span><br></br>
@@ -159,7 +145,7 @@ export const PostBook = () => {
                 <span style={{ color: "red" }}>{errors.releaseDate}</span><br></br>
 
                 <label htmlFor="image">Couverture</label>
-                <input type="file" name="image" id="fileInput" />
+                <input type="file" name="image" id="fileInput" defaultValue={!id ? "" : book.cover} />
 
                 <label htmlFor="categoryId">Catégorie
                     <select name="categoryId" >
