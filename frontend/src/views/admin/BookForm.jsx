@@ -101,12 +101,12 @@ export const BookForm = () => {
                     .post('http://localhost/magic-books/backend/update/book/' + id, formData)
                     .then(res => {
                         console.log(res.data);
-                        // navigate("/dashboard");
+                        navigate("/dashboard");
                     })
                     .catch(error => { console.log(error.data) });
             }
         }
-        // form.reset();
+        form.reset();
     }
 
     return (
@@ -145,7 +145,8 @@ export const BookForm = () => {
                 <span style={{ color: "red" }}>{errors.releaseDate}</span><br></br>
 
                 <label htmlFor="image">Couverture</label>
-                <input type="file" name="image" id="fileInput" defaultValue={!id ? "" : book.cover} />
+                {!id ? "" : <input type="hidden" name="cover" defaultValue={book.cover}/>}
+                <input type="file" name="image" id="fileInput" />
 
                 <label htmlFor="categoryId">Catégorie
                     <select name="categoryId" >

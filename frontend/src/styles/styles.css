@@ -96,7 +96,6 @@ textarea {
   display: flex;
   flex-direction: row;
   gap: 60px;
-  justify-content: center;
 }
 .dashboard .boxContainer {
   border: 1px solid #2D3250;
@@ -127,12 +126,6 @@ textarea {
   background: #2D3250;
   background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
 }
-.dashboard .infoContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
-}
 .dashboard .containerFlex {
   display: flex;
   flex-direction: row;
@@ -156,6 +149,18 @@ textarea {
   border-radius: 10px;
   cursor: pointer;
 }
+.dashboard .bookContainer {
+  width: 100%;
+}
+.dashboard .bookContainer h3 {
+  margin: 5px 0 0 0;
+}
+.dashboard .bookContainer .infoContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
 .dashboard .eye {
   background-color: #676F9D;
   padding: 14px 13px;
@@ -174,9 +179,6 @@ textarea {
 }
 .dashboard .trash:hover {
   background-color: #A62C31;
-}
-.dashboard .bookContainer {
-  width: 75%;
 }
 
 :root {

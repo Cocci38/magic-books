@@ -1,6 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 export const Authors = () => {
 
@@ -59,9 +63,9 @@ export const Authors = () => {
                             </p>
                         </div>
                         
-                        <Link to={'/author/' + author.id} className="button">Voir l'auteur</Link>
-                        <Link to={'/author/update/' + author.id} className="buttonAdmin">Modifier</Link>
-                        <button onClick={() => { deleteAuthor(author.id) }}>Supprimer</button>
+                        <Link to={'/author/' + author.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
+                        <Link to={'/author/update/' + author.id} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                        <button onClick={() => { deleteAuthor(author.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl"/></button>
                     </div>
                     
             ))}

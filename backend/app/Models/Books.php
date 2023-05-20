@@ -4,7 +4,6 @@ namespace App\Models;
 
 use PDO;
 use PDOException;
-use Config\Database;
 
 class Books
 {

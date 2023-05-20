@@ -110,7 +110,7 @@ class BooksController
             // var_dump($_REQUEST);
             $cover = $book->uploadImage();
             //var_dump($cover);
-            if(!empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])){
+            if (!empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])) {
                 // On hydrate l'objet book
                 $book->setTitle($_REQUEST['title']);
                 $book->setAuthorId($_REQUEST['authorId']);
@@ -142,7 +142,7 @@ class BooksController
     {
         // Méthode autorisée
         //header("Access-Control-Allow-Methods: PUT");
-        
+
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // On instancie la base de données
             $database = new Database();
@@ -152,35 +152,30 @@ class BooksController
             $book = new Books($db);
 
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
-            $data = json_decode(file_get_contents("php://input"));
-
-            // Solution temporaire pour l'image :             
-            $book->setId($_REQUEST["id"]);
-            $result = $book->readById($book->getId());
-            if ($result->rowCount() > 0) {
-                $donnees = $result->fetch();
-                // Si l'ancienne image existe et $_FILES est vide on stocke l'ancienne image pour ne pas la perdre
-                if ($donnees["cover"] !== "" && empty($_FILES["image"]["name"])) {
-                    //var_dump("if");
-                    $cover = $donnees["cover"];
-                } else {
-                    //var_dump('else');
-                    $cover = $book->uploadImage();
-                }
-                // Pour supprimer l'ancienne image si elle existe et si on renvoie une nouvelle image
-                if ($donnees["cover"] !== "" && isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
-                    //var_dump('image');
-                    unlink("C:\laragon\www\magic-books\backend\public\pictures" . DIRECTORY_SEPARATOR . $donnees["cover"]);
-                }
-                
+            //$data = json_decode(file_get_contents("php://input"));
+            //var_dump($_REQUEST);
+            // Solution temporaire pour l'image :
+            // Si l'ancienne image existe et $_FILES est vide on stocke l'ancienne image pour ne pas la perdre
+            if ($_REQUEST["cover"] !== "" && empty($_FILES["image"]["name"])) {
+                //var_dump("if");
+                $cover = $_REQUEST["cover"];
+                // Sinon on stocke la nouvelle image
+            } else {
+                //var_dump('else');
+                $cover = $book->uploadImage();
             }
-            
+            // Pour supprimer l'ancienne image si elle existe et si on renvoie une nouvelle image
+            if (isset($_REQUEST["cover"]) && $_REQUEST["cover"] !== "" && isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
+                //var_dump('image');
+                unlink("C:\laragon\www\magic-books\backend\public\pictures" . DIRECTORY_SEPARATOR . $_REQUEST["cover"]);
+            }
+
             //print_r($data);
             //var_dump($_REQUEST);
             // On procède à la modification du livre
-            if(!empty($_REQUEST['id']) && !empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])){
+            if (!empty($_REQUEST['id']) && !empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])) {
                 //On hydrate l'objet book
-                $book->getId($_REQUEST['id']);
+                $book->setId($_REQUEST['id']);
                 $book->setTitle($_REQUEST['title']);
                 $book->setAuthorId($_REQUEST['authorId']);
                 $book->setEditor($_REQUEST['editor']);
@@ -201,7 +196,6 @@ class BooksController
                 //http_response_code(503);
                 echo json_encode(["message" => "Les données ne sont pas complètes"]);
             }
-
         } else {
             http_response_code(405);
             echo json_encode(["message" => "La méthode n'est pas autorisée"]);

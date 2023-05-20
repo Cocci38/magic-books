@@ -5,7 +5,6 @@
 .dashboard {
     @include flexRow;
     gap: 60px;
-    justify-content: center;
     .boxContainer {
         border: 1px solid $dark-blue;
         border-radius: 10px;
@@ -33,11 +32,6 @@
             background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
         }
     }
-    .infoContainer {
-        @include flexRow;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
     .containerFlex {
         display: flex;
         flex-direction: row;
@@ -60,6 +54,18 @@
         border-radius: 10px;
         cursor: pointer;
     }
+    
+    .bookContainer {
+        width: 100%;
+        h3 {
+            margin: 5px 0 0 0;
+        }
+        .infoContainer {
+            @include flexRow;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+    }
     .eye {
         background-color: $light-blue;
         padding: 14px 13px;
@@ -78,9 +84,6 @@
     }
     .trash:hover {
         background-color: $red;
-    }
-    .bookContainer {
-        width: 75%;
     }
 }
 

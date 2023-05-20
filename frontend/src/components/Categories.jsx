@@ -1,6 +1,10 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+//import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 export const Categories = () => {
 
@@ -70,10 +74,9 @@ export const Categories = () => {
                         {!showCategory && <span>{category.name}</span>}
                         {showCategory && <input type="text" name="nameCategory" defaultValue={category.name} onChange={changeHandler} ref={nomInput}></input>}
                     </p>
-                    {/* <Link to={'/category/' + category.id} className="button">Voir le livre</Link> */}
-                    <Link to={`/category/${category.id}`} className="buttonAdmin">Modifier</Link>
-                    {/* <button onClick={() => { updateCategory(category.id) }}>Modifier</button> */}
-                    <button onClick={() => { deleteCategory(category.id) }}>Supprimer</button>
+                    {/* <Link to={'/category/' + category.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link> */}
+                    <Link to={`/category/${category.id}`} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                    <button onClick={() => { deleteCategory(category.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl"/></button>
                 </div>
             ))
         }
