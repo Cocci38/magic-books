@@ -101,12 +101,12 @@ export const BookForm = () => {
                     .post('http://localhost/magic-books/backend/update/book/' + id, formData)
                     .then(res => {
                         console.log(res.data);
-                        navigate("/dashboard");
+                        // navigate("/dashboard");
                     })
                     .catch(error => { console.log(error.data) });
             }
         }
-        form.reset();
+        // form.reset();
     }
 
     return (

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use PDO;
 use PDOException;
+use Config\Database;
 
 class Books
 {
@@ -452,7 +453,7 @@ class Books
 
             // On génère un nom unique pour le fichier
             $newName = md5(uniqid());
-            // On génère le complet
+            // On génère le chemin complet
             $newFilename = "C:\laragon\www\magic-books\backend\public\pictures" . DIRECTORY_SEPARATOR . $newName . "." . $extension;
             //var_dump($newFilename);
             // On déplace le fichier de tmp à assets en le renommant

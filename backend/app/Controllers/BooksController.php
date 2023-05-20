@@ -153,21 +153,34 @@ class BooksController
 
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
-            $cover = $book->uploadImage();
+
+            // Solution temporaire pour l'image :             
+            $book->setId($_REQUEST["id"]);
+            $result = $book->readById($book->getId());
+            if ($result->rowCount() > 0) {
+                $donnees = $result->fetch();
+                // Si l'ancienne image existe et $_FILES est vide on stocke l'ancienne image pour ne pas la perdre
+                if ($donnees["cover"] !== "" && empty($_FILES["image"]["name"])) {
+                    //var_dump("if");
+                    $cover = $donnees["cover"];
+                } else {
+                    //var_dump('else');
+                    $cover = $book->uploadImage();
+                }
+                // Pour supprimer l'ancienne image si elle existe et si on renvoie une nouvelle image
+                if ($donnees["cover"] !== "" && isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
+                    //var_dump('image');
+                    unlink("C:\laragon\www\magic-books\backend\public\pictures" . DIRECTORY_SEPARATOR . $donnees["cover"]);
+                }
+                
+            }
+            
             //print_r($data);
-            // var_dump($_REQUEST);
+            //var_dump($_REQUEST);
+            // On procède à la modification du livre
             if(!empty($_REQUEST['id']) && !empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])){
                 //On hydrate l'objet book
-                // $book->setId($data->id);
-                // $book->setTitle($data->title);
-                // $book->setAuthorId($data->author_id);
-                // $book->setEditor($data->editor);
-                // $book->setSummary($data->summary);
-                // $book->setReleaseDate($data->release_date);
-                // $book->setCover($cover);
-                // $book->setCategoryId($data->category_id);
-                // $book->setTitle($_REQUEST['title']);
-                $book->setId($_REQUEST['id']);
+                $book->getId($_REQUEST['id']);
                 $book->setTitle($_REQUEST['title']);
                 $book->setAuthorId($_REQUEST['authorId']);
                 $book->setEditor($_REQUEST['editor']);
