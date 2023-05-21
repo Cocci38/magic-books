@@ -102,21 +102,23 @@ textarea {
   border-radius: 10px;
   height: -moz-min-content;
   height: min-content;
+  width: 190px;
 }
 .dashboard .boxContainer .boxLien {
   display: flex;
   flex-direction: column;
-  width: 210px;
+  width: 100%;
 }
 .dashboard .boxContainer .boxLien h2 {
   text-decoration: underline;
   text-align: center;
+  margin: 10px 0 5px 0;
 }
 .dashboard .boxContainer .boxLien .buttonAdmin {
   text-decoration: none;
   text-align: center;
   color: #2D3250;
-  padding: 14px 20px;
+  padding: 10px 0;
   border: none;
   cursor: pointer;
 }
@@ -138,6 +140,72 @@ textarea {
     gap: 10px;
   }
 }
+.dashboard .sectionBook {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 75%;
+}
+.dashboard .sectionBook .bookContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 49%;
+  margin-top: 10px;
+}
+.dashboard .sectionBook .bookContainer .coverContainer {
+  width: 150px;
+}
+.dashboard .sectionBook .bookContainer .coverContainer .cover {
+  width: 100%;
+}
+.dashboard .sectionBook .bookContainer h3 {
+  margin: 5px 0 0 0;
+}
+.dashboard .sectionBook .bookContainer .bookInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dashboard .sectionBook .bookContainer .infoContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.dashboard .sectionBook .bookContainer .paragraphFlex {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.dashboard .sectionBook .bookContainer .paragraphFlex .paragraphName {
+  color: #2D3250;
+}
+@media screen and (max-width: 1024px) {
+  .dashboard .sectionBook .bookContainer {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .dashboard .sectionBook .bookContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .dashboard .sectionBook {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+.dashboard .eye {
+  background-color: #676F9D;
+  padding: 14px 13px;
+}
+.dashboard .eye:hover {
+  background-color: #2D3250;
+}
 .dashboard .iconButton {
   text-decoration: none;
   width: 50px;
@@ -148,25 +216,6 @@ textarea {
   border: 1px solid #f6f6ee;
   border-radius: 10px;
   cursor: pointer;
-}
-.dashboard .bookContainer {
-  width: 100%;
-}
-.dashboard .bookContainer h3 {
-  margin: 5px 0 0 0;
-}
-.dashboard .bookContainer .infoContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.dashboard .eye {
-  background-color: #676F9D;
-  padding: 14px 13px;
-}
-.dashboard .eye:hover {
-  background-color: #2D3250;
 }
 .dashboard .pen {
   background-color: #F8B179;
@@ -215,12 +264,4 @@ header ul a {
 }
 header .activeLink {
   color: #F8B179;
-}
-
-.paragraphFlex {
-  display: flex;
-  flex-direction: column;
-}
-.paragraphFlex .paragraphName {
-  color: #2D3250;
 }/*# sourceMappingURL=styles.css.map */

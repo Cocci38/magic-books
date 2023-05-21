@@ -19,13 +19,13 @@ export const Books = () => {
             })
             .catch((err) => {
                 console.log(err)
-                
+
             })
     }
     // Le useEffect se joue lorsque le composant est monté
-    useEffect(() =>{
+    useEffect(() => {
         fetchBooks()
-    },[]);
+    }, []);
 
     const deleteBook = async (id) => {
         if (window.confirm("Voulez-vous supprimer ce livre ?")) {
@@ -49,23 +49,28 @@ export const Books = () => {
     }
 
     return (
-        <section>{!books ? '' : books
-                    .map((book) => (
-                    <div key={book.id} className="bookContainer">
-                        <h3>{ book.title }</h3>
-                        <div className="infoContainer">
-                            <p className="paragraphFlex"><span className="paragraphName">Auteur</span><span>{ book.author }</span></p>
-                            <p className="paragraphFlex"><span className="paragraphName">Date de sortie</span><span> { new Date(book.release_date).toLocaleDateString("fr-FR") }</span> </p>
-                            <p className="paragraphFlex"><span className="paragraphName">Catégorie</span><span>{ book.name }</span></p>
-                            {/* <img src="{book.cover}" /> */}
-                            {book.cover ? <img src={urlImage + book.cover}/> : ""}
-                        </div>
-                        <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{ book.summary.substring(0, 70) + " ..." }</span></p>
-                        <Link to={'/book/' + book.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
-                        <Link to={'/book/update/' + book.id} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                        <button onClick={() => { deleteBook(book.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl"/></button>
+        <section className="sectionBook">{!books ? '' : books
+            .map((book) => (
+                <div key={book.id} className="bookContainer">
+                    <div className="coverContainer">
+                        {book.cover ? <img src={urlImage + book.cover} className="cover" /> : ""}
                     </div>
-                    
+                    <div className="bookInfo">
+                        <h3>{book.title}</h3>
+                        <div className="infoContainer">
+                            <p className="paragraphFlex"><span className="paragraphName">Auteur</span><span>{book.author}</span></p>
+                            <p className="paragraphFlex"><span className="paragraphName">Date de sortie</span><span> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span> </p>
+                            <p className="paragraphFlex"><span className="paragraphName">Catégorie</span><span>{book.name}</span></p>
+                            <p className="paragraphFlex"><span className="paragraphName">Éditeur</span><span>{book.editor}</span></p>
+                        </div>
+                        <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{book.summary.substring(0, 70) + " ..."}</span></p>
+                        <div className="buttonContainer">
+                            <Link to={'/book/' + book.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
+                            <Link to={'/book/update/' + book.id} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                            <button onClick={() => { deleteBook(book.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
+                        </div>
+                    </div>
+                </div>
             ))}
         </section>
     )

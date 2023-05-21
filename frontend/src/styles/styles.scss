@@ -40,9 +40,4 @@ header {
     }
 }
 
-.paragraphFlex {
-    @include flexColumn;
-    .paragraphName{
-        color: $dark-blue;
-    }
-}
+

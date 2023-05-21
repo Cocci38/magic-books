@@ -48,7 +48,7 @@ export const Authors = () => {
     }
 
     return (
-        <section>{!authors ? '' : authors
+        <section className="containerFlex">{!authors ? '' : authors
                     .map((author) => (
                     <div key={author.id} className="bookContainer">
                         <h3>{ author.name }</h3>

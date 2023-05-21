@@ -5,26 +5,33 @@
 .dashboard {
     @include flexRow;
     gap: 60px;
+
     .boxContainer {
         border: 1px solid $dark-blue;
         border-radius: 10px;
         height: min-content;
+        width: 190px;
+
         .boxLien {
             @include flexColumn;
-            width: 210px;
+            width: 100%;
+
             h2 {
                 text-decoration: underline;
                 text-align: center;
+                margin: 10px 0 5px 0;
             }
+
             .buttonAdmin {
                 text-decoration: none;
                 text-align: center;
                 color: $dark-blue;
-                padding: 14px 20px;
+                padding: 10px 0;
                 border: none;
                 cursor: pointer;
             }
         }
+
         hr {
             border: 0;
             height: 1px;
@@ -32,6 +39,7 @@
             background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
         }
     }
+
     .containerFlex {
         display: flex;
         flex-direction: row;
@@ -39,10 +47,78 @@
         gap: 20px;
         width: 75%;
     }
+
     @media screen and (max-width: 900px) {
         gap: 10px;
     }
 
+
+    .sectionBook {
+        @include flexRow;
+        flex-wrap: wrap;
+        width: 75%;
+
+        .bookContainer {
+            @include flexRow;
+            gap: 10px;
+            width: 49%;
+            margin-top: 10px;
+
+            .coverContainer {
+                width: 150px;
+
+                .cover {
+                    width: 100%;
+                }
+            }
+
+
+            h3 {
+                margin: 5px 0 0 0;
+            }
+
+            .bookInfo {
+                @include flexColumn;
+                gap: 10px;
+            }
+
+            .infoContainer {
+                @include flexRow;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .paragraphFlex {
+                @include flexColumn;
+                margin: 0;
+
+                .paragraphName {
+                    color: $dark-blue;
+                }
+            }
+
+            
+            @media screen and (max-width: 1024px) {
+                width: 100%;
+            }
+            @media screen and (max-width: 767px) {
+                @include flexColumn;
+            }
+        }
+        @media screen and (max-width: 1024px) {
+            @include flexColumn;
+            width: 100%;
+        }
+    }
+
+    .eye {
+        background-color: $light-blue;
+        padding: 14px 13px;
+    }
+
+    .eye:hover {
+        background-color: $dark-blue;
+    }
     .iconButton {
         text-decoration: none;
         width: 50px;
@@ -54,37 +130,19 @@
         border-radius: 10px;
         cursor: pointer;
     }
-    
-    .bookContainer {
-        width: 100%;
-        h3 {
-            margin: 5px 0 0 0;
-        }
-        .infoContainer {
-            @include flexRow;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-    }
-    .eye {
-        background-color: $light-blue;
-        padding: 14px 13px;
-    }
-    .eye:hover {
-        background-color: $dark-blue;
-    }
     .pen {
         background-color: $orange;
     }
+
     .pen:hover {
         background-color: darken($orange, 15%);
     }
+
     .trash {
         background-color: $red-light;
     }
+
     .trash:hover {
         background-color: $red;
     }
 }
-
-
