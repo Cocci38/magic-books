@@ -40,109 +40,135 @@
         }
     }
 
-    .containerFlex {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 20px;
-        width: 75%;
-    }
-
-    @media screen and (max-width: 900px) {
-        gap: 10px;
-    }
-
-
-    .sectionBook {
+    .bookContainer {
         @include flexRow;
-        flex-wrap: wrap;
-        width: 75%;
+        gap: 10px;
+        width: 48%;
+        margin-top: 10px;
 
-        .bookContainer {
-            @include flexRow;
+        .coverContainer {
+            width: 150px;
+
+            .cover {
+                width: 100%;
+            }
+        }
+        .bookInfo {
+            @include flexColumn;
             gap: 10px;
-            width: 49%;
-            margin-top: 10px;
+        }
 
-            .coverContainer {
-                width: 150px;
+        .infoContainer {
+            @include flexRow;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-                .cover {
-                    width: 100%;
-                }
+        .paragraphFlex {
+            @include flexColumn;
+            margin: 0;
+
+            .paragraphName {
+                color: $dark-blue;
             }
+        }
 
 
-            h3 {
-                margin: 5px 0 0 0;
-            }
+        @media screen and (max-width: 1024px) {
+            width: 98%;
+        }
 
-            .bookInfo {
+        @media screen and (max-width: 767px) {
+            @include flexColumn;
+        }
+    }
+
+    .categoryContainer {
+        @include flexColumn;
+        height: fit-content;
+    }
+
+    .authorContainer {
+        @include flexColumn;
+        height: fit-content;
+        gap: 10px;
+        width: 48%;
+
+        @media screen and (max-width: 1024px) {
+            width: 90%;
+        }
+
+        .infoAuthor {
+            @include flexRow;
+            gap: 20px;
+
+            @media screen and (max-width: 767px) {
                 @include flexColumn;
                 gap: 10px;
             }
 
-            .infoContainer {
-                @include flexRow;
-                flex-wrap: wrap;
-                gap: 20px;
-            }
-
-            .paragraphFlex {
-                @include flexColumn;
-                margin: 0;
-
-                .paragraphName {
-                    color: $dark-blue;
-                }
-            }
-
-            
-            @media screen and (max-width: 1024px) {
-                width: 100%;
-            }
-            @media screen and (max-width: 767px) {
+            .authorItem {
                 @include flexColumn;
             }
         }
-        @media screen and (max-width: 1024px) {
-            @include flexColumn;
-            width: 100%;
-        }
+
     }
 
-    .eye {
-        background-color: $light-blue;
-        padding: 14px 13px;
+    @media screen and (max-width: 900px) {
+        gap: 30px;
     }
 
-    .eye:hover {
-        background-color: $dark-blue;
-    }
-    .iconButton {
-        text-decoration: none;
-        width: 50px;
-        height: 50px;
-        color: $light;
-        padding: 14px 14px;
-        margin: 8px 0;
-        border: 1px solid $light;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    .pen {
-        background-color: $orange;
-    }
+}
 
-    .pen:hover {
-        background-color: darken($orange, 15%);
-    }
+.sectionRow {
+    @include flexRowWrap;
+    gap: 20px;
+    width: 75%;
 
-    .trash {
-        background-color: $red-light;
+    @media screen and (max-width: 767px) {
+        @include flexColumn;
+        width: 100%;
+        justify-content: center;
     }
+}
 
-    .trash:hover {
-        background-color: $red;
-    }
+h3 {
+    margin: 5px 0 0 0;
+}
+
+.iconButton {
+    text-decoration: none;
+    width: 50px;
+    height: 50px;
+    color: $light;
+    padding: 14px 14px;
+    margin: 8px 0;
+    border: 1px solid $light;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.eye {
+    background-color: $light-blue;
+    padding: 14px 13px;
+}
+
+.eye:hover {
+    background-color: $dark-blue;
+}
+
+.pen {
+    background-color: $orange;
+}
+
+.pen:hover {
+    background-color: darken($orange, 15%);
+}
+
+.trash {
+    background-color: $red-light;
+}
+
+.trash:hover {
+    background-color: $red;
 }

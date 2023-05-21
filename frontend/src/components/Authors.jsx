@@ -22,9 +22,9 @@ export const Authors = () => {
             })
     }
     // Le useEffect se joue lorsque le composant est monté
-    useEffect(() =>{
+    useEffect(() => {
         fetchAuthors()
-    },[]);
+    }, []);
 
     const deleteAuthor = async (id) => {
         if (window.confirm("Voulez-vous supprimer cet auteur ?")) {
@@ -48,26 +48,27 @@ export const Authors = () => {
     }
 
     return (
-        <section className="containerFlex">{!authors ? '' : authors
-                    .map((author) => (
-                    <div key={author.id} className="bookContainer">
-                        <h3>{ author.name }</h3>
-                        <div className="infoContainer">
-                            <p className="paragraphFlex">
-                                <span className="paragraphName">Nationalité</span>
-                                <span>{ author.nationality }</span>
-                            </p>
-                            <p className="paragraphFlex">
-                                <span className="paragraphName">Bibiographie</span>
-                                <span>{ author.biography.substring(0, 70) + " ..." }</span>
-                            </p>
+        <section className="sectionRow">{!authors ? '' : authors
+            .map((author) => (
+                <div key={author.id} className="authorContainer">
+                    <h3>{author.name}</h3>
+                    <div className="infoAuthor">
+                        <div className="authorItem">
+                            <span>Nationalité</span>
+                            <span>{author.nationality}</span>
                         </div>
-                        
+                        <div className="authorItem">
+                            <span>Bibiographie</span>
+                            <span>{author.biography.substring(0, 70) + " ..."}</span>
+                        </div>
+                    </div>
+                    <div className="buttonContainer">
                         <Link to={'/author/' + author.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
                         <Link to={'/author/update/' + author.id} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                        <button onClick={() => { deleteAuthor(author.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl"/></button>
+                        <button onClick={() => { deleteAuthor(author.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
                     </div>
-                    
+                </div>
+
             ))}
         </section>
     )

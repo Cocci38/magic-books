@@ -66,17 +66,17 @@ export const Categories = () => {
     }
     return (
 
-        <section className="containerFlex">{!categories ? '' : categories
+        <section className="sectionRow">{!categories ? '' : categories
             .map((category) => (
                 <div key={category.id} className="categoryContainer">
-                    <p className="paragraphFlex">
-                        <span className="paragraphName">Nom de la catégorie</span>
-                        {!showCategory && <span>{category.name}</span>}
-                        {showCategory && <input type="text" name="nameCategory" defaultValue={category.name} onChange={changeHandler} ref={nomInput}></input>}
-                    </p>
-                    {/* <Link to={'/category/' + category.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link> */}
-                    <Link to={`/category/${category.id}`} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                    <button onClick={() => { deleteCategory(category.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl"/></button>
+                    <span className="paragraphName">Nom de la catégorie</span>
+                    {!showCategory && <span>{category.name}</span>}
+                    {showCategory && <input type="text" name="nameCategory" defaultValue={category.name} onChange={changeHandler} ref={nomInput}></input>}
+                    <div className="buttonContainer">
+                        {/* <Link to={'/category/' + category.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link> */}
+                        <Link to={`/category/${category.id}`} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                        <button onClick={() => { deleteCategory(category.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
+                    </div>
                 </div>
             ))
         }

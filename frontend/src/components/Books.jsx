@@ -49,11 +49,11 @@ export const Books = () => {
     }
 
     return (
-        <section className="sectionBook">{!books ? '' : books
+        <section className="sectionRow">{!books ? '' : books
             .map((book) => (
                 <div key={book.id} className="bookContainer">
                     <div className="coverContainer">
-                        {book.cover ? <img src={urlImage + book.cover} className="cover" /> : ""}
+                        {book.cover ? <img src={urlImage + book.cover} className="cover" /> : <img src='/images/image_vide.png' className="cover" />}
                     </div>
                     <div className="bookInfo">
                         <h3>{book.title}</h3>

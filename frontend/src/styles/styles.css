@@ -128,85 +128,113 @@ textarea {
   background: #2D3250;
   background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
 }
-.dashboard .containerFlex {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
-  width: 75%;
-}
-@media screen and (max-width: 900px) {
-  .dashboard {
-    gap: 10px;
-  }
-}
-.dashboard .sectionBook {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 75%;
-}
-.dashboard .sectionBook .bookContainer {
+.dashboard .bookContainer {
   display: flex;
   flex-direction: row;
   gap: 10px;
-  width: 49%;
+  width: 48%;
   margin-top: 10px;
 }
-.dashboard .sectionBook .bookContainer .coverContainer {
+.dashboard .bookContainer .coverContainer {
   width: 150px;
 }
-.dashboard .sectionBook .bookContainer .coverContainer .cover {
+.dashboard .bookContainer .coverContainer .cover {
   width: 100%;
 }
-.dashboard .sectionBook .bookContainer h3 {
-  margin: 5px 0 0 0;
-}
-.dashboard .sectionBook .bookContainer .bookInfo {
+.dashboard .bookContainer .bookInfo {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.dashboard .sectionBook .bookContainer .infoContainer {
+.dashboard .bookContainer .infoContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 20px;
 }
-.dashboard .sectionBook .bookContainer .paragraphFlex {
+.dashboard .bookContainer .paragraphFlex {
   display: flex;
   flex-direction: column;
   margin: 0;
 }
-.dashboard .sectionBook .bookContainer .paragraphFlex .paragraphName {
+.dashboard .bookContainer .paragraphFlex .paragraphName {
   color: #2D3250;
 }
 @media screen and (max-width: 1024px) {
-  .dashboard .sectionBook .bookContainer {
-    width: 100%;
+  .dashboard .bookContainer {
+    width: 98%;
   }
 }
 @media screen and (max-width: 767px) {
-  .dashboard .sectionBook .bookContainer {
+  .dashboard .bookContainer {
     display: flex;
     flex-direction: column;
   }
 }
+.dashboard .categoryContainer {
+  display: flex;
+  flex-direction: column;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.dashboard .authorContainer {
+  display: flex;
+  flex-direction: column;
+  height: -moz-fit-content;
+  height: fit-content;
+  gap: 10px;
+  width: 48%;
+}
 @media screen and (max-width: 1024px) {
-  .dashboard .sectionBook {
+  .dashboard .authorContainer {
+    width: 90%;
+  }
+}
+.dashboard .authorContainer .infoAuthor {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+@media screen and (max-width: 767px) {
+  .dashboard .authorContainer .infoAuthor {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+.dashboard .authorContainer .infoAuthor .authorItem {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 900px) {
+  .dashboard {
+    gap: 30px;
+  }
+}
+
+.sectionRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: start;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 75%;
+}
+@media screen and (max-width: 767px) {
+  .sectionRow {
     display: flex;
     flex-direction: column;
     width: 100%;
+    justify-content: center;
   }
 }
-.dashboard .eye {
-  background-color: #676F9D;
-  padding: 14px 13px;
+
+h3 {
+  margin: 5px 0 0 0;
 }
-.dashboard .eye:hover {
-  background-color: #2D3250;
-}
-.dashboard .iconButton {
+
+.iconButton {
   text-decoration: none;
   width: 50px;
   height: 50px;
@@ -217,16 +245,29 @@ textarea {
   border-radius: 10px;
   cursor: pointer;
 }
-.dashboard .pen {
+
+.eye {
+  background-color: #676F9D;
+  padding: 14px 13px;
+}
+
+.eye:hover {
+  background-color: #2D3250;
+}
+
+.pen {
   background-color: #F8B179;
 }
-.dashboard .pen:hover {
+
+.pen:hover {
   background-color: #f48730;
 }
-.dashboard .trash {
+
+.trash {
   background-color: #CD5C5C;
 }
-.dashboard .trash:hover {
+
+.trash:hover {
   background-color: #A62C31;
 }
 
