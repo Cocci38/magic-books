@@ -1,36 +1,18 @@
-import { Menu } from './components/Menu';
-import { BookById } from './views/BookById';
-import { AuthorById } from './views/AuthorById';
-import { Home } from './views/Home';
-import { Routes, Route } from 'react-router-dom';
-import { BookForm } from './views/Admin/BookForm';
-import { CategoryForm } from './views/Admin/CategoryForm';
-import { AuthorForm } from './views/Admin/AuthorForm';
-import { Dashboard } from './views/Admin/Dashboard';
-import AdminLayout from './views/Admin/AdminLayout';
-
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AdminRouter from './views/Admin/AdminRouter';
+import PublicRouter from './views/Public/PublicRouter';
 
 function App() {
 
   return (
     <>
-      <Menu />
-      <Routes>
-        <Route element={<AdminLayout />}>
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/category' element={<CategoryForm />} />
-          <Route path='/category/:id' element={<CategoryForm />} />
-          <Route path='/author' element={<AuthorForm />} />
-          <Route path='/author/update/:id' element={<AuthorForm />} />
-          <Route path='/book' element={<BookForm />} />
-          <Route path='/book/update/:id' element={<BookForm />} />
-        </Route>
-        <Route path='/' element={<Home />} />
-        <Route path='/book/:id' element={<BookById />} />
-        <Route path='/author/:id' element={<AuthorById />} />
-
-      </Routes>
+      {/* Quand on fait des routes enfants, il faut préciser au router qu'il y a des routes après, donc on met une astérisque (*) */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<PublicRouter />} />
+          <Route path="/admin/*" element={<AdminRouter /> } />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

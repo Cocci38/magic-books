@@ -65,8 +65,8 @@ export const Books = () => {
                         </div>
                         <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{book.summary.substring(0, 70) + " ..."}</span></p>
                         <div className="buttonContainer">
-                            <Link to={'/book/' + book.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
-                            <Link to={'/book/update/' + book.id} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                            <Link to={'/livre/' + book.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
+                            <Link to={'/admin/livre/editer/' + book.id} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                             <button onClick={() => { deleteBook(book.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
                         </div>
                     </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Menu } from '../../components/Menu'
 
-const AdminLayout = () => {
+const PublicLayout = () => {
     return (
         <div>
             <Menu />
@@ -11,4 +11,4 @@ const AdminLayout = () => {
     )
 }
 
-export default AdminLayout
+export default PublicLayout

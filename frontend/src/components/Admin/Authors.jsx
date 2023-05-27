@@ -63,8 +63,8 @@ export const Authors = () => {
                         </div>
                     </div>
                     <div className="buttonContainer">
-                        <Link to={'/author/' + author.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
-                        <Link to={'/author/update/' + author.id} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                        <Link to={'/auteur/' + author.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
+                        <Link to={'/admin/auteur/editer/' + author.id} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                         <button onClick={() => { deleteAuthor(author.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
                     </div>
                 </div>

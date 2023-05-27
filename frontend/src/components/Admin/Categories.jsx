@@ -74,7 +74,7 @@ export const Categories = () => {
                     {showCategory && <input type="text" name="nameCategory" defaultValue={category.name} onChange={changeHandler} ref={nomInput}></input>}
                     <div className="buttonContainer">
                         {/* <Link to={'/category/' + category.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link> */}
-                        <Link to={`/category/${category.id}`} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                        <Link to={`/admin/categorie/editer/${category.id}`} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                         <button onClick={() => { deleteCategory(category.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
                     </div>
                 </div>
