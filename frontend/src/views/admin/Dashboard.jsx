@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { Books } from '../../components/Books';
-import { Categories } from '../../components/Categories';
-import { Authors } from '../../components/Authors';
+import { Books } from '../../components/Admin/Books';
+import { Categories } from '../../components/Admin/Categories';
+import { Authors } from '../../components/Admin/Authors';
 
 export const Dashboard = () => {
 

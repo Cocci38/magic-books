@@ -1,10 +1,9 @@
-import React from 'react'
-import { Books } from '../components/Books'
+
 
 export const Home = () => {
     return (
         <main>
-            <Books />
+            <h1>Je suis la page d'accueil</h1>
         </main>
         
     )

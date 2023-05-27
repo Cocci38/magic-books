@@ -3,10 +3,11 @@ import { BookById } from './views/BookById';
 import { AuthorById } from './views/AuthorById';
 import { Home } from './views/Home';
 import { Routes, Route } from 'react-router-dom';
-import { BookForm } from './views/admin/BookForm';
-import { CategoryForm } from './views/admin/CategoryForm';
-import { AuthorForm } from './views/admin/AuthorForm';
-import { Dashboard } from './views/admin/Dashboard';
+import { BookForm } from './views/Admin/BookForm';
+import { CategoryForm } from './views/Admin/CategoryForm';
+import { AuthorForm } from './views/Admin/AuthorForm';
+import { Dashboard } from './views/Admin/Dashboard';
+
 
 
 function App() {

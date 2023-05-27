@@ -81,7 +81,7 @@ class UsersController
                     echo json_encode(["message" => "Aucun compte n'a été trouvé"]);
                 }
             } else {
-                echo json_encode(["message" => "Aucune données à renvoyer"]);
+                echo json_encode(["message" => "Aucunes données à renvoyer"]);
             }
         } else {
             http_response_code(405);
@@ -114,10 +114,10 @@ class UsersController
                 $result = $users->updateAccount();
                 if ($result) {
                     http_response_code(201);
-                    echo json_encode(["result" => "Ok", "message" => "L'utilisateur' a été modifié avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "L'utilisateur a été modifié avec succès"]);
                 } else {
                     http_response_code(503);
-                    echo json_encode(["message" => "La modification de l'utilisateur' a échoué"]);
+                    echo json_encode(["message" => "La modification de l'utilisateur a échoué"]);
                 }
             } else {
                 //http_response_code(503);
@@ -151,17 +151,17 @@ class UsersController
                 $result = $users->deleteAccount();
                 if ($result) {
                     http_response_code(200);
-                    echo json_encode(["result" => "Ok", "message" => "La suppression de l'utilisateur' a été effectué avec succès"]);
+                    echo json_encode(["result" => "Ok", "message" => "La suppression de l'utilisateur' a été effectué avec succès."]);
                 } else {
                     http_response_code(503);
-                    echo json_encode(["message" => "La suppression de l'utilisateur' a échoué"]);
+                    echo json_encode(["message" => "La suppression de l'utilisateur' a échoué."]);
                 }
             } else {
-                echo json_encode(["message" => "Vous devez précisé l'identifiant de l'utilisateur'"]);
+                echo json_encode(["message" => "Vous devez préciser l'identifiant de l'utilisateur."]);
             }
         } else {
             http_response_code(405);
-            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+            echo json_encode(["message" => "La méthode n'est pas autorisée."]);
         }
     }
 }

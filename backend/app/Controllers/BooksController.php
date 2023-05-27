@@ -223,18 +223,17 @@ class BooksController
             if (!empty($data)) {
 
                 $book->setId($data);
-                $result = $book->delete();
 
                 // Pour supprimer l'image s'il y en a une
-                if ($result) {
-                    $resultImage = $book->readById($book->getId());
+                $resultImage = $book->readById($book->getId());
                     if ($resultImage->rowCount() > 0) {
                         $donnees = $resultImage->fetch();
                         if (isset($donnees["cover"]) && $donnees["cover"] > 0) {
                             unlink("C:\laragon\www\magic-books\backend\public\pictures" . DIRECTORY_SEPARATOR . $donnees["cover"]);
                         }
                     }
-                }
+
+                $result = $book->delete();
 
                 if ($result) {
                     http_response_code(200);
