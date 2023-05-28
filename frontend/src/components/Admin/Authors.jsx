@@ -63,9 +63,9 @@ export const Authors = () => {
                         </div>
                     </div>
                     <div className="buttonContainer">
-                        <Link to={'/auteur/' + author.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
-                        <Link to={'/admin/auteur/editer/' + author.id} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                        <button onClick={() => { deleteAuthor(author.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
+                        <Link to={'/auteur/' + author.id} className="iconButton eye" aria-label="fiche auteur"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
+                        <Link to={'/admin/auteur/editer/' + author.id} className="iconButton pen" aria-label="modifier l'auteur"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                        <button onClick={() => { deleteAuthor(author.id) }} className="iconButton trash" aria-label="supprimer l'auteur"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
                     </div>
                 </div>
 

@@ -53,7 +53,7 @@ export const Books = () => {
             .map((book) => (
                 <div key={book.id} className="bookContainer">
                     <div className="coverContainer">
-                        {book.cover ? <img src={urlImage + book.cover} className="cover" /> : <img src='/images/image_vide.png' className="cover" />}
+                        {book.cover ? <img src={urlImage + book.cover} className="cover" alt={"couverture du livre " + book.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
                     </div>
                     <div className="bookInfo">
                         <h3>{book.title}</h3>
@@ -65,9 +65,9 @@ export const Books = () => {
                         </div>
                         <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{book.summary.substring(0, 70) + " ..."}</span></p>
                         <div className="buttonContainer">
-                            <Link to={'/livre/' + book.id} className="iconButton eye"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
-                            <Link to={'/admin/livre/editer/' + book.id} className="iconButton pen"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                            <button onClick={() => { deleteBook(book.id) }} className="iconButton trash"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
+                            <Link to={'/livre/' + book.id} className="iconButton eye" aria-label="voir la fiche du livre"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
+                            <Link to={'/admin/livre/editer/' + book.id} className="iconButton pen" aria-label="modifier le livre"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                            <button onClick={() => { deleteBook(book.id) }} className="iconButton trash" aria-label="supprimer le livre"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
                         </div>
                     </div>
                 </div>

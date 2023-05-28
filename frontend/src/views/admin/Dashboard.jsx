@@ -43,26 +43,26 @@ export const Dashboard = () => {
             <section className='boxContainer'>
                 <div className='boxLien'>
                     <h2>Livres</h2>
-                    <a style={{
+                    <button style={{
                         color: !showBooks ? '#2D3250' : '#F8B179',
-                    }} className="buttonAdmin" onClick={displayBook}>Afficher les livres</a>
-                    <Link to={'/book'} className="buttonAdmin">Ajouter un livre</Link>
+                    }} className="buttonAdmin" onClick={displayBook} aria-label="afficher la liste des livres">Afficher les livres</button>
+                    <Link to={'/book'} className="buttonAdmin" aria-label="ajouter un livre">Ajouter un livre</Link>
                 </div>
                 <hr></hr>
                 <div className='boxLien'>
                     <h2>Catégories</h2>
-                    <a style={{
+                    <button style={{
                         color: !showCategories ? '#2D3250' : '#F8B179',
-                    }} className="buttonAdmin" onClick={displayCategory}>Afficher les catégories</a>
-                    <Link to={'/category'} className="buttonAdmin">Ajouter une catégorie</Link>
+                    }} className="buttonAdmin" onClick={displayCategory} aria-label="afficher la liste des catégories">Afficher les catégories</button>
+                    <Link to={'/category'} className="buttonAdmin" aria-label="ajouter une catégorie">Ajouter une catégorie</Link>
                 </div>
                 <hr></hr>
                 <div className='boxLien'>
                     <h2>Auteurs</h2>
-                    <a style={{
+                    <button style={{
                         color: !showAuthors ? '#2D3250' : '#F8B179',
-                    }} className="buttonAdmin" onClick={displayAuthor}>Afficher les auteurs</a>
-                    <Link to={'/author'} className="buttonAdmin">Ajouter un auteur</Link>
+                    }} className="buttonAdmin" onClick={displayAuthor} aria-label="afficher la liste des auteurs">Afficher les auteurs</button>
+                    <Link to={'/author'} className="buttonAdmin" aria-label="ajouter un auteur">Ajouter un auteur</Link>
                 </div>
             </section>
 
