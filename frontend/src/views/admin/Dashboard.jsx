@@ -46,7 +46,7 @@ export const Dashboard = () => {
                     <button style={{
                         color: !showBooks ? '#2D3250' : '#F8B179',
                     }} className="buttonAdmin" onClick={displayBook} aria-label="afficher la liste des livres">Afficher les livres</button>
-                    <Link to={'/book'} className="buttonAdmin" aria-label="ajouter un livre">Ajouter un livre</Link>
+                    <Link to={'livre/ajout'} className="buttonAdmin" aria-label="ajouter un livre">Ajouter un livre</Link>
                 </div>
                 <hr></hr>
                 <div className='boxLien'>
@@ -54,7 +54,7 @@ export const Dashboard = () => {
                     <button style={{
                         color: !showCategories ? '#2D3250' : '#F8B179',
                     }} className="buttonAdmin" onClick={displayCategory} aria-label="afficher la liste des catégories">Afficher les catégories</button>
-                    <Link to={'/category'} className="buttonAdmin" aria-label="ajouter une catégorie">Ajouter une catégorie</Link>
+                    <Link to={'categorie/ajout'} className="buttonAdmin" aria-label="ajouter une catégorie">Ajouter une catégorie</Link>
                 </div>
                 <hr></hr>
                 <div className='boxLien'>
@@ -62,7 +62,7 @@ export const Dashboard = () => {
                     <button style={{
                         color: !showAuthors ? '#2D3250' : '#F8B179',
                     }} className="buttonAdmin" onClick={displayAuthor} aria-label="afficher la liste des auteurs">Afficher les auteurs</button>
-                    <Link to={'/author'} className="buttonAdmin" aria-label="ajouter un auteur">Ajouter un auteur</Link>
+                    <Link to={'auteur/ajout'} className="buttonAdmin" aria-label="ajouter un auteur">Ajouter un auteur</Link>
                 </div>
             </section>
 

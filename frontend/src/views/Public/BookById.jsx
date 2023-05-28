@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { publicService } from '../../services/public.service';
 
 export const BookById = () => {
 
@@ -10,8 +10,7 @@ export const BookById = () => {
 
     useEffect(() => {
         const fetchBook = async () => {
-            await axios
-                .get('http://localhost/magic-books/backend/book/' + id)
+            await publicService.getBook(id)
                 .then((res) => {
                     setBook(res.data)
                 })

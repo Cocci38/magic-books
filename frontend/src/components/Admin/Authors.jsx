@@ -5,14 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { adminService } from '../../services/admin.service';
 
 export const Authors = () => {
 
     const [authors, setAuthors] = useState([]);
 
     const fetchAuthors = async () => {
-        await axios
-            .get('http://localhost/magic-books/backend/authors')
+        await adminService.getAllAuthors()
             .then((res) => {
                 //console.log(res.data)
                 setAuthors(res.data)
@@ -29,10 +29,7 @@ export const Authors = () => {
     const deleteAuthor = async (id) => {
         if (window.confirm("Voulez-vous supprimer cet auteur ?")) {
             // console.log(id);
-            await axios
-                .delete('http://localhost/magic-books/backend/delete/author/' + id, {
-                    data: id,
-                })
+            await adminService.deleteAuthor(id)
                 .then((res) => {
                     //console.log(res.data.result);
                     if (res.data.result === "Ok") {
