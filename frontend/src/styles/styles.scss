@@ -22,21 +22,36 @@
 header {
     @include flexRow;
     align-items: center;
+
     img {
         width: 12%;
     }
+
     ul {
         @include flexRow;
         gap: 20px;
         list-style: none;
         justify-self: center;
+
         a {
             text-decoration: none;
             color: $dark-blue;
         }
     }
+
     .activeLink {
         color: $orange;
     }
 }
 
+p {
+    text-align: left;
+}
+
+.bar {
+    // border-left: 1px solid $dark-blue;
+    padding-left: 1px;
+    background: #2D3250;
+    background-image: linear-gradient(to bottom, #f6f6ee, #2D3250, #f6f6ee);
+    // background: linear-gradient(to bottom, #f6f6ee, #2D3250, #f6f6ee);
+}

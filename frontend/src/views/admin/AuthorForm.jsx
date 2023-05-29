@@ -87,7 +87,7 @@ export const AuthorForm = () => {
                 {!id ? <textarea name="biography" id="biography" rows={8} /> : <textarea name="biography" id="biography" rows={8} defaultValue={author.biography} />}
 
                 <span style={{ color: "red" }}>{errors.biography}</span><br></br>
-                <button type="submit">Enregistrer</button>
+                <button type="submit" className="button">Enregistrer</button>
             </form>
         </div>
     )

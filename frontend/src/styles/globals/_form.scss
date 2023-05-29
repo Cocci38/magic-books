@@ -2,21 +2,28 @@
  * Page du style pour les formulaires
  */
 
+.mainRow {
+    @include flexRow;
+    width: 100%;
+    @media screen and (max-width: 1023px) {
+        @include flexColumn;
+    }
+}
 // Bordure des formulaires 
 .container, .h2Form{
-    width: 50%;
+    width: 48%;
     text-align: center;
     margin: 0 auto;
     padding-bottom: 20px;
     color: $dark-blue;
 }
-form {
-    width:100%;
+form, .form {
+    // width:100%;
     padding: 30px;
-    border: 1px solid $dark-blue;
-    border-radius: 10px;
+    // border: 1px solid $dark-blue;
+    // border-radius: 10px;
     background: $light;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    // box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 // Harmoniser les inputs 
@@ -26,6 +33,7 @@ input[type=email], input[type=password],  input[type=tel], input[type=text], inp
     margin: 8px 0;
     display: inline-block;
     border: 1px solid $orange;
+    border-radius: 10px;
     box-sizing: border-box;
 }
 
@@ -75,6 +83,7 @@ select {
     margin: 8px 0;
     display: inline-block;
     border: 1px solid $orange;
+    border-radius: 10px;
     box-sizing: border-box;
     text-align: center;
 }
@@ -84,5 +93,6 @@ textarea {
     margin: 8px 0;
     display: inline-block;
     border: 1px solid $orange;
+    border-radius: 10px;
     box-sizing: border-box;
 }

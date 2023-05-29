@@ -82,7 +82,7 @@ export const CategoryForm = () => {
                 <label htmlFor="nameCategory">Nom de la catégorie</label>
                 {!id ? <input type="text" name="nameCategory" id="nameCategory" /> : <input type="text" name="nameCategory" id="nameCategory" defaultValue={category.name} />}
                 <span style={{ color: "red" }}>{errors.nameCategory}</span>
-                <button type="submit">Enregistrer</button>
+                <button type="submit" className="button">Enregistrer</button>
             </form>
         </div>
     )

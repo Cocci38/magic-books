@@ -163,7 +163,7 @@ export const BookForm = () => {
                 <textarea name="summary" id="summary" rows={8} defaultValue={!id ? "" : book.summary} />
                 <span style={{ color: "red" }}>{errors.summary}</span><br></br>
 
-                <button type="submit">Enregistrer</button>
+                <button type="submit" className="button">Enregistrer</button>
             </form>
         </div>
     )
