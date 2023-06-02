@@ -1,6 +1,6 @@
 
 export const SignIn = ({ displaySignUp }) => {
-    console.log(displaySignUp);
+    //console.log(displaySignUp);
     // Fonction qui récupère les données transmis par le formulaire et qui l'envoie vers le serveur
     const handlSubmit = async (e) => {
         e.preventDefault();

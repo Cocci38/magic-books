@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import PublicLayout from './PublicLayout'
 import { Home } from './Home'
+import { Log } from './Log'
 import { BookById } from './BookById'
 import { AuthorById } from './AuthorById'
 import Error from '../../utils/Error'
@@ -13,6 +14,7 @@ const PublicRouter = () => {
         <Routes>
             <Route element={<PublicLayout />}>
                 <Route index element={<Home />} />
+                <Route path='log' element={<Log />} />
                 <Route path='connexion' element={<SignIn />} />
                 <Route path='inscription' element={<SignUp />} />
                 <Route path='livre/:id' element={<BookById />} />

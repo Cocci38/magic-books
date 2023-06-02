@@ -10,19 +10,20 @@ export const Log = () => {
     // Fonction pour afficher le formulaire d'inscription
     const displaySignUp = () => {
         console.log('inscription');
-        if (showSignUp == false) {
-            setShowSignUp(true)
-            setShowSignIn(false)
-        } else {
-            setShowSignUp(false)
+        if (showSignIn == false) {
             setShowSignIn(true)
+            setShowSignUp(false)
+        } else {
+            setShowSignIn(false)
+            setShowSignUp(true)
         }
     }
 
     return (
         <>
+            {/* <SignIn displaySignUp={displaySignUp} /> */}
             {
-                showSignUp && (<SignIn displaySignUp={displaySignUp} />)
+                showSignIn && (<SignIn displaySignUp={displaySignUp} />)
             }
             {
                 showSignUp && (<SignUp />)

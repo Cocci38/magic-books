@@ -9,10 +9,10 @@ export const SignUp = () => {
     return (
         <div className="container">
             <form onSubmit={handlSubmit}>
-                <h2 className="h2Form"> S'inscrire'</h2>
+                <h2 className="h2Form"> S'inscrire</h2>
 
                 <label htmlFor="username">username</label>
-                <input type="username" name="username" id="username" />
+                <input type="text" name="username" id="username" />
                 {/* <span style={{ color: "red" }}>{errors.username}</span><br></br> */}
 
                 <label htmlFor="email">Email</label>
