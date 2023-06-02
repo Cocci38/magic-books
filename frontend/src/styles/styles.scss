@@ -27,22 +27,26 @@ header {
         width: 12%;
     }
 
-    ul {
-        @include flexRow;
-        gap: 20px;
-        list-style: none;
-        justify-self: center;
+    nav {
+        flex: 1;
+        ul {
+            @include flexRow;
+            gap: 20px;
+            list-style: none;
+            justify-self: center;
 
-        a {
-            text-decoration: none;
-            color: $dark-blue;
+            a {
+                text-decoration: none;
+                color: $dark-blue;
+            }
+        }
+
+        .activeLink {
+            color: $orange;
         }
     }
-
-    .activeLink {
-        color: $orange;
-    }
 }
+
 
 p {
     text-align: left;

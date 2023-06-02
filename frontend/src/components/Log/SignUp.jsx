@@ -23,7 +23,7 @@ export const SignUp = () => {
                 <input type="password" name="password" id="password" />
                 {/* <span style={{ color: "red" }}>{errors.password}</span><br></br> */}
 
-                <button type="submit">Enregistrer</button>
+                <button type="submit" className="button">Enregistrer</button>
             </form>
         </div>
     )

@@ -21,18 +21,6 @@
                 text-align: center;
                 margin: 10px 0 5px 0;
             }
-
-            .buttonAdmin {
-                text-decoration: none;
-                text-align: center;
-                color: $dark-blue;
-                padding: 10px 0;
-                border: none;
-                cursor: pointer;
-                background-color: transparent;
-                font-family: "Lustria";
-                font-size: 16px;
-            }
         }
 
         hr {
@@ -174,4 +162,16 @@ h3 {
 
 .trash:hover {
     background-color: $red;
+}
+
+.buttonAdmin {
+    text-decoration: none;
+    text-align: center;
+    color: $dark-blue;
+    padding: 10px 0;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    font-family: "Lustria";
+    font-size: 16px;
 }
