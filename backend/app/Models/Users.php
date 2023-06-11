@@ -226,9 +226,9 @@ class Users
                 if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
                     if (preg_match("#^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$#", $this->email)) {
                         if (preg_match("#^[a-zA-Z0-9-?!*+/]{8,25}$#", $this->password)) {
-                            $query = $this->connexion->prepare("SELECT id, username, email, password 
-                        FROM users 
-                        WHERE email = :email");
+                            $query = $this->connexion->prepare("SELECT id, username, email, password, roles 
+                            FROM users 
+                            WHERE email = :email");
 
                             $this->email = $this->valid_data($this->email);
                             $this->email = filter_var($this->email, FILTER_SANITIZE_EMAIL);

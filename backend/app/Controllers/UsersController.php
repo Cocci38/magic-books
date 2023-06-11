@@ -4,10 +4,16 @@ namespace App\Controllers;
 
 use Config\Database;
 use App\Models\Users;
+use Config\JWT;
 
 class UsersController
 {
 
+    /**
+     * Fonction pour l'inscription des utilisateurs
+     *
+     * @return void
+     */
     public function signUp()
     {
         // Méthode autorisée
@@ -49,12 +55,19 @@ class UsersController
         }
     }
 
+    /**
+     * Fonction pour la connexion des utilisateurs
+     *
+     * @return void
+     */
     public function signIn()
     {
         // Méthode autorisée
         header("Access-Control-Allow-Methods: POST");
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $header = [];
+            $secret = '';
             // On instancie la base de données
             $database = new Database();
             $db = $database->getConnexion();
@@ -64,15 +77,34 @@ class UsersController
 
             $data = json_decode(file_get_contents("php://input"));
 
-            $user->setUsername($data->username);
             $user->setEmail($data->email);
             $user->setPassword($data->password);
+
             // On récupère les données
             $stmt = $user->signIn();
             if ($stmt->rowCount() > 0) {
                 //$data = [];
                 $data = $stmt->fetch();
+
                 if (password_verify($user->getPassword(),  $data['password']) && $data['email'] == $user->getEmail()) {
+
+                    // Je génère le token de l'utilisateur
+                    $payload = [
+                        'id' => $data['id'],
+                        'email' => $data['email'],
+                        'username' => $data['username'],
+                        'roles' => [
+                            $data['roles']
+                        ],
+                    ];
+                    $jwt = new JWT();
+                    $token = $jwt->generate($header, $payload, $secret);
+
+                    // Je mets les données dans des cookies pour les envoyer au client
+                    setcookie("token", $token, time()+3600);
+                    setcookie("role", json_decode($data['roles']), time()+3600);
+                    setcookie("username", $data['username'], time()+3600);
+                    
                     // On renvoie les données au format JSON
                     http_response_code(200);
                     echo json_encode(["result" => "Ok", "message" => "l'utilisateur " . $data['username'] . " est connecté"]);

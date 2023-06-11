@@ -1,2 +1,5 @@
 backend/config
 backend/public/pictures
+frontend/src/assets/.env
+package.json
+frontend/src/.env
