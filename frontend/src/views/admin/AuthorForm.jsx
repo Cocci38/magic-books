@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { adminService } from '../../services/admin.service';
+import { publicService } from '../../services/public.service';
 
 export const AuthorForm = () => {
 
@@ -14,8 +16,7 @@ export const AuthorForm = () => {
     if (id !== undefined) {
         useEffect(() => {
             const fetchAuthor = async () => {
-                await axios
-                    .get('http://localhost/magic-books/backend/author/' + id)
+                await publicService.getAuthor(id)
                     .then((res) => {
                         setAuthor(res.data)
                     })
@@ -54,30 +55,17 @@ export const AuthorForm = () => {
         } else {
             if (id === undefined) {
                 //console.log(nameCategory);
-                await axios
-                    .post(
-                        'http://localhost/magic-books/backend/create/author', {
-                        name: nameAuthor,
-                        nationality: nationality,
-                        biography: biography
-                    })
+                await adminService.postAuthor(nameAuthor, nationality, biography)
                     .then(res => {
                         console.log(res.data);
-                        navigate("/dashboard");
+                        navigate("/admin");
                     })
                     .catch(error => { console.log(error.data) });
             } else {
-                await axios
-                    .put(
-                        'http://localhost/magic-books/backend/update/author/' + id, {
-                        id: id,
-                        name: nameAuthor,
-                        nationality: nationality,
-                        biography: biography
-                    })
+                await adminService.updateAuthor(id, nameAuthor, nationality, biography)
                     .then(res => {
                         console.log(res.data);
-                        navigate("/dashboard");
+                        navigate("/admin");
                     })
                     .catch(error => { console.log(error.data) });
             }
@@ -99,7 +87,7 @@ export const AuthorForm = () => {
                 {!id ? <textarea name="biography" id="biography" rows={8} /> : <textarea name="biography" id="biography" rows={8} defaultValue={author.biography} />}
 
                 <span style={{ color: "red" }}>{errors.biography}</span><br></br>
-                <button type="submit">Enregistrer</button>
+                <button type="submit" className="button">Enregistrer</button>
             </form>
         </div>
     )

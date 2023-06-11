@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 //import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { adminService } from '../../services/admin.service';
 
 export const Categories = () => {
 
@@ -14,8 +15,7 @@ export const Categories = () => {
     const nomInput = useRef();
 
     const fetchCategories = async () => {
-        await axios
-            .get('http://localhost/magic-books/backend/categories')
+        await adminService.getAllCategories()
             .then((res) => {
                 //console.log(res.data)
                 setCategories(res.data)
@@ -45,12 +45,9 @@ export const Categories = () => {
     // }
 
     const deleteCategory = async (id) => {
-        if (window.confirm("Voulez-vous supprimer cet article ?")) {
+        if (window.confirm("Voulez-vous supprimer cette catégorie ?")) {
             // console.log(id);
-            await axios
-                .delete('http://localhost/magic-books/backend/delete/category/' + id, {
-                    data: id,
-                })
+            await adminService.deleteCategory(id)
                 .then((res) => {
                     //console.log(res.data.result);
                     if (res.data.result === "Ok") {

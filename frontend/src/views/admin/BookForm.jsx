@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { adminService } from '../../services/admin.service';
+import { publicService } from '../../services/public.service';
 
 export const BookForm = () => {
 
@@ -17,8 +19,7 @@ export const BookForm = () => {
     if (id !== undefined) {
         useEffect(() => {
             const fetchBook = async () => {
-                await axios
-                    .get('http://localhost/magic-books/backend/book/' + id)
+                await publicService.getBook(id)
                     .then((res) => {
                         setBook(res.data)
                     })
@@ -32,8 +33,7 @@ export const BookForm = () => {
     // console.log(book);
 
     const fetchAuthors = async () => {
-        await axios
-            .get('http://localhost/magic-books/backend/authors')
+        await adminService.getAllAuthors()
             .then((res) => {
                 //console.log(res.data)
                 setAuthors(res.data)
@@ -48,8 +48,7 @@ export const BookForm = () => {
     }, []);
 
     const fetchCategories = async () => {
-        await axios
-            .get('http://localhost/magic-books/backend/categories')
+        await adminService.getAllCategories()
             .then((res) => {
                 //console.log(res.data)
                 setCategories(res.data)
@@ -64,7 +63,7 @@ export const BookForm = () => {
         fetchCategories()
     }, []);
 
-    const handlSubmit = (e) => {
+    const handlSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
         //console.log(e.target);
@@ -89,19 +88,17 @@ export const BookForm = () => {
             setErrors(errors);
         } else {
             if (id === undefined) {
-                axios
-                    .post('http://localhost/magic-books/backend/create/book', formData)
+                await adminService.postBook(formData)
                     .then(res => {
                         console.log(res.data);
-                        navigate("/dashboard");
+                        navigate("/admin");
                     })
                     .catch(error => { console.log(error.data) });
             } else {
-                axios 
-                    .post('http://localhost/magic-books/backend/update/book/' + id, formData)
+                await adminService.updateBook(id, formData)
                     .then(res => {
                         console.log(res.data);
-                        navigate("/dashboard");
+                        navigate("/admin");
                     })
                     .catch(error => { console.log(error.data) });
             }
@@ -166,7 +163,7 @@ export const BookForm = () => {
                 <textarea name="summary" id="summary" rows={8} defaultValue={!id ? "" : book.summary} />
                 <span style={{ color: "red" }}>{errors.summary}</span><br></br>
 
-                <button type="submit">Enregistrer</button>
+                <button type="submit" className="button">Enregistrer</button>
             </form>
         </div>
     )

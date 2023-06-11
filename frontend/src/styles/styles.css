@@ -1,21 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative&display=swap"); /**
  * Page du style pour les formulaires
  */
+.mainRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+@media screen and (max-width: 1023px) {
+  .mainRow {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .container, .h2Form {
-  width: 50%;
+  width: 48%;
   text-align: center;
   margin: 0 auto;
   padding-bottom: 20px;
   color: #2D3250;
 }
 
-form {
-  width: 100%;
+form, .form {
   padding: 30px;
-  border: 1px solid #2D3250;
-  border-radius: 10px;
   background: #f6f6ee;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 input[type=email], input[type=password], input[type=tel], input[type=text], input[type=number], input[type=date], input[type=search], input[type=file] {
@@ -24,6 +32,7 @@ input[type=email], input[type=password], input[type=tel], input[type=text], inpu
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #F8B179;
+  border-radius: 10px;
   box-sizing: border-box;
 }
 
@@ -76,6 +85,7 @@ select {
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #F8B179;
+  border-radius: 10px;
   box-sizing: border-box;
   text-align: center;
 }
@@ -86,6 +96,7 @@ textarea {
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #F8B179;
+  border-radius: 10px;
   box-sizing: border-box;
 }
 
@@ -113,17 +124,6 @@ textarea {
   text-decoration: underline;
   text-align: center;
   margin: 10px 0 5px 0;
-}
-.dashboard .boxContainer .boxLien .buttonAdmin {
-  text-decoration: none;
-  text-align: center;
-  color: #2D3250;
-  padding: 10px 0;
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-  font-family: "Lustria";
-  font-size: 16px;
 }
 .dashboard .boxContainer hr {
   border: 0;
@@ -274,6 +274,18 @@ h3 {
   background-color: #A62C31;
 }
 
+.buttonAdmin {
+  text-decoration: none;
+  text-align: center;
+  color: #2D3250;
+  padding: 10px 0;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-family: "Lustria";
+  font-size: 16px;
+}
+
 :root {
   font-family: "Lustria";
   line-height: 1.5;
@@ -295,17 +307,30 @@ header {
 header img {
   width: 12%;
 }
-header ul {
+header nav {
+  flex: 1;
+}
+header nav ul {
   display: flex;
   flex-direction: row;
   gap: 20px;
   list-style: none;
   justify-self: center;
 }
-header ul a {
+header nav ul a {
   text-decoration: none;
   color: #2D3250;
 }
-header .activeLink {
+header nav .activeLink {
   color: #F8B179;
+}
+
+p {
+  text-align: left;
+}
+
+.bar {
+  padding-left: 1px;
+  background: #2D3250;
+  background-image: linear-gradient(to bottom, #f6f6ee, #2D3250, #f6f6ee);
 }/*# sourceMappingURL=styles.css.map */

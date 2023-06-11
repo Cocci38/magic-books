@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState,useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { adminService } from '../../services/admin.service';
+import { publicService } from '../../services/public.service';
 
 export const CategoryForm = () => {
 
@@ -15,8 +17,7 @@ export const CategoryForm = () => {
     if (id !== undefined) {
         useEffect(() => {
             const fetchCategory = async () => {
-                await axios
-                    .get('http://localhost/magic-books/backend/category/' +id)
+                await publicService.getCategory(id)
                     .then((res) => {
                         setCategory(res.data)
                     })
@@ -54,27 +55,18 @@ export const CategoryForm = () => {
             // Si l'id est indéfini, j'envoie le formulaire de création
             if (id === undefined) {
                 //console.log('je passe ici');
-                await axios
-                .post(
-                    'http://localhost/magic-books/backend/create/category', {
-                    name: nameCategory,
-                })
+                await adminService.postCategory(nameCategory)
                 .then(res => {
                     // console.log(res.data);
-                    navigate("/dashboard");
+                    navigate("/admin");
                 })
                 .catch(error => { console.log(error.data) });
             // Sinon j'envoie le formulaire de modification
             } else {
-                await axios
-                .put(
-                    'http://localhost/magic-books/backend/update/category/'+id, {
-                    id: id,
-                    name: nameCategory,
-                })
+                await adminService.updateCategory(id, nameCategory)
                 .then(res => {
                     // console.log(res.data);
-                    navigate("/dashboard");
+                    navigate("/admin");
                 })
                 .catch(error => { console.log(error.data) });
             }
@@ -90,7 +82,7 @@ export const CategoryForm = () => {
                 <label htmlFor="nameCategory">Nom de la catégorie</label>
                 {!id ? <input type="text" name="nameCategory" id="nameCategory" /> : <input type="text" name="nameCategory" id="nameCategory" defaultValue={category.name} />}
                 <span style={{ color: "red" }}>{errors.nameCategory}</span>
-                <button type="submit">Enregistrer</button>
+                <button type="submit" className="button">Enregistrer</button>
             </form>
         </div>
     )

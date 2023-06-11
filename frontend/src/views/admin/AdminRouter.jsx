@@ -1,11 +1,11 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { Dashboard } from './Dashboard'
 import { CategoryForm } from './CategoryForm'
 import { AuthorForm } from './AuthorForm'
 import { BookForm } from './BookForm'
 import AdminLayout from './AdminLayout'
 import Error from '../../utils/Error'
+import { Dashboard } from './Dashboard' 
 
 const AdminRouter = () => {
     return (
