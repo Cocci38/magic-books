@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { useState,useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminService } from '../../services/admin.service';

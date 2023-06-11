@@ -1,10 +1,49 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { publicService } from '../../services/public.service';
 
 export const SignIn = ({ displaySignUp }) => {
+    const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
     //console.log(displaySignUp);
     // Fonction qui récupère les données transmis par le formulaire et qui l'envoie vers le serveur
     const handlSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
+
+        const formData = new FormData(form);
+        const email = formData.get("email");
+        const password = formData.get("password");
+        console.log(email);
+
+        const validateData = () => {
+            let errors = {};
+            if (!email) {
+                errors.email = "L'email est requis";
+            }
+            if (!password) {
+                errors.password = "Le mot de passe est requis";
+            }
+            return errors;
+        };
+        const errors = validateData();
+
+        if (Object.keys(errors).length) {
+            setErrors(errors);
+        }else{
+            await publicService.signIn(email, password)
+                .then(res => {
+                    console.log(res.data);
+                    //navigate("/admin");
+                })
+                .catch(error => { console.log(error.data) });
+            }
+        
+    }
+    const handleChange = async (e) => {
+        const form = e.target;
+
+        console.log(form);
     }
 
     return (
@@ -14,12 +53,12 @@ export const SignIn = ({ displaySignUp }) => {
                     <h2 className="h2Form"> Se connecter</h2>
 
                     <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" />
-                    {/* <span style={{ color: "red" }}>{errors.email}</span><br></br> */}
+                    <input type="email" name="email" id="email" onChange={handleChange} />
+                    <span style={{ color: "red" }}>{errors.email}</span><br></br>
 
                     <label htmlFor="password">Mot de passe</label>
                     <input type="password" name="password" id="password" />
-                    {/* <span style={{ color: "red" }}>{errors.password}</span><br></br> */}
+                    <span style={{ color: "red" }}>{errors.password}</span><br></br>
 
                     <button type="submit" className="button">Connexion</button>
                 </form>
