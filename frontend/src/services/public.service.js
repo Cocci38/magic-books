@@ -16,15 +16,7 @@ const getAuthor = (id) => {
     return Axios.get("author/" + id)
 }
 
-// Services de connexion vers l'api pour la connexion des utilisateurs
-const signIn = (email, password) => {
-    return Axios.post('signin', {
-        email: email,
-        password: password
-    })
-}
-
 // Déclaration des services pour l'import
 export const publicService = {
-    getBook, getCategory, getAuthor, signIn
+    getBook, getCategory, getAuthor
 }

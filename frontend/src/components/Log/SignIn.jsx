@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { publicService } from '../../services/public.service';
+import { accountService } from "../../services/account.service";
 
 export const SignIn = ({ displaySignUp }) => {
     const [errors, setErrors] = useState({});
@@ -14,7 +14,6 @@ export const SignIn = ({ displaySignUp }) => {
         const formData = new FormData(form);
         const email = formData.get("email");
         const password = formData.get("password");
-        console.log(email);
 
         const validateData = () => {
             let errors = {};
@@ -30,16 +29,25 @@ export const SignIn = ({ displaySignUp }) => {
 
         if (Object.keys(errors).length) {
             setErrors(errors);
-        }else{
-            await publicService.signIn(email, password)
+        } else {
+            await accountService.signIn(email, password)
                 .then(res => {
-                    console.log(res.data);
-                    //navigate("/admin");
+                    //console.log(res);
+                    let cookies = res.data.token
+                    console.log(document.cookie);
+                    accountService.saveToken(cookies)
+                    navigate("/")
+                    // accountService.saveRole(JSON.parse(res.data.role))
+                    if (accountService.isLogged()) {
+                        //window.location.reload();
+                        navigate("/admin");
+                    }
                 })
                 .catch(error => { console.log(error.data) });
-            }
-        
+        }
+
     }
+    
     const handleChange = async (e) => {
         const form = e.target;
 

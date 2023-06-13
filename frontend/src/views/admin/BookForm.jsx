@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminService } from '../../services/admin.service';
 import { publicService } from '../../services/public.service';
@@ -15,19 +14,24 @@ export const BookForm = () => {
     const [book, setBook] = useState([]);
     const [categories, setCategories] = useState([]);
     const [authors, setAuthors] = useState([]);
+    const flag = useRef(false);
 
     if (id !== undefined) {
+
+        const fetchBook = async () => {
+            await publicService.getBook(id)
+                .then((res) => {
+                    setBook(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
         useEffect(() => {
-            const fetchBook = async () => {
-                await publicService.getBook(id)
-                    .then((res) => {
-                        setBook(res.data)
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                    })
+            if (flag.current === false) {
+                fetchBook()
             }
-            fetchBook()
+            return () => flag.current = true
         }, [id])
     }
     // console.log(book);
@@ -44,7 +48,10 @@ export const BookForm = () => {
     }
     // Le useEffect se joue lorsque le composant est monté
     useEffect(() => {
-        fetchAuthors()
+        if (flag.current === false) {
+            fetchAuthors()
+        }
+        return () => flag.current = true
     }, []);
 
     const fetchCategories = async () => {
@@ -60,7 +67,10 @@ export const BookForm = () => {
     }
     // Le useEffect se joue lorsque le composant est monté
     useEffect(() => {
-        fetchCategories()
+        if (flag.current === false) {
+            fetchCategories()
+        }
+        return () => flag.current = true
     }, []);
 
     const handlSubmit = async (e) => {
@@ -68,7 +78,7 @@ export const BookForm = () => {
         const form = e.target;
         //console.log(e.target);
         const formData = new FormData(form);
-        
+
         console.log([...formData]);
         const validateData = () => {
             let errors = {};
@@ -109,24 +119,24 @@ export const BookForm = () => {
     return (
         <div className="container">
             <form onSubmit={handlSubmit}>
-            <h2 className="h2Form">{!id ? "Ajouter un livre" : "Modifier un livre"}</h2>
+                <h2 className="h2Form">{!id ? "Ajouter un livre" : "Modifier un livre"}</h2>
                 <input type="hidden" name="id" defaultValue={!id ? "" : book.id} />
-                
+
                 <label htmlFor="title">Titre</label>
                 <input type="text" name="title" id="title" defaultValue={!id ? "" : book.title} />
                 <span style={{ color: "red" }}>{errors.title}</span><br></br>
 
                 <label htmlFor="authorId">Auteur
                     <select name="authorId" >
-                        <option>{ "--- Sélectionner un auteur ---" }</option>
+                        <option>{"--- Sélectionner un auteur ---"}</option>
                         {!authors ? '' : authors
                             .map((author) => (
-                                <option 
-                                    key={author.id} 
+                                <option
+                                    key={author.id}
                                     value={author.id}
                                     defaultValue={book.author_id}
                                     selected={author.id === book.author_id ? "selected" : ""}>{author.name}
-                                    </option>
+                                </option>
                             ))
                         }
                     </select>
@@ -142,17 +152,17 @@ export const BookForm = () => {
                 <span style={{ color: "red" }}>{errors.releaseDate}</span><br></br>
 
                 <label htmlFor="image">Couverture</label>
-                {!id ? "" : <input type="hidden" name="cover" defaultValue={book.cover}/>}
+                {!id ? "" : <input type="hidden" name="cover" defaultValue={book.cover} />}
                 <input type="file" name="image" id="fileInput" />
 
                 <label htmlFor="categoryId">Catégorie
                     <select name="categoryId" >
-                        <option>{ "--- Sélectionner une catégorie ---" }</option>
+                        <option>{"--- Sélectionner une catégorie ---"}</option>
                         {!categories ? '' : categories
                             .map((category) => (
                                 <option key={category.id}
-                                value={category.id}
-                                selected={category.name === book.categories_name ? "selected" : ""}>{category.name} </option>
+                                    value={category.id}
+                                    selected={category.name === book.categories_name ? "selected" : ""}>{category.name} </option>
                             ))
                         }
                     </select>

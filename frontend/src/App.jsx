@@ -1,6 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AdminRouter from './views/Admin/AdminRouter';
 import PublicRouter from './views/Public/PublicRouter';
+// import AuthGuard from './helpers/AuthGuard';
+import { accountService } from './services/account.service';
 
 function App() {
 
@@ -10,7 +12,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="*" element={<PublicRouter />} />
-          <Route path="/admin/*" element={<AdminRouter /> } />
+          {/* <Route path="/admin/*" element={accountService.isLogged() ? <AdminRouter /> : <Navigate to="/authentification"/>} /> */}
+          <Route path="/admin/*" element={accountService.isLogged() ? <AdminRouter /> : <PublicRouter />} />
+          {/* <Route path="/admin/*" element={<AdminRouter />} /> */}
         </Routes>
       </BrowserRouter>
     </>

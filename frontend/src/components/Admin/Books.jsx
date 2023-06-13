@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +11,8 @@ export const Books = () => {
 
     const [books, setBooks] = useState([]);
     const urlImage = "http://localhost/magic-books/backend/public/pictures/";
+    const flag = useRef(false);
+
     const fetchBooks = async () => {
         await adminService.getAllBooks()
             .then((res) => {
@@ -24,7 +26,11 @@ export const Books = () => {
     }
     // Le useEffect se joue lorsque le composant est monté
     useEffect(() => {
-        fetchBooks()
+        // Fonction de nettoyage pour ne faire qu'une seule fois l'appel vers l'api
+        if (flag.current === false) {
+            fetchBooks()
+        }
+        return () => flag.current = true
     }, []);
 
     const deleteBook = async (id) => {

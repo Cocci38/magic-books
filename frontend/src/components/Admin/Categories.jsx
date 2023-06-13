@@ -11,6 +11,7 @@ export const Categories = () => {
 
     const [categories, setCategories] = useState([]);
     const [showCategory, setShowCategory] = useState(false);
+    const flag = useRef(false);
 
     const nomInput = useRef();
 
@@ -26,7 +27,10 @@ export const Categories = () => {
     }
     // Le useEffect se joue lorsque le composant est monté
     useEffect(() => {
+        if (flag.current === false) {
         fetchCategories()
+    }
+    return () => flag.current = true
     }, []);
 
     // const updateCategory = (idCat) => {

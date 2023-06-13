@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminService } from '../../services/admin.service';
 import { publicService } from '../../services/public.service';
@@ -12,19 +11,23 @@ export const AuthorForm = () => {
     const { id } = useParams();
     //console.log(id);
     const [author, setAuthor] = useState([]);
+    const flag = useRef(false);
 
     if (id !== undefined) {
+        const fetchAuthor = async () => {
+            await publicService.getAuthor(id)
+                .then((res) => {
+                    setAuthor(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
         useEffect(() => {
-            const fetchAuthor = async () => {
-                await publicService.getAuthor(id)
-                    .then((res) => {
-                        setAuthor(res.data)
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                    })
+            if (flag.current === false) {
+                fetchAuthor()
             }
-            fetchAuthor()
+            return () => flag.current = true
         }, [id])
     }
     //console.log(author);

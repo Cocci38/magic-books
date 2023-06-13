@@ -1,5 +1,4 @@
-
-import { useState,useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminService } from '../../services/admin.service';
 import { publicService } from '../../services/public.service';
@@ -11,25 +10,30 @@ export const CategoryForm = () => {
     // console.log(id);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
-    const [category, setCategory] = useState({name:''});
+    const [category, setCategory] = useState({ name: '' });
+    const flag = useRef(false);
 
     // Si je l'id est présent, je récupère la catégorie pour l'afficher dans le formulaire de modification
     if (id !== undefined) {
+
+        const fetchCategory = async () => {
+            await publicService.getCategory(id)
+                .then((res) => {
+                    setCategory(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
         useEffect(() => {
-            const fetchCategory = async () => {
-                await publicService.getCategory(id)
-                    .then((res) => {
-                        setCategory(res.data)
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                    })
+            if (flag.current === false) {
+                fetchCategory()
             }
-            fetchCategory()
+            return () => flag.current = true
         }, [id]);
         //console.log(category.name);
     }
-    
+
 
     // Fonction qui récupère les données transmis par le formulaire et qui l'envoie vers le serveur
     const handlSubmit = async (e) => {
@@ -56,21 +60,21 @@ export const CategoryForm = () => {
             if (id === undefined) {
                 //console.log('je passe ici');
                 await adminService.postCategory(nameCategory)
-                .then(res => {
-                    // console.log(res.data);
-                    navigate("/admin");
-                })
-                .catch(error => { console.log(error.data) });
-            // Sinon j'envoie le formulaire de modification
+                    .then(res => {
+                        // console.log(res.data);
+                        navigate("/admin");
+                    })
+                    .catch(error => { console.log(error.data) });
+                // Sinon j'envoie le formulaire de modification
             } else {
                 await adminService.updateCategory(id, nameCategory)
-                .then(res => {
-                    // console.log(res.data);
-                    navigate("/admin");
-                })
-                .catch(error => { console.log(error.data) });
+                    .then(res => {
+                        // console.log(res.data);
+                        navigate("/admin");
+                    })
+                    .catch(error => { console.log(error.data) });
             }
-            
+
         }
         form.reset();
     }

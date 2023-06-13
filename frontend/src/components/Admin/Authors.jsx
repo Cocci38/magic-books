@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +10,7 @@ import { adminService } from '../../services/admin.service';
 export const Authors = () => {
 
     const [authors, setAuthors] = useState([]);
+    const flag = useRef(false);
 
     const fetchAuthors = async () => {
         await adminService.getAllAuthors()
@@ -23,7 +24,10 @@ export const Authors = () => {
     }
     // Le useEffect se joue lorsque le composant est monté
     useEffect(() => {
+        if (flag.current === false) {
         fetchAuthors()
+    }
+    return () => flag.current = true
     }, []);
 
     const deleteAuthor = async (id) => {
