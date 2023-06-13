@@ -10,9 +10,10 @@ const Axios = axios.create({
  * Intercepteur pour le token
  */
 Axios.interceptors.request.use(request => {
-    // if (accountService.isLogged()) {
-    //     request.headers.Authorization = "Bearer "+ accountService.getToken()
-    // }
+    if (accountService.isLogged()) {
+        request.headers.Authorization = "Bearer "+accountService.getToken()
+        request.withCredentials = true
+    }
     return request
 });
 

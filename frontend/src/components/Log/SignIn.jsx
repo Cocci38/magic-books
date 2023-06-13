@@ -32,15 +32,16 @@ export const SignIn = ({ displaySignUp }) => {
         } else {
             await accountService.signIn(email, password)
                 .then(res => {
-                    //console.log(res);
+                    console.log(res);
                     let cookies = res.data.token
-                    console.log(document.cookie);
+                    let token = document.cookie.split('; ')
+                    console.log(token);
                     accountService.saveToken(cookies)
-                    navigate("/")
+                    //navigate("/")
                     // accountService.saveRole(JSON.parse(res.data.role))
                     if (accountService.isLogged()) {
                         //window.location.reload();
-                        navigate("/admin");
+                        //navigate("/admin");
                     }
                 })
                 .catch(error => { console.log(error.data) });

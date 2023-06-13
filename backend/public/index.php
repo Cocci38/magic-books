@@ -1,21 +1,25 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
-    header("Access-Control-Allow-Headers: Content-Type");
-    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Authorization, X-Requested-With");
+    header("Access-Control-Allow-Origin: http://localhost:5173");
     header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
+    header("Access-Control-Allow-Credentials: true");
     exit;
 }
+
 // Entêtes autorisées
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
 // Les entêtes requis
 // Accès depuis n'importe quel site ou appareil (*)
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://localhost:5173");
 // Format des données envoyées
 header("Content-Type: application/json; charset=UTF-8");
 // Durée de vie de la requête
 header("Access-Control: no-cache, max-age=0, private");
 header("Pragma: no-cache");
+header("Access-Control-Allow-Credentials: true");
+header("Authorization: Bearer");
 
 use Router\Router;
 
