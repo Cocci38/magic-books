@@ -51,6 +51,7 @@ $router->put('/update/author/:id', 'App\Controllers\AuthorsController@update');
 $router->delete('/delete/author/:id', 'App\Controllers\AuthorsController@delete');
 
 // On appelle les fonctions signUp, signIn, updateAccount and deleteAccount dans le bloc UsersController
+$router->get('/user/:id', 'App\Controllers\UsersController@readById'); // Dans l'url on écrit users/id
 $router->post('/signup', 'App\Controllers\UsersController@signUp');
 $router->post('/signin', 'App\Controllers\UsersController@signIn');
 $router->put('/update/account/:id', 'App\Controllers\UsersController@updateAccount');

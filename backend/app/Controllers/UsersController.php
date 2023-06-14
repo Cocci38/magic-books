@@ -107,13 +107,51 @@ class UsersController
                     
                     // On renvoie les données au format JSON
                     http_response_code(200);
-                    echo json_encode(["result" => "Ok", "message" => "l'utilisateur " . $data['username'] . " est connecté", "token"=>$token, "role"=>$data['roles']]);
+                    echo json_encode(["result" => "Ok", "message" => "l'utilisateur " . $data['username'] . " est connecté", "token"=>$token, "data"=>$data]);
                     //echo json_encode($data['username']);
                 } else {
                     echo json_encode(["message" => "Aucun compte n'a été trouvé"]);
                 }
             } else {
                 echo json_encode(["message" => "Aucunes données à renvoyer"]);
+            }
+        } else {
+            http_response_code(405);
+            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+        }
+    }
+
+    public function readById()
+    {
+        // Méthode autorisée
+        header("Access-Control-Allow-Methods: GET");
+
+        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+            // On instancie la base de données
+            $database = new Database();
+            $db = $database->getConnexion();
+
+            // On instancie l'objet Authors
+            $user = new Users($db);
+            // file_get_contents => c'est le fichier d'entrée php
+            //$data = json_decode(file_get_contents("php://input"));
+            $url = $_GET['url'];
+            $id = basename(parse_url($url, PHP_URL_PATH));
+            //$user->setId($data->id);
+            $user->setId($id);
+            // On récupère les données
+            $result = $user->readById();
+
+            if ($result->rowCount() > 0) {
+                //$data = [];
+                $donnees = $result->fetch();
+
+                // On renvoie les données au format JSON
+                http_response_code(200);
+                echo json_encode($donnees);
+            } else {
+                http_response_code(404);
+                echo json_encode(["message" => "Aucun utilisateur ne correspond"]);
             }
         } else {
             http_response_code(405);

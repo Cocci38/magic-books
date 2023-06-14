@@ -35,6 +35,14 @@ let saveRole = (role) => {
 }
 
 /**
+ * Sauvegarde de l'id dans le localStorage
+ * @param {string} id 
+ */
+let saveId = (id) => {
+    localStorage.setItem('id', id)
+}
+
+/**
  * Suppression du token du localStorage
  */
 let logout = () => {
@@ -54,7 +62,11 @@ let getToken = () => {
     return localStorage.getItem('token')
 }
 
+let getReaderId = () => {
+    return localStorage.getItem('id')
+}
+
 // Déclaration des services pour import
 export const accountService = {
-    signUp, signIn, saveToken, saveRole, logout, isLogged, getToken
+    signUp, signIn, saveToken, saveRole, saveId, logout, isLogged, getToken, getReaderId
 }

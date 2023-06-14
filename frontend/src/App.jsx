@@ -3,6 +3,7 @@ import AdminRouter from './views/Admin/AdminRouter';
 import PublicRouter from './views/Public/PublicRouter';
 // import AuthGuard from './helpers/AuthGuard';
 import { accountService } from './services/account.service';
+import ReaderRouter from './views/Reader/ReaderRouter';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           {/* <Route path="/admin/*" element={accountService.isLogged() ? <AdminRouter /> : <Navigate to="/authentification"/>} /> */}
           <Route path="/admin/*" element={accountService.isLogged() ? <AdminRouter /> : <PublicRouter />} />
           {/* <Route path="/admin/*" element={<AdminRouter />} /> */}
+          <Route path="/mon-compte/*" element={<ReaderRouter/> } />
         </Routes>
       </BrowserRouter>
     </>

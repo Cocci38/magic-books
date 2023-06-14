@@ -29,19 +29,19 @@ class Users
     }
 
     /**
-     * Get the value of id
+     * Get the value of table
      */
-    public function getId()
+    public function getTable()
     {
-        return $this->id;
+        return $this->table;
     }
 
     /**
-     * Set the value of id
+     * Set the value of table
      */
-    public function setId($id): self
+    public function setTable($table): self
     {
-        $this->id = $id;
+        $this->table = $table;
 
         return $this;
     }
@@ -60,6 +60,24 @@ class Users
     public function setConnexion($connexion): self
     {
         $this->connexion = $connexion;
+
+        return $this;
+    }
+    
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
 
         return $this;
     }
@@ -240,6 +258,30 @@ class Users
                     }
                 }
             }
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
+        }
+    }
+
+    /**
+     * Pour afficher un utilisateur selon son id
+     *
+     * @return $query
+     */
+    public function readById()
+    {
+        try {
+            $query = $this->connexion->prepare("SELECT id, username, email FROM " . $this->table . " WHERE id = :id");
+
+            $this->id = $this->valid_data($this->id);
+
+            $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+
+            //On execute la requête
+            $query->execute();
+
+            // On retourne le résultat
+            return $query;
         } catch (PDOException $exception) {
             echo "Erreur de connexion : " . $exception->getMessage();
         }

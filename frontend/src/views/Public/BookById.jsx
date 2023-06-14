@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { publicService } from '../../services/public.service';
+import { accountService } from "../../services/account.service";
 
 export const BookById = () => {
 
     const { id } = useParams();
-    //console.log(id);
+    const readerId = accountService.getReaderId();
+    // console.log(id);
+    // console.log(readerId);
     const [book, setBook] = useState([]);
     const flag = useRef(false);
 
@@ -26,6 +29,11 @@ export const BookById = () => {
         return () => flag.current = true
     }, [id])
 
+    const addLibrary = () => {
+        console.log(id);
+        console.log(readerId);
+    }   
+
     //console.log(books);
     return (
         <main>
@@ -38,6 +46,7 @@ export const BookById = () => {
                     <p className="paragraphFlex"><span className="paragraphName">Catégorie</span><span>{book.categories_name}</span></p>
                     <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{book.summary}</span></p>
                 </div>
+                <button onClick={addLibrary}>Ajouter à la bibliothèque</button>
             </section>
         </main>
     )
