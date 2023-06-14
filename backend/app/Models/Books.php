@@ -254,12 +254,14 @@ class Books
     /**
      * Pour lire la liste des livres
      * 
+     * @return $query
      */
     public function readAll()
     {
         try {
-            // On écrit la requête préparer
-            $query = $this->connexion->prepare("SELECT b.id, b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name FROM $this->table b 
+            // On écrit la requête préparée
+            $query = $this->connexion->prepare("SELECT b.id, b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name 
+                                            FROM $this->table b 
                                             LEFT JOIN categories c ON b.category_id = c.id 
                                             LEFT JOIN authors a ON b.author_id = a.id ORDER BY b.title ASC");
 
@@ -274,7 +276,7 @@ class Books
     }
 
     /**
-     * Pour lire un lvre selon son id
+     * Pour lire un livre selon son id
      *
      * @return id
      */
