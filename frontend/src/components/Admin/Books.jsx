@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -16,8 +16,11 @@ export const Books = () => {
     const fetchBooks = async () => {
         await adminService.getAllBooks()
             .then((res) => {
-                //console.log(res.data)
-                setBooks(res.data)
+                console.log(res.data)
+                if (res.data.result !== "ERROR") {
+                    setBooks(res.data)
+                }
+                
             })
             .catch((err) => {
                 console.log(err)
@@ -52,7 +55,7 @@ export const Books = () => {
     }
 
     return (
-        <section className="sectionRow">{!books ? '' : books
+        <section className="sectionRow">{Array.isArray(books) ? books 
             .map((book) => (
                 <div key={book.id} className="bookContainer">
                     <div className="coverContainer">
@@ -74,7 +77,8 @@ export const Books = () => {
                         </div>
                     </div>
                 </div>
-            ))}
+            ))
+            : <Navigate to={"/"} /> }
         </section>
     )
 }

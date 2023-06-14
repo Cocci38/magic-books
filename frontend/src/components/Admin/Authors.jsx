@@ -49,7 +49,7 @@ export const Authors = () => {
     }
 
     return (
-        <section className="sectionRow">{!authors ? '' : authors
+        <section className="sectionRow">{Array.isArray(authors) ? authors
             .map((author) => (
                 <div key={author.id} className="authorContainer">
                     <h3>{author.name}</h3>
@@ -70,7 +70,8 @@ export const Authors = () => {
                     </div>
                 </div>
 
-            ))}
+            ))
+            : <Navigate to={"/"} />}
         </section>
     )
 

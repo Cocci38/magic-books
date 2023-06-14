@@ -67,7 +67,7 @@ export const Categories = () => {
     }
     return (
 
-        <section className="sectionRow">{!categories ? '' : categories
+        <section className="sectionRow">{Array.isArray(categories) ? categories
             .map((category) => (
                 <div key={category.id} className="categoryContainer">
                     <span className="paragraphName">Nom de la catégorie</span>
@@ -80,7 +80,7 @@ export const Categories = () => {
                     </div>
                 </div>
             ))
-        }
+            : <Navigate to={"/"} />}
         </section>
     )
 }

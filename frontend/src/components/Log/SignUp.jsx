@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { publicService } from '../../services/public.service';
+import { accountService } from "../../services/account.service";
 
 export const SignUp = () => {
 
@@ -14,6 +14,7 @@ export const SignUp = () => {
         const form = e.target;
 
         const formData = new FormData(form);
+        const username = formData.get("username");
         const email = formData.get("email");
         const password = formData.get("password");
         console.log(email);
@@ -36,7 +37,7 @@ export const SignUp = () => {
         if (Object.keys(errors).length) {
             setErrors(errors);
         }else{
-            await publicService.signIn(email, password)
+            await accountService.signUp(username, email, password)
                 .then(res => {
                     console.log(res.data);
                     navigate("/admin");
