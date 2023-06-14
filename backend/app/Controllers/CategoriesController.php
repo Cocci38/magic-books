@@ -5,10 +5,7 @@ namespace App\Controllers;
 use Config\Database;
 use App\Models\Categories;
 
-
-
-
-class CategoriesController
+class CategoriesController extends Controller
 {
 
     public function readAll()
@@ -91,37 +88,41 @@ class CategoriesController
     {
         // Méthode autorisée
         //header("Access-Control-Allow-Methods: POST");
+        if ($this->Authorization() == "[ROLE_ADMIN]") {
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                // On instancie la base de données
+                $database = new Database();
+                $db = $database->getConnexion();
 
-            // On instancie la base de données
-            $database = new Database();
-            $db = $database->getConnexion();
+                // On instancie l'objet Categories
+                $category = new Categories($db);
+                // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+                $data = json_decode(file_get_contents("php://input"));
+                error_log(print_r($data)); //file_get_contents("php://input"),1));
+                if (!empty($data->name)) {
+                    // On hydrate l'objet category
+                    $category->setName($data->name);
 
-            // On instancie l'objet Categories
-            $category = new Categories($db);
-            // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
-            $data = json_decode(file_get_contents("php://input"));
-            error_log(print_r($data)); //file_get_contents("php://input"),1));
-            if (!empty($data->name)) {
-                // On hydrate l'objet category
-                $category->setName($data->name);
-
-                $result = $category->create();
-                if ($result) {
-                    http_response_code(201);
-                    echo json_encode(["result" => "Ok", "message" => "La catégorie a été ajouté avec succès"]);
+                    $result = $category->create();
+                    if ($result) {
+                        http_response_code(201);
+                        echo json_encode(["result" => "Ok", "message" => "La catégorie a été ajouté avec succès"]);
+                    } else {
+                        http_response_code(503);
+                        echo json_encode(["message" => "L'ajout de la catégorie a échoué"]);
+                    }
                 } else {
-                    http_response_code(503);
-                    echo json_encode(["message" => "L'ajout de la catégorie a échoué"]);
+                    //http_response_code(409);
+                    echo json_encode(["message" => "Les données ne sont pas complètes"]);
                 }
             } else {
-                //http_response_code(409);
-                echo json_encode(["message" => "Les données ne sont pas complètes"]);
+                http_response_code(405);
+                echo json_encode(["message" => "La méthode n'est pas autorisée"]);
             }
         } else {
-            http_response_code(405);
-            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+            http_response_code(401);
+            echo json_encode(["result" => "ERROR", "message" => "Autorisation refusée"]);
         }
     }
 
@@ -129,36 +130,40 @@ class CategoriesController
     {
         // Méthode autorisée
         header("Access-Control-Allow-Methods: PUT");
+        if ($this->Authorization() == "[ROLE_ADMIN]") {
+            if ($_SERVER["REQUEST_METHOD"] === "PUT") {
+                // On instancie la base de données
+                $database = new Database();
+                $db = $database->getConnexion();
 
-        if ($_SERVER["REQUEST_METHOD"] === "PUT") {
-            // On instancie la base de données
-            $database = new Database();
-            $db = $database->getConnexion();
+                $category = new Categories($db);
 
-            $category = new Categories($db);
+                // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+                $data = json_decode(file_get_contents("php://input"));
 
-            // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
-            $data = json_decode(file_get_contents("php://input"));
+                if (!empty($data->id)) {
+                    $category->setId($data->id);
+                    $category->setName($data->name);
 
-            if (!empty($data->id)) {
-                $category->setId($data->id);
-                $category->setName($data->name);
-
-                $result = $category->update();
-                if ($result) {
-                    http_response_code(201);
-                    echo json_encode(["result" => "Ok", "message" => "La catégorie a été modifié avec succès"]);
+                    $result = $category->update();
+                    if ($result) {
+                        http_response_code(201);
+                        echo json_encode(["result" => "Ok", "message" => "La catégorie a été modifié avec succès"]);
+                    } else {
+                        http_response_code(503);
+                        echo json_encode(["message" => "La modification de la catégorie a échoué"]);
+                    }
                 } else {
-                    http_response_code(503);
-                    echo json_encode(["message" => "La modification de la catégorie a échoué"]);
+                    //http_response_code(503);
+                    echo json_encode(["message" => "Les données ne sont pas complètes"]);
                 }
             } else {
-                //http_response_code(503);
-                echo json_encode(["message" => "Les données ne sont pas complètes"]);
+                http_response_code(405);
+                echo json_encode(["message" => "La méthode n'est pas autorisée"]);
             }
         } else {
-            http_response_code(405);
-            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+            http_response_code(401);
+            echo json_encode(["result" => "ERROR", "message" => "Autorisation refusée"]);
         }
     }
 
@@ -166,35 +171,39 @@ class CategoriesController
     {
         // Méthode autorisée
         header("Access-Control-Allow-Methods: DELETE");
+        if ($this->Authorization() == "[ROLE_ADMIN]") {
+            if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
+                // On instancie la base de données
+                $database = new Database();
+                $db = $database->getConnexion();
 
-        if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
-            // On instancie la base de données
-            $database = new Database();
-            $db = $database->getConnexion();
+                // On instancie l'objet Categories
+                $category = new Categories($db);
 
-            // On instancie l'objet Categories
-            $category = new Categories($db);
+                // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+                $data = json_decode(file_get_contents("php://input"));
 
-            // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
-            $data = json_decode(file_get_contents("php://input"));
-
-            //echo json_encode($data);
-            if (!empty($data)) {
-                $category->setId($data);
-                $result = $category->delete();
-                if ($result) {
-                    http_response_code(200);
-                    echo json_encode(["result" => "Ok", "message" => "La suppression de la catégorie a été effectué avec succès"]);
+                //echo json_encode($data);
+                if (!empty($data)) {
+                    $category->setId($data);
+                    $result = $category->delete();
+                    if ($result) {
+                        http_response_code(200);
+                        echo json_encode(["result" => "Ok", "message" => "La suppression de la catégorie a été effectué avec succès"]);
+                    } else {
+                        http_response_code(503);
+                        echo json_encode(["message" => "La suppression de la catégorie a échoué"]);
+                    }
                 } else {
-                    http_response_code(503);
-                    echo json_encode(["message" => "La suppression de la catégorie a échoué"]);
+                    echo json_encode(["message" => "Vous devez précisé l'identifiant de la catégorie"]);
                 }
             } else {
-                echo json_encode(["message" => "Vous devez précisé l'identifiant de la catégorie"]);
+                http_response_code(405);
+                echo json_encode(["message" => "La méthode n'est pas autorisée"]);
             }
         } else {
-            http_response_code(405);
-            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+            http_response_code(401);
+            echo json_encode(["result" => "ERROR", "message" => "Autorisation refusée"]);
         }
     }
 }

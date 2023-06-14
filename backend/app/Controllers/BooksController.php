@@ -5,38 +5,41 @@ namespace App\Controllers;
 use Config\Database;
 use App\Models\Books;
 
-class BooksController
+class BooksController extends Controller
 {
 
     public function readAll()
     {
         // Méthode autorisée
         header("Access-Control-Allow-Methods: GET");
+        if ($this->Authorization() == "[ROLE_ADMIN]") {
+            if ($_SERVER["REQUEST_METHOD"] === "GET") {
+                // On instancie la base de données
+                $database = new Database();
+                $db = $database->getConnexion();
 
-        if ($_SERVER["REQUEST_METHOD"] === "GET") {
-            // On instancie la base de données
-            $database = new Database();
-            $db = $database->getConnexion();
+                // On instancie l'objet Books
+                $book = new Books($db);
 
-            // On instancie l'objet Books
-            $book = new Books($db);
+                // On récupère les données
+                $stmt = $book->readAll();
 
-            // On récupère les données
-            $stmt = $book->readAll();
+                if ($stmt->rowCount() > 0) {
+                    //$data = [];
+                    $data = $stmt->fetchAll();
 
-            if ($stmt->rowCount() > 0) {
-                //$data = [];
-                $data = $stmt->fetchAll();
-
-                // On renvoie les données au format JSON
-                http_response_code(200);
-                echo json_encode($data);
+                    // On renvoie les données au format JSON
+                    http_response_code(200);
+                    echo json_encode($data);
+                } else {
+                    echo json_encode(["message" => "Aucune données à renvoyer"]);
+                }
             } else {
-                echo json_encode(["message" => "Aucune données à renvoyer"]);
+                http_response_code(405);
+                echo json_encode(["message" => "La méthode n'est pas autorisée"]);
             }
         } else {
-            http_response_code(405);
-            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+            echo json_encode(["result" => "ERROR", "message" => "Autorisation refusée"]);
         }
     }
 
@@ -95,46 +98,50 @@ class BooksController
     {
         // Méthode autorisée
         header("Access-Control-Allow-Methods: POST");
+        if ($this->Authorization() == "[ROLE_ADMIN]") {
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                // On instancie la base de données
+                $database = new Database();
+                $db = $database->getConnexion();
 
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            // On instancie la base de données
-            $database = new Database();
-            $db = $database->getConnexion();
+                // On instancie l'objet Books
+                $book = new Books($db);
 
-            // On instancie l'objet Books
-            $book = new Books($db);
-
-            // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
-            $data = json_decode(file_get_contents("php://input"));
-            // var_dump($data);
-            // var_dump($_REQUEST);
-            $cover = $book->uploadImage();
-            //var_dump($cover);
-            if (!empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])) {
-                // On hydrate l'objet book
-                $book->setTitle($_REQUEST['title']);
-                $book->setAuthorId($_REQUEST['authorId']);
-                $book->setEditor($_REQUEST['editor']);
-                $book->setSummary($_REQUEST['summary']);
-                $book->setReleaseDate($_REQUEST['releaseDate']);
-                $book->setCover($cover);
-                $book->setCategoryId($_REQUEST['categoryId']);
-                //var_dump($book);
-                $result = $book->create();
-                if ($result) {
-                    http_response_code(201);
-                    echo json_encode(["result" => "Ok", "message" => "Le livre a été ajouté avec succès"]);
+                // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+                $data = json_decode(file_get_contents("php://input"));
+                // var_dump($data);
+                // var_dump($_REQUEST);
+                $cover = $book->uploadImage();
+                //var_dump($cover);
+                if (!empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])) {
+                    // On hydrate l'objet book
+                    $book->setTitle($_REQUEST['title']);
+                    $book->setAuthorId($_REQUEST['authorId']);
+                    $book->setEditor($_REQUEST['editor']);
+                    $book->setSummary($_REQUEST['summary']);
+                    $book->setReleaseDate($_REQUEST['releaseDate']);
+                    $book->setCover($cover);
+                    $book->setCategoryId($_REQUEST['categoryId']);
+                    //var_dump($book);
+                    $result = $book->create();
+                    if ($result) {
+                        http_response_code(201);
+                        echo json_encode(["result" => "Ok", "message" => "Le livre a été ajouté avec succès"]);
+                    } else {
+                        http_response_code(503);
+                        echo json_encode(["message" => "L'ajout du livre a échoué"]);
+                    }
                 } else {
-                    http_response_code(503);
-                    echo json_encode(["message" => "L'ajout du livre a échoué"]);
+                    //http_response_code(503);
+                    echo json_encode(["message" => "Les données ne sont pas complètes"]);
                 }
             } else {
-                //http_response_code(503);
-                echo json_encode(["message" => "Les données ne sont pas complètes"]);
+                http_response_code(405);
+                echo json_encode(["message" => "La méthode n'est pas autorisée"]);
             }
         } else {
-            http_response_code(405);
-            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+            http_response_code(401);
+            echo json_encode(["result" => "ERROR", "message" => "Autorisation refusée"]);
         }
     }
 
@@ -142,65 +149,69 @@ class BooksController
     {
         // Méthode autorisée
         //header("Access-Control-Allow-Methods: PUT");
+        if ($this->Authorization() == "[ROLE_ADMIN]") {
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                // On instancie la base de données
+                $database = new Database();
+                $db = $database->getConnexion();
 
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            // On instancie la base de données
-            $database = new Database();
-            $db = $database->getConnexion();
+                // On instancie l'objet Books
+                $book = new Books($db);
 
-            // On instancie l'objet Books
-            $book = new Books($db);
+                // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+                //$data = json_decode(file_get_contents("php://input"));
 
-            // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
-            //$data = json_decode(file_get_contents("php://input"));
+                //print_r($data);
+                //var_dump($_REQUEST);
 
-            //print_r($data);
-            //var_dump($_REQUEST);
+                // On procède à la modification du livre
+                if (!empty($_REQUEST['id']) && !empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])) {
 
-            // On procède à la modification du livre
-            if (!empty($_REQUEST['id']) && !empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])) {
-                
-                // Solution temporaire pour l'image :
-                // Si l'ancienne image existe et $_FILES est vide on stocke l'ancienne image pour ne pas la perdre
-                if ($_REQUEST["cover"] !== "" && empty($_FILES["image"]["name"])) {
-                    //var_dump("if");
-                    $cover = $_REQUEST["cover"];
-                    // Sinon on stocke la nouvelle image
+                    // Solution temporaire pour l'image :
+                    // Si l'ancienne image existe et $_FILES est vide on stocke l'ancienne image pour ne pas la perdre
+                    if ($_REQUEST["cover"] !== "" && empty($_FILES["image"]["name"])) {
+                        //var_dump("if");
+                        $cover = $_REQUEST["cover"];
+                        // Sinon on stocke la nouvelle image
+                    } else {
+                        //var_dump('else');
+                        $cover = $book->uploadImage();
+                    }
+                    // Pour supprimer l'ancienne image si elle existe et si on renvoie une nouvelle image
+                    if (isset($_REQUEST["cover"]) && $_REQUEST["cover"] !== "" && isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
+                        //var_dump('image');
+                        unlink("C:\laragon\www\magic-books\backend\public\pictures" . DIRECTORY_SEPARATOR . $_REQUEST["cover"]);
+                    }
+
+                    //On hydrate l'objet book
+                    $book->setId($_REQUEST['id']);
+                    $book->setTitle($_REQUEST['title']);
+                    $book->setAuthorId($_REQUEST['authorId']);
+                    $book->setEditor($_REQUEST['editor']);
+                    $book->setSummary($_REQUEST['summary']);
+                    $book->setReleaseDate($_REQUEST['releaseDate']);
+                    $book->setCover($cover);
+                    $book->setCategoryId($_REQUEST['categoryId']);
+
+                    $result = $book->update();
+                    if ($result) {
+                        http_response_code(201);
+                        echo json_encode(["result" => "Ok", "message" => "Le livre a été modifié avec succès"]);
+                    } else {
+                        http_response_code(503);
+                        echo json_encode(["message" => "La modification du livre a échoué"]);
+                    }
                 } else {
-                    //var_dump('else');
-                    $cover = $book->uploadImage();
-                }
-                // Pour supprimer l'ancienne image si elle existe et si on renvoie une nouvelle image
-                if (isset($_REQUEST["cover"]) && $_REQUEST["cover"] !== "" && isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
-                    //var_dump('image');
-                    unlink("C:\laragon\www\magic-books\backend\public\pictures" . DIRECTORY_SEPARATOR . $_REQUEST["cover"]);
-                }
-
-                //On hydrate l'objet book
-                $book->setId($_REQUEST['id']);
-                $book->setTitle($_REQUEST['title']);
-                $book->setAuthorId($_REQUEST['authorId']);
-                $book->setEditor($_REQUEST['editor']);
-                $book->setSummary($_REQUEST['summary']);
-                $book->setReleaseDate($_REQUEST['releaseDate']);
-                $book->setCover($cover);
-                $book->setCategoryId($_REQUEST['categoryId']);
-
-                $result = $book->update();
-                if ($result) {
-                    http_response_code(201);
-                    echo json_encode(["result" => "Ok", "message" => "Le livre a été modifié avec succès"]);
-                } else {
-                    http_response_code(503);
-                    echo json_encode(["message" => "La modification du livre a échoué"]);
+                    //http_response_code(503);
+                    echo json_encode(["message" => "Les données ne sont pas complètes"]);
                 }
             } else {
-                //http_response_code(503);
-                echo json_encode(["message" => "Les données ne sont pas complètes"]);
+                http_response_code(405);
+                echo json_encode(["message" => "La méthode n'est pas autorisée"]);
             }
         } else {
-            http_response_code(405);
-            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+            http_response_code(401);
+            echo json_encode(["result" => "ERROR", "message" => "Autorisation refusée"]);
         }
     }
 
@@ -208,24 +219,24 @@ class BooksController
     {
         // Méthode autorisée
         header("Access-Control-Allow-Methods: DELETE");
+        if ($this->Authorization() == "[ROLE_ADMIN]") {
+            if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
+                // On instancie la base de données
+                $database = new Database();
+                $db = $database->getConnexion();
 
-        if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
-            // On instancie la base de données
-            $database = new Database();
-            $db = $database->getConnexion();
+                // On instancie l'objet Books
+                $book = new Books($db);
 
-            // On instancie l'objet Books
-            $book = new Books($db);
+                // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+                $data = json_decode(file_get_contents("php://input"));
 
-            // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
-            $data = json_decode(file_get_contents("php://input"));
+                if (!empty($data)) {
 
-            if (!empty($data)) {
+                    $book->setId($data);
 
-                $book->setId($data);
-
-                // Pour supprimer l'image s'il y en a une
-                $resultImage = $book->readById($book->getId());
+                    // Pour supprimer l'image s'il y en a une
+                    $resultImage = $book->readById($book->getId());
                     if ($resultImage->rowCount() > 0) {
                         $donnees = $resultImage->fetch();
                         if (isset($donnees["cover"]) && $donnees["cover"] > 0) {
@@ -233,21 +244,25 @@ class BooksController
                         }
                     }
 
-                $result = $book->delete();
+                    $result = $book->delete();
 
-                if ($result) {
-                    http_response_code(200);
-                    echo json_encode(["result" => "Ok", "message" => "La suppression du livre a été effectué avec succès"]);
+                    if ($result) {
+                        http_response_code(200);
+                        echo json_encode(["result" => "Ok", "message" => "La suppression du livre a été effectué avec succès"]);
+                    } else {
+                        http_response_code(503);
+                        echo json_encode(["message" => "La suppression du livre a échoué"]);
+                    }
                 } else {
-                    http_response_code(503);
-                    echo json_encode(["message" => "La suppression du livre a échoué"]);
+                    echo json_encode(["message" => "Vous devez précisé l'identifiant du livre"]);
                 }
             } else {
-                echo json_encode(["message" => "Vous devez précisé l'identifiant du livre"]);
+                http_response_code(405);
+                echo json_encode(["message" => "La méthode n'est pas autorisée"]);
             }
         } else {
-            http_response_code(405);
-            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+            http_response_code(401);
+            echo json_encode(["result" => "ERROR", "message" => "Autorisation refusée"]);
         }
     }
 }
