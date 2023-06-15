@@ -58,17 +58,21 @@ p {
     background: #2D3250;
     background-image: linear-gradient(to bottom, #f6f6ee, #2D3250, #f6f6ee);
     // background: linear-gradient(to bottom, #f6f6ee, #2D3250, #f6f6ee);
+    @media screen and (max-width: 1023px) {
+        padding-bottom: 1px;
+        background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
+        margin-top: 10px;
+    }
 }
 
 .flexRow {
+    @include flexRow;
+}
+
+.flexRowWrap {
     @include flexRowWrap;
 }
 
 .flexColumn {
     @include flexColumn;
-}
-
-.divColor {
-    background-color: $dark-blue;
-    color: $light;
 }

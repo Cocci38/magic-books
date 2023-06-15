@@ -293,8 +293,29 @@ h3 {
   margin-left: 10px;
 }
 
+.libraryContainer {
+  width: 75%;
+  gap: 10px;
+}
+@media screen and (max-width: 1023px) {
+  .libraryContainer {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .libraryContainer {
+    width: 100%;
+  }
+}
+
 .libraryBook {
-  width: 570px;
+  width: 48%;
+  gap: 10px;
+}
+@media screen and (max-width: 1023px) {
+  .libraryBook {
+    width: 100%;
+  }
 }
 
 .coverContainerMini {
@@ -311,14 +332,34 @@ h3 {
 .containerInfo {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 24%;
+}
+@media screen and (max-width: 1023px) {
+  .containerInfo {
+    width: 100%;
+    margin-left: 10px;
+  }
 }
 .containerInfo h2 {
   margin: 5px 0 0 0;
 }
 
+.border {
+  border: 1px solid #2D3250;
+  border-radius: 10px;
+  background-color: #2D3250;
+}
+
 .labelInfo {
   width: 150px;
+}
+
+.divColor {
+  color: #f6f6ee;
+}
+
+.divMargin {
+  margin-left: 10px;
 }
 
 :root {
@@ -369,8 +410,20 @@ p {
   background: #2D3250;
   background-image: linear-gradient(to bottom, #f6f6ee, #2D3250, #f6f6ee);
 }
+@media screen and (max-width: 1023px) {
+  .bar {
+    padding-bottom: 1px;
+    background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
+    margin-top: 10px;
+  }
+}
 
 .flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexRowWrap {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -381,9 +434,4 @@ p {
 .flexColumn {
   display: flex;
   flex-direction: column;
-}
-
-.divColor {
-  background-color: #2D3250;
-  color: #f6f6ee;
 }/*# sourceMappingURL=styles.css.map */

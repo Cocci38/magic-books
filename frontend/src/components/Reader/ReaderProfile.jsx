@@ -28,10 +28,18 @@ export const ReaderProfile = () => {
 
     return (
         <section className="containerInfo">
-            <h2>Mes informations</h2>
+            <h2 className="divMargin">Mes informations</h2>
+            <div className="flexColumn">
+            {/* <div className="flexColumn labelInfo border"><span className="divColor divMargin">Nom utilisateur : </span><span className="divColor divMargin">Email : </span></div>
+            <div className="flexColumn labelInfo divMargin"><span>{reader.username}</span><span>{reader.email}</span></div> */}
             <div className="flexRow">
-            <div className="flexColumn labelInfo "><span className="paragraphName divColor">Nom utilisateur : </span><span className="paragraphName divColor">Email : </span></div>
-            <div className="flexColumn labelInfo"><span>{reader.username}</span><span>{reader.email}</span></div>
+                <span className="labelInfo divMargin">Nom utilisateur : </span>
+                <span>{reader.username}</span>
+            </div>
+            <div className="flexRow">
+            <span className="labelInfo divMargin">Email : </span>
+                <span>{reader.email}</span>
+            </div>
             </div>
         </section>
     )
