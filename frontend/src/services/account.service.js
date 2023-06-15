@@ -47,6 +47,7 @@ let saveId = (id) => {
  */
 let logout = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('id')
 }
 
 /**

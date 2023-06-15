@@ -37,7 +37,7 @@ export const Books = () => {
 
     const deleteBook = async (id) => {
         if (window.confirm("Voulez-vous supprimer ce livre ?")) {
-            console.log(id);
+            //console.log(id);
             await adminService.deleteBook(id)
                 .then((res) => {
                     //console.log(res.data.result);

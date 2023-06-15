@@ -58,7 +58,7 @@ $router->put('/update/account/:id', 'App\Controllers\UsersController@updateAccou
 $router->delete('/delete/account/:id', 'App\Controllers\UsersController@deleteAccount');
 
 // On appelle les fonctions readAllByReaderId, create, delete dans le bloc ReaderHasBookController
-$router->get('/library', 'App\Controllers\ReaderHasBookController@readAllByReaderId');
+$router->get('/library/:id', 'App\Controllers\ReaderHasBookController@readAllByReaderId');
 $router->post('/create/library', 'App\Controllers\ReaderHasBookController@create');
 $router->delete('/delete/library-book/:id', 'App\Controllers\ReaderHasBookController@delete');
 

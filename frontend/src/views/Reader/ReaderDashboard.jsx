@@ -1,3 +1,4 @@
+import { ReaderLibrary } from "../../components/Reader/ReaderLibrary";
 import { ReaderProfile } from "../../components/Reader/ReaderProfile";
 
 export const ReaderDashboard = () => {
@@ -6,6 +7,7 @@ export const ReaderDashboard = () => {
         <main>
             <h1>Je suis le dashboard de l'utilisateur</h1>
             <ReaderProfile />
+            <ReaderLibrary />
         </main>
     )
 }

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Books;
 use Config\Database;
 use App\Models\ReaderHasBook;
+use App\Models\Users;
 
 class ReaderHasBookController extends Controller
 {
@@ -26,8 +27,8 @@ class ReaderHasBookController extends Controller
             //print_r($book);
             $url = $_GET['url'];
             $id = basename(parse_url($url, PHP_URL_PATH));
-            //var_dump($data);
-            $readerHasBook->setReaderId($data->readerId);
+            //var_dump($id);
+            $readerHasBook->setReaderId($id);
             // On récupère les données
             $stmt = $readerHasBook->readAllByReaderId($readerHasBook->getReaderId());
 
@@ -64,40 +65,50 @@ class ReaderHasBookController extends Controller
             $readerHasBook = new ReaderHasBook($db);
             $book = new ReaderHasBook($db);
             $bookExists = new Books($db);
+            $reader = new Users($db);
 
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
 
             if (!empty($data->readerId) && !empty($data->bookId)) {
 
-                // On vérifie que le livre existe
-                $bookExists->setId($data->bookId);
-                $exist = $bookExists->readById();
-                if ($exist->rowCount() > 0) {
+                // On vérifie que l'utilisateur existe
+                $reader->setId($data->readerId);
+                $readerExists = $reader->readById();
+                if ($readerExists->rowCount() > 0) {
 
-                    // On vérifie que le livre n'est pas présent dans la bibliothèque du lecteur
-                    $book->setReaderId($data->readerId);
-                    $book->setBookId($data->bookId);
-                    $bookResult = $book->readByBookId($book->getReaderId(), $book->getBookId());
-                    if ($bookResult->rowCount() > 0) {
-                        http_response_code(503);
-                        echo json_encode(["message" => "Ce livre est déjà présent dans la bibliothèque"]);
-                    } else {
-                        $readerHasBook->setReaderId($data->readerId);
-                        $readerHasBook->setBookId($data->bookId);
+                    // On vérifie que le livre existe
+                    $bookExists->setId($data->bookId);
+                    $exist = $bookExists->readById();
+                    if ($exist->rowCount() > 0) {
 
-                        $result = $readerHasBook->create();
-                        if ($result) {
-                            http_response_code(201);
-                            echo json_encode(["result" => "Ok", "message" => "Le livre a été ajouté à la bibliothèque"]);
-                        } else {
+                        // On vérifie que le livre n'est pas présent dans la bibliothèque du lecteur
+                        $book->setReaderId($data->readerId);
+                        $book->setBookId($data->bookId);
+                        $bookResult = $book->readByBookId($book->getReaderId(), $book->getBookId());
+                        if ($bookResult->rowCount() > 0) {
                             http_response_code(503);
-                            echo json_encode(["message" => "L'ajout du livre dans la bibliothèque a échoué"]);
+                            echo json_encode(["message" => "Ce livre est déjà présent dans la bibliothèque"]);
+                        } else {
+                            $readerHasBook->setReaderId($data->readerId);
+                            $readerHasBook->setBookId($data->bookId);
+
+                            $result = $readerHasBook->create();
+                            if ($result) {
+                                http_response_code(201);
+                                echo json_encode(["result" => "Ok", "message" => "Le livre a été ajouté à la bibliothèque"]);
+                            } else {
+                                http_response_code(503);
+                                echo json_encode(["message" => "L'ajout du livre dans la bibliothèque a échoué"]);
+                            }
                         }
+                    } else {
+                        http_response_code(404);
+                        echo json_encode(["message" => "Le livre n'existe pas"]);
                     }
                 } else {
                     http_response_code(404);
-                    echo json_encode(["message" => "Le livre n'existe pas"]);
+                    echo json_encode(["message" => "L'utilisateur n'existe pas"]);
                 }
             } else {
                 //http_response_code(503);
@@ -128,11 +139,11 @@ class ReaderHasBookController extends Controller
 
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
-            //var_dump($data->id);
+            // var_dump($data);
 
             if (!empty($data)) {
 
-                $readerHasBook->setId($data->id);
+                $readerHasBook->setId($data);
 
                 $result = $readerHasBook->delete();
 
