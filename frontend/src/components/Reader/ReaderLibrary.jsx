@@ -35,37 +35,32 @@ export const ReaderLibrary = () => {
         if (window.confirm("Voulez-vous supprimer ce livre de votre bibliothèque ?")) {
             //console.log(id);
             await readerService.deleteBookLibrary(id)
-            .then((res) => {
-                console.log(res.data.result);
-                if (res.data.result === "Ok") {
-                    fetchLibrary();
-                } else {
-                    console.log('erreur');
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+                .then((res) => {
+                    console.log(res.data.result);
+                    if (res.data.result === "Ok") {
+                        fetchLibrary();
+                    } else {
+                        console.log('erreur');
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
         }
     }
 
 
     return (
-        <section className="sectionRow">{Array.isArray(libraries) ? libraries
-        .map((library) => (
-            <div key={library.libraryId} className="bookContainer">
-                    <div className="coverContainer">
-                        {library.cover ? <img src={urlImage + library.cover} className="cover" alt={"couverture du livre " + library.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
+        <section className="sectionRowWrap">{Array.isArray(libraries) ? libraries
+            .map((library) => (
+                <div key={library.libraryId} className="sectionRowWrap libraryBook">
+                    <div className="coverContainerMini">
+                        {library.cover ? <img src={urlImage + library.cover} className="coverMini" alt={"couverture du livre " + library.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
                     </div>
-                    <div className="bookInfo">
+                    <div className="bookInfo readerBook">
                         <h3>{library.title}</h3>
-                        <div className="infoContainer">
-                            <p className="paragraphFlex"><span className="paragraphName">Auteur</span><span>{library.author}</span></p>
-                            <p className="paragraphFlex"><span className="paragraphName">Date de sortie</span><span> {new Date(library.release_date).toLocaleDateString("fr-FR")}</span> </p>
-                            <p className="paragraphFlex"><span className="paragraphName">Catégorie</span><span>{library.name}</span></p>
-                            <p className="paragraphFlex"><span className="paragraphName">Éditeur</span><span>{library.editor}</span></p>
-                        </div>
-                        <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{library.summary.substring(0, 70) + " ..."}</span></p>
+                        <div><span className="paragraphName">Auteur : </span><span>{library.author}</span></div>
+                        <div><span className="paragraphName">Date de sortie : </span><span> {new Date(library.release_date).toLocaleDateString("fr-FR")}</span> </div>
                         <div className="buttonContainer">
                             <Link to={'/livre/' + library.bookId} className="iconButton eye" aria-label="voir la fiche du livre"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
                             <button onClick={() => { deleteLibrary(library.libraryId) }} className="iconButton trash" aria-label="supprimer le livre"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
@@ -73,7 +68,7 @@ export const ReaderLibrary = () => {
                     </div>
                 </div>
             ))
-        : "" }
+            : ""}
 
         </section>
     )

@@ -1,0 +1,32 @@
+.sectionRowWrap {
+    @include flexRowWrap;
+    gap: 20px;
+    margin-left: 10px;
+}
+.libraryBook {
+    width: 570px;
+}
+
+.coverContainerMini {
+    width: 100px;
+    .coverMini {
+        width: 100%;
+    }
+}
+
+.readerBook {
+    gap: 3px;
+}
+
+.containerInfo {
+    @include flexColumn;
+    width: 20%;
+    h2 {
+        margin: 5px 0 0 0;
+    }
+}
+
+.labelInfo {
+    width: 150px;
+}
+

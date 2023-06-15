@@ -2,6 +2,7 @@
 @import './globals/_mixins.scss';
 @import './globals/_form.scss';
 @import './globals/_dashboard.scss';
+@import './globals/readerDashboard';
 
 
 :root {
@@ -47,7 +48,6 @@ header {
     }
 }
 
-
 p {
     text-align: left;
 }
@@ -58,4 +58,17 @@ p {
     background: #2D3250;
     background-image: linear-gradient(to bottom, #f6f6ee, #2D3250, #f6f6ee);
     // background: linear-gradient(to bottom, #f6f6ee, #2D3250, #f6f6ee);
+}
+
+.flexRow {
+    @include flexRowWrap;
+}
+
+.flexColumn {
+    @include flexColumn;
+}
+
+.divColor {
+    background-color: $dark-blue;
+    color: $light;
 }

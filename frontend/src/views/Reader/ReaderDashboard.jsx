@@ -6,8 +6,11 @@ export const ReaderDashboard = () => {
     return (
         <main>
             <h1>Je suis le dashboard de l'utilisateur</h1>
+            <div className="mainRow">
             <ReaderProfile />
+            <div className="bar"></div>
             <ReaderLibrary />
+            </div>
         </main>
     )
 }

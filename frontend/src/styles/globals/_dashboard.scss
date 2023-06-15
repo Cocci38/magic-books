@@ -44,26 +44,6 @@
                 width: 100%;
             }
         }
-        .bookInfo {
-            @include flexColumn;
-            gap: 10px;
-        }
-
-        .infoContainer {
-            @include flexRow;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .paragraphFlex {
-            @include flexColumn;
-            margin: 0;
-
-            .paragraphName {
-                color: $dark-blue;
-            }
-        }
-
 
         @media screen and (max-width: 1024px) {
             width: 98%;
@@ -108,7 +88,6 @@
     @media screen and (max-width: 900px) {
         gap: 30px;
     }
-
 }
 
 .sectionRow {
@@ -121,6 +100,20 @@
         width: 100%;
         justify-content: center;
     }
+}
+
+.bookInfo {
+    @include flexColumn;
+    gap: 10px;
+}
+
+.paragraphFlex {
+    @include flexColumn;
+    margin: 0;
+}
+
+.paragraphName {
+    color: $dark-blue;
 }
 
 h3 {

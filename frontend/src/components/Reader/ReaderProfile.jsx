@@ -27,10 +27,12 @@ export const ReaderProfile = () => {
     }, [id])
 
     return (
-        <section>
+        <section className="containerInfo">
             <h2>Mes informations</h2>
-            <h2>{reader.username}</h2>
-            <p className="paragraphFlex"><span className="paragraphName">Email</span><span>{reader.email}</span></p>
+            <div className="flexRow">
+            <div className="flexColumn labelInfo "><span className="paragraphName divColor">Nom utilisateur : </span><span className="paragraphName divColor">Email : </span></div>
+            <div className="flexColumn labelInfo"><span>{reader.username}</span><span>{reader.email}</span></div>
+            </div>
         </section>
     )
 }

@@ -144,25 +144,6 @@ textarea {
 .dashboard .bookContainer .coverContainer .cover {
   width: 100%;
 }
-.dashboard .bookContainer .bookInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.dashboard .bookContainer .infoContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.dashboard .bookContainer .paragraphFlex {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-}
-.dashboard .bookContainer .paragraphFlex .paragraphName {
-  color: #2D3250;
-}
 @media screen and (max-width: 1024px) {
   .dashboard .bookContainer {
     width: 98%;
@@ -233,6 +214,22 @@ textarea {
   }
 }
 
+.bookInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.paragraphFlex {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.paragraphName {
+  color: #2D3250;
+}
+
 h3 {
   margin: 5px 0 0 0;
 }
@@ -286,6 +283,44 @@ h3 {
   font-size: 16px;
 }
 
+.sectionRowWrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: start;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-left: 10px;
+}
+
+.libraryBook {
+  width: 570px;
+}
+
+.coverContainerMini {
+  width: 100px;
+}
+.coverContainerMini .coverMini {
+  width: 100%;
+}
+
+.readerBook {
+  gap: 3px;
+}
+
+.containerInfo {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+.containerInfo h2 {
+  margin: 5px 0 0 0;
+}
+
+.labelInfo {
+  width: 150px;
+}
+
 :root {
   font-family: "Lustria";
   line-height: 1.5;
@@ -333,4 +368,22 @@ p {
   padding-left: 1px;
   background: #2D3250;
   background-image: linear-gradient(to bottom, #f6f6ee, #2D3250, #f6f6ee);
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: start;
+  justify-content: flex-start;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.divColor {
+  background-color: #2D3250;
+  color: #f6f6ee;
 }/*# sourceMappingURL=styles.css.map */
