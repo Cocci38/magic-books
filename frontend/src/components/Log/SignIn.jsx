@@ -32,18 +32,20 @@ export const SignIn = ({ displaySignUp }) => {
         } else {
             await accountService.signIn(email, password)
                 .then(res => {
-                    // console.log(res.data.data.id);
-                    let cookies = res.data.token
-                    //let token = document.cookie.split('; ')
-                    //console.log(token);
-                    accountService.saveToken(cookies)
-                    accountService.saveId(res.data.data.id)
-                    //navigate("/")
-                    // accountService.saveRole(JSON.parse(res.data.role))
-                    if (accountService.isLogged()) {
-                        //window.location.reload();
-                        //navigate("/admin");
+                    if (res.data.result === "Ok") {
+                        console.log(res.data.id);
+                        let cookies = res.data.token
+                        accountService.saveToken(cookies)
+                        accountService.saveId(res.data.id)
+                        navigate("/")
+                        accountService.saveRole(JSON.parse(res.data.role))
+                        if (accountService.isLogged()) {
+                            window.location.reload();
+                            navigate("/admin");
+                        }
                     }
+                    
+                    
                 })
                 .catch(error => { console.log(error.data) });
         }

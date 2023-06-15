@@ -294,17 +294,12 @@ h3 {
 }
 
 .libraryContainer {
-  width: 75%;
+  width: 100%;
   gap: 10px;
 }
 @media screen and (max-width: 1023px) {
   .libraryContainer {
     margin-top: 20px;
-  }
-}
-@media screen and (max-width: 767px) {
-  .libraryContainer {
-    width: 100%;
   }
 }
 
@@ -326,6 +321,7 @@ h3 {
 }
 
 .readerBook {
+  width: 100%;
   gap: 3px;
 }
 
@@ -341,7 +337,7 @@ h3 {
   }
 }
 .containerInfo h2 {
-  margin: 5px 0 0 0;
+  margin: 15px 0 0 10px;
 }
 
 .border {
@@ -434,4 +430,7 @@ p {
 .flexColumn {
   display: flex;
   flex-direction: column;
+}
+.flexColumn h2 {
+  margin: 15px 0 0 10px;
 }/*# sourceMappingURL=styles.css.map */

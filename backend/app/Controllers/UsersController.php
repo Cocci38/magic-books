@@ -101,13 +101,14 @@ class UsersController
                     $token = $jwt->generate($header, $payload, $secret);
 
                     // Je mets les données dans des cookies pour les envoyer au client
-                    setcookie("token", $token, time()+3600);
-                    // setcookie("role", json_decode($data['roles']), time()+3600, secure:true, httponly:true);
+                    // setcookie("token", $token, time()+3600);
+                    // //setcookie("role", json_decode($data['roles']), time()+3600, secure:true, httponly:true);
                     // setcookie("username", $data['username'], time()+3600);
+                    // setcookie("toto", "Toto", time()+3600);
                     
                     // On renvoie les données au format JSON
                     http_response_code(200);
-                    echo json_encode(["result" => "Ok", "message" => "l'utilisateur " . $data['username'] . " est connecté", "token"=>$token, "data"=>$data]);
+                    echo json_encode(["result" => "Ok", "token"=>$token, "id"=>$data['id'], "username"=>$data["username"], "role"=>$data['roles']]);
                     //echo json_encode($data['username']);
                 } else {
                     echo json_encode(["message" => "Aucun compte n'a été trouvé"]);

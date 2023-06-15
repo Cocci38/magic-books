@@ -5,14 +5,11 @@
 }
 
 .libraryContainer {
-    width: 75%;
+    width: 100%;
     gap: 10px;
 
     @media screen and (max-width: 1023px) {
         margin-top: 20px;
-    }
-    @media screen and (max-width: 767px) {
-        width: 100%;
     }
 }
 
@@ -33,6 +30,7 @@
 }
 
 .readerBook {
+    width: 100%;
     gap: 3px;
 }
 
@@ -46,7 +44,7 @@
     }
 
     h2 {
-        margin: 5px 0 0 0;
+        margin: 15px 0 0 10px;
     }
 }
 

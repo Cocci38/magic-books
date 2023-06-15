@@ -75,4 +75,7 @@ p {
 
 .flexColumn {
     @include flexColumn;
+    h2 {
+        margin: 15px 0 0 10px;
+    }
 }

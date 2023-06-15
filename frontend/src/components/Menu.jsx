@@ -18,6 +18,7 @@ export const Menu = () => {
                 <ul>
                     <li><NavLink to='/' className={({isActive}) => (isActive ? "activeLink" : undefined)}>Accueil</NavLink></li>
                     <li><NavLink to='/admin' className={({isActive}) => (isActive ? "activeLink" : undefined)}>Tableau de bord</NavLink></li>
+                    <li><NavLink to='/mon-compte' className={({isActive}) => (isActive ? "activeLink" : undefined)}>Mon compte</NavLink></li>
                 </ul>
             </nav>
             {!accountService.isLogged() ?

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Axios from "./services";
 
 // Services de connexion vers l'api pour l'inscription des utilisateurs
@@ -13,7 +14,7 @@ const signUp = (username, email, password) => {
 const signIn = (email, password) => {
     return Axios.post('signin', {
         email: email,
-        password: password
+        password: password,
     })
 }
 
@@ -48,6 +49,8 @@ let saveId = (id) => {
 let logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('id')
+    localStorage.removeItem('role')
+    
 }
 
 /**
@@ -57,6 +60,24 @@ let logout = () => {
 let isLogged = () => {
     let token = localStorage.getItem('token')
     return !!token
+}
+
+let isAdmin = () => {
+    let role = localStorage.getItem('role')
+    if (role === "[ROLE_ADMIN]") {
+        return !!role
+    } else {
+        return false
+    }
+}
+
+let isReader = () => {
+    let role = localStorage.getItem('role')
+    if (role === "[ROLE_READER]") {
+        return !!role
+    } else {
+        return false
+    }
 }
 
 let getToken = () => {
@@ -69,5 +90,5 @@ let getReaderId = () => {
 
 // Déclaration des services pour import
 export const accountService = {
-    signUp, signIn, saveToken, saveRole, saveId, logout, isLogged, getToken, getReaderId
+    signUp, signIn, saveToken, saveRole, saveId, logout, isLogged, isAdmin, isReader, getToken, getReaderId
 }

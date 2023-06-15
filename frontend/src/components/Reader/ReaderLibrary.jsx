@@ -51,9 +51,12 @@ export const ReaderLibrary = () => {
 
 
     return (
-        <section className="sectionRowWrap libraryContainer">{Array.isArray(libraries) ? libraries
+        <section className="flexColumn ">
+            <h2 className="divMargin">Ma bibliothèque</h2>
+            <div className="sectionRowWrap libraryContainer">
+            {Array.isArray(libraries) ? libraries
             .map((library) => (
-                <div key={library.libraryId} className="sectionRowWrap libraryBook">
+                <div key={library.libraryId} className="flexRow libraryBook">
                     <div className="coverContainerMini">
                         {library.cover ? <img src={urlImage + library.cover} className="coverMini" alt={"couverture du livre " + library.title} /> : <img src='/images/image_vide.png' className="coverMini" alt="ce livre n'a pas de couverture" />}
                     </div>
@@ -69,6 +72,7 @@ export const ReaderLibrary = () => {
                 </div>
             ))
             : ""}
+            </div>
 
         </section>
     )

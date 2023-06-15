@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { publicService } from '../../services/public.service';
 import { accountService } from "../../services/account.service";
 import { readerService } from "../../services/reader.service";
@@ -12,6 +12,7 @@ export const BookById = () => {
     // console.log(readerId);
     const [book, setBook] = useState([]);
     const flag = useRef(false);
+    const navigate = useNavigate();
 
 
     const fetchBook = async () => {
@@ -35,7 +36,9 @@ export const BookById = () => {
         // console.log(readerId);
         await readerService.postBookLibrary(readerId, id)
             .then((res) => {
-                console.log("Livre ajouté à la bibliothèque")
+                if (res.data.result === "Ok") {
+                    navigate("/mon-compte")
+                }
             })
             .catch((err) => {
                 console.log(err)
