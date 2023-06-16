@@ -8,6 +8,7 @@ export const BookById = () => {
 
     const { id } = useParams();
     const readerId = accountService.getReaderId();
+    const urlImage = "http://localhost/magic-books/backend/public/pictures/";
     // console.log(id);
     // console.log(readerId);
     const [book, setBook] = useState([]);
@@ -47,16 +48,40 @@ export const BookById = () => {
     //console.log(books);
     return (
         <main>
-            <section>
-                <div className="bookContainer">
+            <section className="flexColumn flexAttribute">
+                <div className="bookIdContainer">
                     <h2>{book.title}</h2>
-                    <p className="paragraphFlex"><span className="paragraphName">Auteur</span><span>{book.author}</span></p>
-                    <p className="paragraphFlex"><span className="paragraphName">Date de sortie</span><span> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span> </p>
-                    <p className="paragraphFlex"><span className="paragraphName">Éditeur</span><span>{book.editor}</span></p>
-                    <p className="paragraphFlex"><span className="paragraphName">Catégorie</span><span>{book.categories_name}</span></p>
-                    <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{book.summary}</span></p>
+                    <div className="flexRow">
+                        <div className="coverContainer divMargin">
+                            {book.cover ? <img src={urlImage + book.cover} className="cover" alt={"couverture du livre " + book.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas d'image de couverture" />}
+                        </div>
+                        <div className="flexColumn">
+                            <div className="flexColumn divMargin">
+                                <h3 className="paragraphName">Auteur</h3>
+                                <span>{book.author}</span>
+                            </div>
+                            <div className="flexColumn divMargin">
+                                <h3 className="paragraphName">Date de sortie</h3>
+                                <span> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span>
+                            </div>
+                            <div className="flexColumn divMargin">
+                                <h3 className="paragraphName">Éditeur</h3>
+                                <span>{book.editor}</span>
+                            </div>
+                            <div className="flexColumn divMargin">
+                                <h3 className="paragraphName">Catégorie</h3>
+                                <span>{book.categories_name}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flexColumn divMargin">
+                        <h3 className="paragraphName">Résumé</h3>
+                        <p>{book.summary}</p>
+                    </div>
+                    <button className="button" onClick={addLibrary}>Ajouter à la bibliothèque</button>
                 </div>
-                <button className="button" onClick={addLibrary}>Ajouter à la bibliothèque</button>
+                
             </section>
         </main>
     )

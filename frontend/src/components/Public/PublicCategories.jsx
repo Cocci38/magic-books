@@ -25,7 +25,7 @@ export const PublicCategories = () => {
 
     return (
 
-        <section className="sectionRow">{Array.isArray(categories) ? categories
+        <section className="flexRowWrap">{Array.isArray(categories) ? categories
             .map((category) => (
                 <div key={category.id} className="categoryContainer">
                     <span>{category.name}</span>

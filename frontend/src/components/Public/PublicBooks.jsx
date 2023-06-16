@@ -31,7 +31,7 @@ export const PublicBooks = () => {
     }, []);
 
     return (
-        <section className="sectionRow">{Array.isArray(books) ? books 
+        <section className="flexRowWrap">{Array.isArray(books) ? books 
             .map((book) => (
                 <div key={book.id} className="bookContainer">
                     <div className="coverContainer">

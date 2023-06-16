@@ -3,6 +3,7 @@
 @import './globals/_form.scss';
 @import './globals/_dashboard.scss';
 @import './globals/readerDashboard';
+@import './globals/public';
 
 
 :root {
@@ -20,12 +21,20 @@
     -webkit-text-size-adjust: 100%;
 }
 
-header {
+body{
+    margin: 0 auto;
+}
+
+.menu {
     @include flexRow;
     align-items: center;
+    height: 15vh;
 
     img {
-        width: 12%;
+        width: 150px;
+        @media screen and (max-width: 768px) {
+            width: 25%;
+        }
     }
 
     nav {
@@ -47,6 +56,22 @@ header {
         }
     }
 }
+
+.headerMenu {
+    width: 100%;
+    background-color: $dark-blue;
+    
+}
+
+.imageHeader {
+    max-width: 100%;
+    min-height: 100%;
+    opacity: 20%;
+    object-fit: cover;
+}
+
+
+
 
 p {
     text-align: left;
@@ -75,7 +100,7 @@ p {
 
 .flexColumn {
     @include flexColumn;
-    h2 {
-        margin: 15px 0 0 10px;
-    }
+}
+.flexAttribute {
+    @include flexAttribute;
 }
