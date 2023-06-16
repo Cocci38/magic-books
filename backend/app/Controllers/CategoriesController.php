@@ -53,26 +53,38 @@ class CategoriesController extends Controller
             // On instancie l'objet Categories
             $category = new Categories($db);
             // file_get_contents => c'est le fichier d'entrée php
-            $data = json_decode(file_get_contents("php://input"));
+            //$data = json_decode(file_get_contents("php://input"));
 
             $url = $_GET['url'];
             $id = basename(parse_url($url, PHP_URL_PATH));
-            if (isset($id) && $id !== null) {
 
+            if (isset($id) && $id !== null) {
+                $count = 0;
                 $category->setId($id);
                 // On récupère les données
                 $result = $category->readById();
 
-                if ($result->rowCount() > 0) {
+                if ($result->rowCount() > 1) {
                     //$data = [];
-                    $donnees = $result->fetch();
+                    $data = $result->fetchAll();
+                    // Je compte pour déterminer le nombre de livres présent dans la catégorie sélectionnée
+                    if ($data > 0) {
+                        $count = count($data);
+                    }
+                    $categoryName = $data[0]["categorie_name"];
 
                     // On renvoie les données au format JSON
                     http_response_code(200);
-                    echo json_encode($donnees);
+                    echo json_encode(["result" => "Ok", "data" => $data, "count" => $count, "categoryName" => $categoryName]);
                 } else {
-                    http_response_code(404);
-                    echo json_encode(["message" => "Aucune données à renvoyer"]);
+                    $data = $result->fetch();
+                    if ($data["book_id"] == null) {
+                        http_response_code(200);
+                        echo json_encode(["result" => "Ok", "categoryName" => $data["categorie_name"], "count" => $count]);
+                    } else {
+                        http_response_code(404);
+                        echo json_encode(["message" => "Aucune données à renvoyer"]);
+                    }
                 }
             } else {
                 http_response_code(404);

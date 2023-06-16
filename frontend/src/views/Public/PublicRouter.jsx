@@ -6,6 +6,7 @@ import { Log } from './Log'
 import { BookById } from './BookById'
 import { AuthorById } from './AuthorById'
 import Error from '../../utils/Error'
+import { CategoryById } from './CategoryById'
 const PublicRouter = () => {
     return (
         <Routes>
@@ -14,6 +15,7 @@ const PublicRouter = () => {
                 <Route path='authentification' element={<Log />} />
                 <Route path='livre/:id' element={<BookById />} />
                 <Route path='auteur/:id' element={<AuthorById />} />
+                <Route path='categorie/:id' element={<CategoryById />} />
                 <Route path='*' element={<Error />} />
             </Route>
         </Routes>

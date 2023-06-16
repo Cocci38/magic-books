@@ -94,6 +94,37 @@ class BooksController extends Controller
         }
     }
 
+    public function readOrderByDate()
+    {
+        // Méthode autorisée
+        header("Access-Control-Allow-Methods: GET");
+        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+            // On instancie la base de données
+            $database = new Database();
+            $db = $database->getConnexion();
+
+            // On instancie l'objet Books
+            $book = new Books($db);
+
+            // On récupère les données
+            $stmt = $book->readOrderByDate();
+
+            if ($stmt->rowCount() > 0) {
+                //$data = [];
+                $data = $stmt->fetchAll();
+
+                // On renvoie les données au format JSON
+                http_response_code(200);
+                echo json_encode($data);
+            } else {
+                echo json_encode(["message" => "Aucune données à renvoyer"]);
+            }
+        } else {
+            http_response_code(405);
+            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+        }
+    }
+
     public function create()
     {
         // Méthode autorisée

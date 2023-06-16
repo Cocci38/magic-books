@@ -301,6 +301,32 @@ class Books
     }
 
     /**
+     * Pour sélectionner 6 livres en partant du plus récent
+     *
+     * @return $query
+     */
+    public function readOrderByDate()
+    {
+        try {
+            // On écrit la requête préparée
+            $query = $this->connexion->prepare("SELECT b.id, b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name 
+                                            FROM $this->table b 
+                                            LEFT JOIN categories c ON b.category_id = c.id 
+                                            LEFT JOIN authors a ON b.author_id = a.id 
+                                            ORDER BY b.release_date DESC 
+                                            LIMIT 6");
+
+            //On execute la requête
+            $query->execute();
+
+            // On retourne le résultat
+            return $query;
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
+        }
+    }
+
+    /**
      * Pour insérer un livre dans la base données
      *
      * @return void

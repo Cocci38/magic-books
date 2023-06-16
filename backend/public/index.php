@@ -32,6 +32,7 @@ $router = new Router($url);
 // On appelle les fonctions readAll, readById, create, update and delete dans le bloc BooksController
 $router->get('/books', 'App\Controllers\BooksController@readAll'); // Un chemin '/' et une action BooksController@readAll' (le controller @ la méthode)
 $router->get('/book/:id', 'App\Controllers\BooksController@readById'); // Dans l'url on écrit book/id
+$router->get('/book-by-date', 'App\Controllers\BooksController@readOrderByDate'); 
 $router->post('/create/book', 'App\Controllers\BooksController@create');
 $router->post('/update/book/:id', 'App\Controllers\BooksController@update');
 $router->delete('/delete/book/:id', 'App\Controllers\BooksController@delete');

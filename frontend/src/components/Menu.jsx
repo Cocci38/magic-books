@@ -13,7 +13,6 @@ export const Menu = () => {
 
     let isLogin = false;
     let isAdmin = accountService.isAdmin();
-    let isReader = accountService.isReader();
     let isLogged = accountService.isLogged();
     
     if (isLogged) {
