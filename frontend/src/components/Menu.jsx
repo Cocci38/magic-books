@@ -11,14 +11,30 @@ export const Menu = () => {
         navigate('/')
     }
 
+    let isLogin = false;
+    let isAdmin = accountService.isAdmin();
+    let isReader = accountService.isReader();
+    let isLogged = accountService.isLogged();
+    
+    if (isLogged) {
+        if (isAdmin) {
+            isLogin = true;
+        }else if (isReader){
+            isLogin = true;
+        } else {
+            isLogin = false;
+        }
+    }
+
     return (
         <header>
             <img src='/images/Magic-books.png' alt='logo magic book' />
             <nav>
                 <ul>
                     <li><NavLink to='/' className={({isActive}) => (isActive ? "activeLink" : undefined)}>Accueil</NavLink></li>
-                    <li><NavLink to='/admin' className={({isActive}) => (isActive ? "activeLink" : undefined)}>Tableau de bord</NavLink></li>
-                    <li><NavLink to='/mon-compte' className={({isActive}) => (isActive ? "activeLink" : undefined)}>Mon compte</NavLink></li>
+                    {isAdmin ? <li><NavLink to='/admin' className={({isActive}) => (isActive ? "activeLink" : undefined)}>Tableau de bord</NavLink></li> : ""}
+                    {isLogin ? <li><NavLink to='/mon-compte' className={({isActive}) => (isActive ? "activeLink" : undefined)}>Mon compte</NavLink></li> : ""}
+                    
                 </ul>
             </nav>
             {!accountService.isLogged() ?

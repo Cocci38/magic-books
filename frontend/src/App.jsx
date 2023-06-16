@@ -6,15 +6,15 @@ import { accountService } from './services/account.service';
 import ReaderRouter from './views/Reader/ReaderRouter';
 
 function App() {
-  let isLogged = "";
+  let isLogin = "";
   let admin = accountService.isAdmin();
   let reader = accountService.isReader();
   if (admin) {
-    isLogged = true;
+    isLogin = true;
   }else if (reader){
-    isLogged = true;
+    isLogin = true;
   } else{
-    isLogged = false;
+    isLogin = false;
   }
   //console.log(admin);
   return (
@@ -30,7 +30,7 @@ function App() {
 
         {/* {admin ? <Route path="/admin/*" element={<AdminRouter />} /> : <Route path="*" element={<PublicRouter />} />} */}
         {admin && <Route path="/admin/*" element={<AdminRouter />} />}
-        {isLogged && <Route path="/mon-compte/*" element={<ReaderRouter/> } />}
+        {isLogin && <Route path="/mon-compte/*" element={<ReaderRouter/> } />}
 
           
         </Routes>
