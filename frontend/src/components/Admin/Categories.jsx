@@ -73,7 +73,7 @@ export const Categories = () => {
                     {!showCategory && <span>{category.name}</span>}
                     {showCategory && <input type="text" name="nameCategory" defaultValue={category.name} onChange={changeHandler} ref={nomInput}></input>}
                     <div className="buttonContainer">
-                        <Link to={'/category/' + category.id} className="iconButton eye" aria-label="voir la fiche catégorie"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
+                        <Link to={'/categorie/' + category.id} className="iconButton eye" aria-label="voir la fiche catégorie"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
                         <Link to={`/admin/categorie/editer/${category.id}`} className="iconButton pen" aria-label="modifier la catégorie"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                         <button onClick={() => { deleteCategory(category.id) }} className="iconButton trash" aria-label="supprimer la catégorie"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
                     </div>

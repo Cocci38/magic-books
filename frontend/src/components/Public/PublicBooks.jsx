@@ -14,7 +14,7 @@ export const PublicBooks = () => {
                 if (res.data.result !== "ERROR") {
                     setBooks(res.data)
                 }
-                
+
             })
             .catch((err) => {
                 console.log(err)
@@ -31,25 +31,21 @@ export const PublicBooks = () => {
     }, []);
 
     return (
-        <section className="flexRowWrap">{Array.isArray(books) ? books 
-            .map((book) => (
-                <div key={book.id} className="bookContainer">
-                    <div className="coverContainer">
-                        {book.cover ? <img src={urlImage + book.cover} className="cover" alt={"couverture du livre " + book.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
-                    </div>
-                    <div className="bookInfo">
-                        <h3>{book.title}</h3>
-                        <div className="infoContainer">
-                            <p className="paragraphFlex"><span className="paragraphName">Auteur</span><span>{book.author}</span></p>
-                            <p className="paragraphFlex"><span className="paragraphName">Date de sortie</span><span> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span> </p>
-                            <p className="paragraphFlex"><span className="paragraphName">Catégorie</span><span>{book.name}</span></p>
-                            <p className="paragraphFlex"><span className="paragraphName">Éditeur</span><span>{book.editor}</span></p>
+        <section className="centerContainer divMargin">
+            <h2>Livres mis en avant</h2>
+            <div className="flexRowWrap">
+
+                {Array.isArray(books) ? books
+                    .map((book) => (
+                        <div key={book.id} className="categoryIdContainer divMargin">
+                            <div className="coverContainer divMargin">
+                                {book.cover ? <img src={urlImage + book.cover} className="cover" alt={"couverture du livre " + book.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
+                            </div>
+                            <div className="divMargin">{book.summary.substring(0, 100) + " ..."}</div>
                         </div>
-                        <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{book.summary.substring(0, 70) + " ..."}</span></p>
-                    </div>
-                </div>
-            ))
-            : "" }
+                    ))
+                    : ""}
+            </div>
         </section>
     )
 }

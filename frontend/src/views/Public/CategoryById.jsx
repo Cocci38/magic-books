@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { publicService } from "../../services/public.service";
 
 
@@ -9,6 +9,7 @@ export const CategoryById = () => {
     const [categories, setCategory] = useState([]);
     const [nameCategory, setNameCategory] = useState([]);
     const [count, setCount] = useState([]);
+
 
     const flag = useRef(false);
     const urlImage = "http://localhost/magic-books/backend/public/pictures/";
@@ -20,7 +21,7 @@ export const CategoryById = () => {
                 setCategory(res.data.data)
                 setCount(res.data.count)
                 setNameCategory(res.data.categoryName)
-                
+
             })
             .catch((err) => {
                 console.log(err)
@@ -32,22 +33,24 @@ export const CategoryById = () => {
         }
         return () => flag.current = true
     }, [id])
+
     return (
         <main>
-            <section>
+            <section className="centerContainer divMargin">
                 <h2>{nameCategory}</h2>
                 <div>{count} livres pour la catégorie {nameCategory}</div>
-                {Array.isArray(categories) ? categories
-                .map((category) => (
-                    <div key={category.book_id} className="categoryContainer">
-                    <div className="coverContainer">
-                        {category.cover ? <img src={urlImage + category.cover} className="cover" alt={"couverture du livre " + category.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
-                    </div>
-                    <div>{category.title}</div>
-                    <div>{category.author}</div>
-                    </div>
-                ))
-                : ""}
+                <div className="flexRowWrap">
+                    {Array.isArray(categories) ? categories
+                        .map((category) => (
+                            <div key={category.book_id} className="categoryIdContainer divMargin">
+                                <div className="coverContainer divMargin">
+                                    {category.cover ? <img src={urlImage + category.cover} className="cover" alt={"couverture du livre " + category.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
+                                </div>
+                                <div className="divMargin">{category.summary.substring(0, 100) + " ..."}</div>
+                            </div>
+                        ))
+                        : ""}
+                </div>
             </section>
         </main>
     )

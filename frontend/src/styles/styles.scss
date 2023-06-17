@@ -70,6 +70,7 @@ body{
     object-fit: cover;
 }
 
+
 p {
     text-align: left;
 }
@@ -107,3 +108,10 @@ p {
         @include flexColumn;
     }
 }
+
+.centerContainer {
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+

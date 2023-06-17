@@ -396,6 +396,20 @@ h3 {
   grid-template-rows: 1fr 1fr 1fr;
 }
 
+.categoryIdContainer {
+  width: 250px;
+  border-radius: 10px;
+  box-shadow: rgba(45, 50, 80, 0.15) 2px 2px 5px 0px, rgba(45, 50, 80, 0.15) -2px 2px 5px 0px;
+  margin-top: 10px;
+}
+.categoryIdContainer .coverContainer {
+  width: 95%;
+  align-self: center;
+}
+.categoryIdContainer .coverContainer .cover {
+  width: 100%;
+}
+
 :root {
   font-family: "Lustria";
   line-height: 1.5;
@@ -503,4 +517,8 @@ p {
     display: flex;
     flex-direction: column;
   }
+}
+.centerContainer {
+  margin-left: 150px;
+  margin-right: 150px;
 }/*# sourceMappingURL=styles.css.map */

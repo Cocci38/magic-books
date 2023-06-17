@@ -18,20 +18,22 @@ export const PublicCategories = () => {
     // Le useEffect se joue lorsque le composant est monté
     useEffect(() => {
         if (flag.current === false) {
-        fetchCategories()
-    }
-    return () => flag.current = true
+            fetchCategories()
+        }
+        return () => flag.current = true
     }, []);
 
     return (
 
-        <section className="flexRowWrap">{Array.isArray(categories) ? categories
-            .map((category) => (
-                <div key={category.id} className="categoryContainer">
-                    <span>{category.name}</span>
-                </div>
-            ))
-            : ""}
+        <section className="centerContainer divMargin">
+            <h2>Toutes les catégories</h2>
+            {Array.isArray(categories) ? categories
+                .map((category) => (
+                    <div key={category.id} className="categoryContainer">
+                        <span>{category.name}</span>
+                    </div>
+                ))
+                : ""}
         </section>
     )
 }

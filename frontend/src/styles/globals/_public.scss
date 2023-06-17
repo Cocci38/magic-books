@@ -40,3 +40,19 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
 }
+
+.categoryIdContainer {
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: rgba(45, 50, 80, 0.15) 2px 2px 5px 0px, rgba(45, 50, 80, 0.15) -2px 2px 5px 0px;
+    margin-top: 10px;
+
+    .coverContainer {
+        width: 95%;
+        align-self: center;
+
+        .cover {
+            width: 100%;
+        }
+    }
+}
