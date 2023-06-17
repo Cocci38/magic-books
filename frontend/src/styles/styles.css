@@ -352,7 +352,7 @@ h3 {
 }
 
 .divMargin {
-  margin: 10px;
+  margin: 5px;
 }
 
 .bookIdContainer {
@@ -372,10 +372,28 @@ h3 {
   padding: 15px 5px 0 5px;
 }
 .bookIdContainer .coverContainer {
-  width: 200px;
+  width: 300px;
+}
+@media screen and (max-width: 767px) {
+  .bookIdContainer .coverContainer {
+    width: 95%;
+    align-self: center;
+  }
 }
 .bookIdContainer .coverContainer .cover {
   width: 100%;
+}
+
+.buttonContainerLibrary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gridBook {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
 :root {
@@ -478,4 +496,11 @@ p {
 .flexAttribute {
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+  .responsiveFlexColumn {
+    display: flex;
+    flex-direction: column;
+  }
 }/*# sourceMappingURL=styles.css.map */

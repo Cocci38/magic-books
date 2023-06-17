@@ -5,7 +5,7 @@ export const ReaderDashboard = () => {
 
     return (
         <main>
-            <h1>Je suis le dashboard de l'utilisateur</h1>
+            <h1 style={{textAlign: "center"}}>Mon Compte</h1>
             <div className="mainRow">
             <ReaderProfile />
             <div className="bar"></div>

@@ -51,7 +51,7 @@ export const BookById = () => {
             <section className="flexColumn flexAttribute">
                 <div className="bookIdContainer">
                     <h2>{book.title}</h2>
-                    <div className="flexRow">
+                    <div className="flexRow responsiveFlexColumn">
                         <div className="coverContainer divMargin">
                             {book.cover ? <img src={urlImage + book.cover} className="cover" alt={"couverture du livre " + book.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas d'image de couverture" />}
                         </div>
@@ -79,9 +79,11 @@ export const BookById = () => {
                         <h3 className="paragraphName">Résumé</h3>
                         <p>{book.summary}</p>
                     </div>
-                    <button className="button" onClick={addLibrary}>Ajouter à la bibliothèque</button>
+                    <div className="buttonContainerLibrary">
+                        <button className="button" onClick={addLibrary}>Ajouter à la bibliothèque</button>
+                    </div>
                 </div>
-                
+
             </section>
         </main>
     )

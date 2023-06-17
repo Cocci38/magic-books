@@ -57,18 +57,33 @@ export const Books = () => {
         <section className="sectionRow">{Array.isArray(books) ? books 
             .map((book) => (
                 <div key={book.id} className="bookContainer">
-                    <div className="coverContainer">
+                    {/* <div className="coverContainer">
                         {book.cover ? <img src={urlImage + book.cover} className="cover" alt={"couverture du livre " + book.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
-                    </div>
+                    </div> */}
                     <div className="bookInfo">
                         <h3>{book.title}</h3>
-                        <div className="infoContainer">
-                            <p className="paragraphFlex"><span className="paragraphName">Auteur</span><span>{book.author}</span></p>
-                            <p className="paragraphFlex"><span className="paragraphName">Date de sortie</span><span> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span> </p>
-                            <p className="paragraphFlex"><span className="paragraphName">Catégorie</span><span>{book.name}</span></p>
-                            <p className="paragraphFlex"><span className="paragraphName">Éditeur</span><span>{book.editor}</span></p>
+                        <div className="flexRowWrap">
+                            <div className="flexColumn">
+                                <h4 className="divMargin">Auteur</h4>
+                                <span className="divMargin">{book.author}</span>
+                            </div>
+                            <div className="flexColumn">
+                                <h4 className="divMargin">Date de sortie</h4>
+                                <span className="divMargin"> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span>
+                            </div>
+                            <div className="flexColumn">
+                                <h4 className="divMargin">Catégorie</h4>
+                                <span className="divMargin">{book.name}</span>
+                            </div>
+                            <div className="flexColumn">
+                                <h4 className="divMargin">Éditeur</h4>
+                                <span className="divMargin">{book.editor}</span>
+                            </div>
                         </div>
-                        <p className="paragraphFlex"><span className="paragraphName">Résumé</span><span>{book.summary.substring(0, 70) + " ..."}</span></p>
+                        <div className="flexColumn">
+                            <h4 className="divMargin">Résumé</h4>
+                            <span>{book.summary.substring(0, 70) + " ..."}</span>
+                        </div>
                         <div className="buttonContainer">
                             <Link to={'/livre/' + book.id} className="iconButton eye" aria-label="voir la fiche du livre"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
                             <Link to={'/admin/livre/editer/' + book.id} className="iconButton pen" aria-label="modifier le livre"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>

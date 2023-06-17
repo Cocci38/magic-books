@@ -70,9 +70,6 @@ body{
     object-fit: cover;
 }
 
-
-
-
 p {
     text-align: left;
 }
@@ -103,4 +100,10 @@ p {
 }
 .flexAttribute {
     @include flexAttribute;
+}
+
+@media screen and (max-width: 767px) {
+    .responsiveFlexColumn {
+        @include flexColumn;
+    }
 }
