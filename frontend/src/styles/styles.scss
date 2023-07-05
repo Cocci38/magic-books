@@ -63,23 +63,51 @@ body{
 }
 
 .headerMenu {
+    position: relative;
     width: 100%;
     background-color: $dark-blue;
     overflow: hidden;
     height: 300px;
+    @media screen and (max-width: 768px){
+        height: 200px;
+    }
 }
 
 .imageHeader {
+    position: absolute;
     max-width: 100%;
     min-height: 100%;
     opacity: 20%;
     object-fit: cover;
 }
 
+.titleBlock {
+    position: relative;
+    z-index: 1;
+    width: 30%;
+    float: right;
+    margin: 100px;
+    @media screen and (min-width: 768px) and (max-width: 950px){
+        width: 50%;
+    }
+    @media screen and (max-width: 768px){
+        width: auto;
+        margin: 50px;
+    }
+    @media screen and (max-width: 500px){
+        margin: 40px;
+    }
+    p {
+        color: $light;
+        font-size: 10pt;
+        text-align: start;
+    }
+}
+
 footer {
     position: absolute;
     width: 100%;
-    height: 110px;
+    height: fit-content;
     background-color: $dark-blue;
     color: $light;
     img {

@@ -465,13 +465,20 @@ body {
 }
 
 .headerMenu {
+  position: relative;
   width: 100%;
   background-color: #2D3250;
   overflow: hidden;
   height: 300px;
 }
+@media screen and (max-width: 768px) {
+  .headerMenu {
+    height: 200px;
+  }
+}
 
 .imageHeader {
+  position: absolute;
   max-width: 100%;
   min-height: 100%;
   opacity: 20%;
@@ -479,10 +486,40 @@ body {
      object-fit: cover;
 }
 
+.titleBlock {
+  position: relative;
+  z-index: 1;
+  width: 30%;
+  float: right;
+  margin: 100px;
+}
+@media screen and (min-width: 768px) and (max-width: 950px) {
+  .titleBlock {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .titleBlock {
+    width: auto;
+    margin: 50px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .titleBlock {
+    margin: 40px;
+  }
+}
+.titleBlock p {
+  color: #f6f6ee;
+  font-size: 10pt;
+  text-align: start;
+}
+
 footer {
   position: absolute;
   width: 100%;
-  height: 110px;
+  height: -moz-fit-content;
+  height: fit-content;
   background-color: #2D3250;
   color: #f6f6ee;
 }
