@@ -131,6 +131,12 @@ textarea {
   background: #2D3250;
   background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
 }
+.dashboard .itemFlex {
+  margin: 10px;
+}
+.dashboard .barLine {
+  border-bottom: 1px solid #2D3250;
+}
 .dashboard .bookContainer {
   display: flex;
   flex-direction: row;
@@ -574,6 +580,17 @@ p {
 .flexAttribute {
   justify-content: center;
   align-items: center;
+}
+
+.flexResponsive {
+  display: flex;
+  flex-direction: row;
+}
+@media screen and (max-width: 767px) {
+  .flexResponsive {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 767px) {

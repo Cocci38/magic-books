@@ -157,6 +157,13 @@ p {
     @include flexAttribute;
 }
 
+.flexResponsive {
+    @include flexRow;
+    @media screen and (max-width: 767px) {
+        @include flexColumn;
+    }
+}
+
 @media screen and (max-width: 767px) {
     .responsiveFlexColumn {
         @include flexColumn;

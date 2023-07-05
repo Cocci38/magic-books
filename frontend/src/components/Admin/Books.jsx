@@ -54,13 +54,32 @@ export const Books = () => {
     }
 
     return (
-        <section className="sectionRow">{Array.isArray(books) ? books 
+        <section style={{width: '80%'}}>
+        <div className="flexRow barLine">
+            <span className="itemFlex" style={{width: '30%'}}>Titre</span>
+            <span className="itemFlex" style={{width: '20%'}}>Auteur</span>
+            <span className="itemFlex" style={{width: '10%'}}>Date de sortie</span>
+            <span className="itemFlex" style={{width: '13%'}}>Catégorie</span>
+            <span className="itemFlex" style={{width: '12%'}}>Éditeur</span>
+            <span style={{marginLeft: '153px'}}></span>
+        </div>
+        {Array.isArray(books) ? books 
             .map((book) => (
-                <div key={book.id} className="bookContainer">
+                <div className="flexRow barLine" key={book.id}>
                     {/* <div className="coverContainer">
                         {book.cover ? <img src={urlImage + book.cover} className="cover" alt={"couverture du livre " + book.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
                     </div> */}
-                    <div className="bookInfo">
+                        <span className="itemFlex" style={{width: '30%'}}>{book.title}</span>
+                        <span className="itemFlex" style={{width: '20%'}}>{book.author}</span>
+                        <span className="itemFlex" style={{width: '10%'}}> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span>
+                        <span className="itemFlex" style={{width: '13%'}}>{book.name}</span>
+                        <span className="itemFlex" style={{width: '12%'}}>{book.editor}</span>
+                        <div className="flexResponsive">
+                            <Link to={'/livre/' + book.id} style={{height:"20px", width:"19px"}} className="iconButton eye" aria-label="voir la fiche du livre"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
+                            <Link to={'/admin/livre/editer/' + book.id} style={{height:"20px", width:"18px"}} className="iconButton pen" aria-label="modifier le livre"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                            <button onClick={() => { deleteBook(book.id) }} className="iconButton trash" aria-label="supprimer le livre"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
+                        </div>
+                    {/* <div className="bookInfo">
                         <h3>{book.title}</h3>
                         <div className="flexRowWrap">
                             <div className="flexColumn">
@@ -89,7 +108,7 @@ export const Books = () => {
                             <Link to={'/admin/livre/editer/' + book.id} className="iconButton pen" aria-label="modifier le livre"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                             <button onClick={() => { deleteBook(book.id) }} className="iconButton trash" aria-label="supprimer le livre"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             ))
             : <Navigate to={"/"} /> }
