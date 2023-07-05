@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { adminService } from '../../services/admin.service';
+import { Link } from "react-router-dom";
 
 export const PublicCategories = () => {
     const [categories, setCategories] = useState([]);
@@ -30,7 +31,8 @@ export const PublicCategories = () => {
             {Array.isArray(categories) ? categories
                 .map((category) => (
                     <div key={category.id} className="categoryContainer">
-                        <span>{category.name}</span>
+                    <Link to={'categorie/'+category.id} >{category.name}</Link>
+                        
                     </div>
                 ))
                 : ""}

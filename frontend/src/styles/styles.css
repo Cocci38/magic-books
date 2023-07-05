@@ -427,6 +427,11 @@ body {
   margin: 0 auto;
 }
 
+.divContent {
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+
 .menu {
   display: flex;
   flex-direction: row;
@@ -462,6 +467,8 @@ body {
 .headerMenu {
   width: 100%;
   background-color: #2D3250;
+  overflow: hidden;
+  height: 300px;
 }
 
 .imageHeader {
@@ -470,6 +477,26 @@ body {
   opacity: 20%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  height: 110px;
+  background-color: #2D3250;
+  color: #f6f6ee;
+}
+footer img {
+  width: 85px;
+}
+footer p {
+  font-size: 8pt;
+  white-space: normal;
+  margin: 20px;
+}
+footer .notice {
+  text-align: center;
+  margin: 0;
 }
 
 p {
@@ -521,4 +548,8 @@ p {
 .centerContainer {
   margin-left: 150px;
   margin-right: 150px;
+}
+
+.colorOrange {
+  color: #F8B179;
 }/*# sourceMappingURL=styles.css.map */

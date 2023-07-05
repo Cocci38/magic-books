@@ -109,7 +109,7 @@ class Categories
         //$data = ($data != null) ? trim(stripslashes(strip_tags(htmlspecialchars($data)))) : $data;
         $data = trim($data);            // Supprime les espaces (ou d'autres caractères) en début et fin de chaîne
         $data = stripslashes($data);    // Supprime les antislashs d'une chaîne
-        $data = htmlspecialchars($data, ENT_COMPAT, 'ISO-8859-1', true); // Convertit les caractères spéciaux en entités HTML
+        $data = htmlspecialchars($data, ENT_COMPAT, 'ISO-8859-1', true); // Convertis les caractères spéciaux en entités HTML
         $data = strip_tags($data);      // Supprime les balises HTML et PHP d'une chaîne
         //$data = htmlentities($data, ENT_COMPAT);
         return $data;

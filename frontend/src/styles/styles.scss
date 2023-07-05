@@ -25,6 +25,11 @@ body{
     margin: 0 auto;
 }
 
+.divContent {
+    min-height: 100vh;
+    padding-bottom:100px;
+}
+
 .menu {
     @include flexRow;
     align-items: center;
@@ -60,7 +65,8 @@ body{
 .headerMenu {
     width: 100%;
     background-color: $dark-blue;
-    
+    overflow: hidden;
+    height: 300px;
 }
 
 .imageHeader {
@@ -68,6 +74,26 @@ body{
     min-height: 100%;
     opacity: 20%;
     object-fit: cover;
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+    height: 110px;
+    background-color: $dark-blue;
+    color: $light;
+    img {
+        width: 85px;
+    }
+    p {
+        font-size: 8pt;
+        white-space: normal;
+        margin: 20px;
+    }
+    .notice {
+        text-align: center;
+        margin: 0;
+    }
 }
 
 
@@ -114,4 +140,6 @@ p {
     margin-right: 150px;
 }
 
-
+.colorOrange {
+    color: $orange;
+}

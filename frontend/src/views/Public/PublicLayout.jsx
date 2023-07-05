@@ -7,8 +7,10 @@ import { Footer } from '../../components/Footer'
 const PublicLayout = () => {
     return (
         <div>
-            <Menu />
-            <Outlet />
+            <div className='divContent'>
+                <Menu />
+                <Outlet />
+            </div>
             <Footer />
         </div>
     )
