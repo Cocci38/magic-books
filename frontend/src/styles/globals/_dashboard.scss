@@ -24,6 +24,9 @@
         width: 95%;
         margin-left: 20px;
     }
+    @media screen and (max-width: 650px) {
+        margin-left: 10px;
+    }
 }
 
 .dashboard {
@@ -76,58 +79,13 @@
         border-bottom: 1px solid $dark-blue;
     }
 
-    .bookContainer {
-        @include flexRow;
-        gap: 10px;
-        width: 48%;
-        margin-top: 10px;
-
-        .coverContainer {
-            width: 150px;
-
-            .cover {
-                width: 100%;
-            }
-        }
-
-        @media screen and (max-width: 1024px) {
-            width: 98%;
-        }
-
-        @media screen and (max-width: 767px) {
-            @include flexColumn;
-        }
-    }
-
     .categoryContainer {
         @include flexColumn;
         height: fit-content;
-    }
-
-    .authorContainer {
-        @include flexColumn;
-        height: fit-content;
-        gap: 10px;
-        width: 48%;
-
-        @media screen and (max-width: 1024px) {
-            width: 90%;
+        margin-left: 50px;
+        @media screen and (max-width: 650px) {
+            margin-left: 20px;
         }
-
-        .infoAuthor {
-            @include flexRow;
-            gap: 20px;
-
-            @media screen and (max-width: 767px) {
-                @include flexColumn;
-                gap: 10px;
-            }
-
-            .authorItem {
-                @include flexColumn;
-            }
-        }
-
     }
 
     @media screen and (max-width: 900px) {
@@ -145,24 +103,6 @@
         width: 100%;
         justify-content: center;
     }
-}
-
-.bookInfo {
-    @include flexColumn;
-    gap: 10px;
-}
-
-.paragraphFlex {
-    @include flexColumn;
-    margin: 0;
-}
-
-.paragraphName {
-    color: $dark-blue;
-}
-
-h3 {
-    margin: 5px 0 0 0;
 }
 
 .iconButton {

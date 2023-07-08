@@ -54,7 +54,7 @@ export const Authors = () => {
                 <span className="itemFlex" style={{ width: '30%' }}>Nom</span>
                 <span className="itemFlex" style={{ width: '20%' }}>Nationalité</span>
                 <span className="itemFlex" style={{ width: '35%' }}>Biographie</span>
-                <span style={{ marginLeft: '153px' }}></span>
+                <span className="spanEmpty"></span>
             </div>
             {Array.isArray(authors) ? authors
                 .map((author) => (

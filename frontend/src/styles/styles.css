@@ -131,6 +131,11 @@ textarea {
     margin-left: 20px;
   }
 }
+@media screen and (max-width: 650px) {
+  .list {
+    margin-left: 10px;
+  }
+}
 
 .dashboard {
   display: flex;
@@ -179,64 +184,17 @@ textarea {
 .dashboard .barLine {
   border-bottom: 1px solid #2D3250;
 }
-.dashboard .bookContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  width: 48%;
-  margin-top: 10px;
-}
-.dashboard .bookContainer .coverContainer {
-  width: 150px;
-}
-.dashboard .bookContainer .coverContainer .cover {
-  width: 100%;
-}
-@media screen and (max-width: 1024px) {
-  .dashboard .bookContainer {
-    width: 98%;
-  }
-}
-@media screen and (max-width: 767px) {
-  .dashboard .bookContainer {
-    display: flex;
-    flex-direction: column;
-  }
-}
 .dashboard .categoryContainer {
   display: flex;
   flex-direction: column;
   height: -moz-fit-content;
   height: fit-content;
+  margin-left: 50px;
 }
-.dashboard .authorContainer {
-  display: flex;
-  flex-direction: column;
-  height: -moz-fit-content;
-  height: fit-content;
-  gap: 10px;
-  width: 48%;
-}
-@media screen and (max-width: 1024px) {
-  .dashboard .authorContainer {
-    width: 90%;
+@media screen and (max-width: 650px) {
+  .dashboard .categoryContainer {
+    margin-left: 20px;
   }
-}
-.dashboard .authorContainer .infoAuthor {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-@media screen and (max-width: 767px) {
-  .dashboard .authorContainer .infoAuthor {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-.dashboard .authorContainer .infoAuthor .authorItem {
-  display: flex;
-  flex-direction: column;
 }
 @media screen and (max-width: 900px) {
   .dashboard {
@@ -260,26 +218,6 @@ textarea {
     width: 100%;
     justify-content: center;
   }
-}
-
-.bookInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.paragraphFlex {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-}
-
-.paragraphName {
-  color: #2D3250;
-}
-
-h3 {
-  margin: 5px 0 0 0;
 }
 
 .iconButton {
