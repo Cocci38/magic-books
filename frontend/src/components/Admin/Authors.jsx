@@ -25,9 +25,9 @@ export const Authors = () => {
     // Le useEffect se joue lorsque le composant est monté
     useEffect(() => {
         if (flag.current === false) {
-        fetchAuthors()
-    }
-    return () => flag.current = true
+            fetchAuthors()
+        }
+        return () => flag.current = true
     }, []);
 
     const deleteAuthor = async (id) => {
@@ -49,29 +49,28 @@ export const Authors = () => {
     }
 
     return (
-        <section className="sectionRow">{Array.isArray(authors) ? authors
-            .map((author) => (
-                <div key={author.id} className="authorContainer">
-                    <h3>{author.name}</h3>
-                    <div className="infoAuthor">
-                        <div className="authorItem">
-                            <span>Nationalité</span>
-                            <span>{author.nationality}</span>
-                        </div>
-                        <div className="authorItem">
-                            <span>Bibiographie</span>
-                            <span>{author.biography.substring(0, 70) + " ..."}</span>
+        <section className="list">
+            <div className="flexRow barLine">
+                <span className="itemFlex" style={{ width: '30%' }}>Nom</span>
+                <span className="itemFlex" style={{ width: '20%' }}>Nationalité</span>
+                <span className="itemFlex" style={{ width: '35%' }}>Biographie</span>
+                <span style={{ marginLeft: '153px' }}></span>
+            </div>
+            {Array.isArray(authors) ? authors
+                .map((author) => (
+                    <div key={author.id} className="flexRow barLine">
+                        <span className="itemFlex" style={{ width: '30%' }}>{author.name}</span>
+                        <span className="itemFlex" style={{ width: '20%' }}>{author.nationality}</span>
+                        <span className="itemFlex" style={{ width: '35%' }}> {author.biography.substring(0, 70) + " ..."}</span>
+                        <div className="flexResponsive">
+                            <Link to={'/auteur/' + author.id} style={{ height: "20px", width: "19px" }} className="iconButton eye" aria-label="fiche auteur"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
+                            <Link to={'/admin/auteur/editer/' + author.id} style={{ height: "20px", width: "18px" }} className="iconButton pen" aria-label="modifier l'auteur"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                            <button onClick={() => { deleteAuthor(author.id) }} className="iconButton trash" aria-label="supprimer l'auteur"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
                         </div>
                     </div>
-                    <div className="buttonContainer">
-                        <Link to={'/auteur/' + author.id} className="iconButton eye" aria-label="fiche auteur"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
-                        <Link to={'/admin/auteur/editer/' + author.id} className="iconButton pen" aria-label="modifier l'auteur"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                        <button onClick={() => { deleteAuthor(author.id) }} className="iconButton trash" aria-label="supprimer l'auteur"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
-                    </div>
-                </div>
 
-            ))
-            : <Navigate to={"/"} />}
+                ))
+                : <Navigate to={"/"} />}
         </section>
     )
 

@@ -66,7 +66,7 @@ export const Categories = () => {
     }
     return (
 
-        <section className="sectionRow">{Array.isArray(categories) ? categories
+        <section className="sectionRow list">{Array.isArray(categories) ? categories
             .map((category) => (
                 <div key={category.id} className="categoryContainer">
                     <span className="paragraphName">Nom de la catégorie</span>

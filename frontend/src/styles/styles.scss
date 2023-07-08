@@ -21,45 +21,143 @@
     -webkit-text-size-adjust: 100%;
 }
 
-body{
+body {
     margin: 0 auto;
 }
 
 .divContent {
     min-height: 100vh;
-    padding-bottom:100px;
+    padding-bottom: 100px;
 }
 
-.menu {
+main {
+    margin-top: 30px;
+}
+
+// .menu {
+//     @include flexRow;
+//     align-items: center;
+//     height: 15vh;
+
+//     img {
+//         width: 150px;
+//         @media screen and (max-width: 768px) {
+//             width: 25%;
+//         }
+//     }
+
+//     nav {
+//         flex: 1;
+//         ul {
+//             @include flexRow;
+//             gap: 20px;
+//             list-style: none;
+//             justify-self: center;
+
+//             a {
+//                 text-decoration: none;
+//                 color: $dark-blue;
+//             }
+//         }
+
+//         .activeLink {
+//             color: $orange;
+//         }
+//     }
+// }
+
+nav {
     @include flexRow;
+    justify-content: space-between;
     align-items: center;
-    height: 15vh;
+    padding: 10px;
+    font-size: calc(0.5rem + 0.8vw);
+
+    @media screen and (min-width: 650px) and (max-width: 1024px) {
+        justify-content: space-around;
+    }
 
     img {
         width: 150px;
+
         @media screen and (max-width: 768px) {
-            width: 25%;
+            width: 20%;
+            z-index: 2;
         }
     }
 
-    nav {
-        flex: 1;
+    ul {
+        @include flexRow;
+        justify-content: space-between;
+        width: 60%;
+        list-style: none;
+
+        @media screen and (min-width: 650px) and (max-width: 1024px) {
+            justify-content: space-around;
+        }
+
+        a {
+            text-decoration: none;
+            color: $dark-blue;
+        }
+    }
+
+    .buttonLog {
+        text-decoration: none;
+        text-align: center;
+        color: $dark-blue;
+        padding: 10px 0;
+        border: none;
+        cursor: pointer;
+        background-color: transparent;
+        font-family: "Lustria";
+        font-size: calc(0.5rem + 0.8vw);
+    }
+
+    .responsiveButton {
+        display: none;
+    }
+
+    .activeButton {
+        display: block;
+    }
+
+    .activeLink {
+        color: $orange;
+    }
+
+
+    @media screen and (max-width: 650px) {
         ul {
-            @include flexRow;
-            gap: 20px;
-            list-style: none;
-            justify-self: center;
-
-            a {
-                text-decoration: none;
-                color: $dark-blue;
-            }
+            position: fixed;
+            left: -100%;
+            top: 4%;
+            flex-direction: column;
+            background: $light;
+            width: 94%;
+            text-align: center;
+            transition: 0.25s;
         }
 
-        .activeLink {
-            color: $orange;
+        li {
+            padding: 3px;
+        }
+        .responsiveButton {
+            display: block;
+        }
+    
+        .activeButton {
+            display: none;
+        }
+        .toggleNav{
+            z-index: 1;
+            left: 0;
+        }
+        .removeBtn {
+            z-index: 2;
         }
     }
+
 }
 
 .headerMenu {
@@ -68,7 +166,8 @@ body{
     background-color: $dark-blue;
     overflow: hidden;
     height: 300px;
-    @media screen and (max-width: 768px){
+
+    @media screen and (max-width: 768px) {
         height: 200px;
     }
 }
@@ -87,16 +186,20 @@ body{
     width: 30%;
     float: right;
     margin: 100px;
-    @media screen and (min-width: 768px) and (max-width: 950px){
+
+    @media screen and (min-width: 768px) and (max-width: 950px) {
         width: 50%;
     }
-    @media screen and (max-width: 768px){
+
+    @media screen and (max-width: 768px) {
         width: auto;
         margin: 50px;
     }
-    @media screen and (max-width: 500px){
+
+    @media screen and (max-width: 500px) {
         margin: 40px;
     }
+
     p {
         color: $light;
         font-size: 10pt;
@@ -110,14 +213,17 @@ footer {
     height: fit-content;
     background-color: $dark-blue;
     color: $light;
+
     img {
         width: 85px;
     }
+
     p {
         font-size: 8pt;
         white-space: normal;
         margin: 20px;
     }
+
     .notice {
         text-align: center;
         margin: 0;
@@ -134,6 +240,7 @@ p {
     padding-left: 1px;
     background: #2D3250;
     background-image: linear-gradient(to bottom, #f6f6ee, #2D3250, #f6f6ee);
+
     // background: linear-gradient(to bottom, #f6f6ee, #2D3250, #f6f6ee);
     @media screen and (max-width: 1023px) {
         padding-bottom: 1px;
@@ -153,12 +260,14 @@ p {
 .flexColumn {
     @include flexColumn;
 }
+
 .flexAttribute {
     @include flexAttribute;
 }
 
 .flexResponsive {
     @include flexRow;
+
     @media screen and (max-width: 767px) {
         @include flexColumn;
     }

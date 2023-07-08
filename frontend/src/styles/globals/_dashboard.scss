@@ -2,6 +2,30 @@
  * Feuille de style pour le dashboard de l'administrateur
  */
 
+.buttonBugger {
+    text-decoration: none;
+    text-align: center;
+    color: $dark-blue;
+    padding: 10px 0;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    font-family: "Lustria";
+    font-size: calc(0.5rem + 0.8vw);
+    margin-left: 20px;
+    display: none;
+    @media screen and (max-width: 950px) {
+        display: block;
+    }
+}
+.list {
+    width: 80%;
+    @media screen and (max-width: 950px) {
+        width: 95%;
+        margin-left: 20px;
+    }
+}
+
 .dashboard {
     @include flexRow;
     gap: 60px;
@@ -11,6 +35,13 @@
         border-radius: 10px;
         height: min-content;
         width: 190px;
+        margin-left: 20px;
+
+        @media screen and (max-width: 950px) {
+            position: fixed;
+            left: -100%;
+            transition: 0.25s;
+        }
 
         .boxLien {
             @include flexColumn;
@@ -29,11 +60,18 @@
             background: #2D3250;
             background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
         }
+
+    }
+    .toggleNavAdmin {
+        position: absolute;
+        left: 0;
+        background-color: $light;
     }
 
     .itemFlex {
         margin: 10px;
     }
+
     .barLine {
         border-bottom: 1px solid $dark-blue;
     }
@@ -137,6 +175,9 @@ h3 {
     border: 1px solid $light;
     border-radius: 10px;
     cursor: pointer;
+    @media screen and (max-width: 767px) {
+        margin: 0;
+    }
 }
 
 .eye {
@@ -174,4 +215,11 @@ h3 {
     background-color: transparent;
     font-family: "Lustria";
     font-size: 16px;
+}
+
+.spanEmpty {
+    margin-left: 153px;
+    @media screen and (max-width: 767px) {
+        margin-left: 53px;
+    }
 }
