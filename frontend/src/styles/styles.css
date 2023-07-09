@@ -20,6 +20,11 @@
   padding-bottom: 20px;
   color: #2D3250;
 }
+@media screen and (max-width: 1023px) {
+  .container, .h2Form {
+    width: 90%;
+  }
+}
 
 form, .form {
   padding: 30px;
@@ -293,10 +298,6 @@ textarea {
   margin-left: 10px;
 }
 
-.libraryContainer {
-  width: 100%;
-  gap: 10px;
-}
 @media screen and (max-width: 1023px) {
   .libraryContainer {
     margin-top: 20px;
@@ -304,10 +305,15 @@ textarea {
 }
 
 .libraryBook {
-  width: 48%;
+  width: 30%;
   gap: 10px;
 }
 @media screen and (max-width: 1023px) {
+  .libraryBook {
+    width: 48%;
+  }
+}
+@media screen and (max-width: 650px) {
   .libraryBook {
     width: 100%;
   }
@@ -322,7 +328,9 @@ textarea {
 
 .readerBook {
   width: 100%;
-  gap: 3px;
+}
+.readerBook h3 {
+  margin: 0 0 5px 0;
 }
 
 .containerInfo {
@@ -344,7 +352,7 @@ textarea {
 }
 
 .labelInfo {
-  width: 150px;
+  width: 125px;
 }
 
 .divColor {
@@ -352,14 +360,24 @@ textarea {
 }
 
 .divMargin {
-  margin: 5px;
+  margin: 10px;
+}
+@media screen and (max-width: 1023px) {
+  .divMargin {
+    margin: 3px;
+  }
 }
 
 .bookIdContainer {
-  width: 65%;
+  width: 55%;
   border-radius: 10px;
   box-shadow: rgba(45, 50, 80, 0.15) 2px 2px 5px 0px, rgba(45, 50, 80, 0.15) -2px 2px 5px 0px;
   margin-top: 50px;
+}
+@media screen and (max-width: 950px) {
+  .bookIdContainer {
+    width: 95%;
+  }
 }
 .bookIdContainer h2 {
   text-align: center;
@@ -371,8 +389,11 @@ textarea {
   min-height: 50px;
   padding: 15px 5px 0 5px;
 }
+.bookIdContainer h3 {
+  margin: 0;
+}
 .bookIdContainer .coverContainer {
-  width: 300px;
+  width: 200px;
 }
 @media screen and (max-width: 767px) {
   .bookIdContainer .coverContainer {
@@ -408,6 +429,25 @@ textarea {
 }
 .categoryIdContainer .coverContainer .cover {
   width: 100%;
+}
+
+.divMarginLeft {
+  margin-left: 0;
+}
+@media screen and (max-width: 950px) {
+  .divMarginLeft {
+    margin-left: 70px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .divMarginLeft {
+    margin-left: 25px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .divMarginLeft {
+    margin-left: 0;
+  }
 }
 
 :root {
@@ -608,7 +648,7 @@ p {
   .bar {
     padding-bottom: 1px;
     background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
-    margin-top: 10px;
+    margin: 10px;
   }
 }
 
@@ -623,6 +663,11 @@ p {
   flex-wrap: wrap;
   align-content: start;
   justify-content: flex-start;
+}
+@media screen and (max-width: 500px) {
+  .flexRowWrap {
+    justify-content: center;
+  }
 }
 
 .flexColumn {
@@ -655,6 +700,21 @@ p {
 .centerContainer {
   margin-left: 150px;
   margin-right: 150px;
+}
+@media screen and (max-width: 1024px) {
+  .centerContainer {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+@media screen and (max-width: 950px) {
+  .centerContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .colorOrange {

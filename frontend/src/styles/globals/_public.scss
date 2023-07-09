@@ -1,8 +1,12 @@
 .bookIdContainer {
-    width: 65%;
+    width: 55%;
     border-radius: 10px;
     box-shadow: rgba(45, 50, 80, 0.15) 2px 2px 5px 0px, rgba(45, 50, 80, 0.15) -2px 2px 5px 0px;
     margin-top: 50px;
+
+    @media screen and (max-width: 950px) {
+        width: 95%;
+    }
 
     h2 {
         text-align: center;
@@ -15,8 +19,12 @@
         padding: 15px 5px 0 5px;
     }
 
+    h3 {
+        margin: 0;
+    }
+
     .coverContainer {
-        width: 300px;
+        width: 200px;
 
         @media screen and (max-width: 767px) {
             width: 95%;
@@ -55,4 +63,17 @@
             width: 100%;
         }
     }
+}
+
+.divMarginLeft {
+    margin-left: 0;
+    @media screen and (max-width: 950px) {
+        margin-left: 70px;
+    }
+    @media screen and (max-width: 900px) {
+        margin-left: 25px;
+    }
+    @media screen and (max-width: 800px) {
+            margin-left: 0;
+        }
 }

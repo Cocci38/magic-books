@@ -39,7 +39,7 @@ export const CategoryById = () => {
             <section className="centerContainer divMargin">
                 <h2>{nameCategory}</h2>
                 <div>{count} livres pour la catégorie {nameCategory}</div>
-                <div className="flexRowWrap">
+                <div className="flexRowWrap divMarginLeft">
                     {Array.isArray(categories) ? categories
                         .map((category) => (
                             <div key={category.book_id} className="categoryIdContainer divMargin">

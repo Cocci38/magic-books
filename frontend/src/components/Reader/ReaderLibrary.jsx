@@ -60,10 +60,10 @@ export const ReaderLibrary = () => {
                     <div className="coverContainerMini">
                         {library.cover ? <img src={urlImage + library.cover} className="coverMini" alt={"couverture du livre " + library.title} /> : <img src='/images/image_vide.png' className="coverMini" alt="ce livre n'a pas de couverture" />}
                     </div>
-                    <div className="bookInfo readerBook">
+                    <div className="readerBook">
                         <h3>{library.title}</h3>
-                        <div><span className="paragraphName">Auteur : </span><span>{library.author}</span></div>
-                        <div><span className="paragraphName">Date de sortie : </span><span> {new Date(library.release_date).toLocaleDateString("fr-FR")}</span> </div>
+                        <div><span>{library.author}</span></div>
+                        <div><span> {new Date(library.release_date).toLocaleDateString("fr-FR")}</span> </div>
                         <div className="buttonContainer">
                             <Link to={'/livre/' + library.bookId} className="iconButton eye" aria-label="voir la fiche du livre"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
                             <button onClick={() => { deleteLibrary(library.libraryId) }} className="iconButton trash" aria-label="supprimer le livre"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>

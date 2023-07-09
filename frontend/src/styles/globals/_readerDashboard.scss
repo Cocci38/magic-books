@@ -5,8 +5,7 @@
 }
 
 .libraryContainer {
-    width: 100%;
-    gap: 10px;
+    // gap: 10px;
 
     @media screen and (max-width: 1023px) {
         margin-top: 20px;
@@ -14,9 +13,13 @@
 }
 
 .libraryBook {
-    width: 48%;
+    // width: 48%;
+    width: 30%;
     gap: 10px;
     @media screen and (max-width: 1023px) {
+        width: 48%;
+    }
+    @media screen and (max-width: 650px) {
         width: 100%;
     }
 }
@@ -31,7 +34,9 @@
 
 .readerBook {
     width: 100%;
-    gap: 3px;
+    h3 {
+        margin: 0 0 5px 0;
+    }
 }
 
 .containerInfo {
@@ -51,7 +56,7 @@
 }
 
 .labelInfo {
-    width: 150px;
+    width: 125px;
 }
 
 .divColor {
@@ -59,5 +64,8 @@
 }
 
 .divMargin {
-    margin: 5px;
+    margin: 10px;
+    @media screen and (max-width: 1023px) {
+        margin: 3px;
+    }
 }

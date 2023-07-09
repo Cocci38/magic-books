@@ -16,6 +16,9 @@
     margin: 0 auto;
     padding-bottom: 20px;
     color: $dark-blue;
+    @media screen and (max-width: 1023px) {
+        width: 90%;
+    }
 }
 form, .form {
     // width:100%;

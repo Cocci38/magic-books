@@ -34,11 +34,11 @@ export const ReaderProfile = () => {
             <div className="flexColumn labelInfo divMargin"><span>{reader.username}</span><span>{reader.email}</span></div> */}
             <div className="flexRow">
                 <span className="labelInfo divMargin">Nom utilisateur : </span>
-                <span>{reader.username}</span>
+                <span className="divMargin">{reader.username}</span>
             </div>
             <div className="flexRow">
             <span className="labelInfo divMargin">Email : </span>
-                <span>{reader.email}</span>
+                <span className="divMargin">{reader.email}</span>
             </div>
             </div>
         </section>

@@ -142,17 +142,20 @@ nav {
         li {
             padding: 3px;
         }
+
         .responsiveButton {
             display: block;
         }
-    
+
         .activeButton {
             display: none;
         }
-        .toggleNav{
+
+        .toggleNav {
             z-index: 1;
             left: 0;
         }
+
         .removeBtn {
             z-index: 2;
         }
@@ -245,7 +248,7 @@ p {
     @media screen and (max-width: 1023px) {
         padding-bottom: 1px;
         background-image: linear-gradient(to right, #f6f6ee, #2D3250, #f6f6ee);
-        margin-top: 10px;
+        margin: 10px;
     }
 }
 
@@ -255,6 +258,9 @@ p {
 
 .flexRowWrap {
     @include flexRowWrap;
+    @media screen and (max-width: 500px) {
+        justify-content: center;
+    }
 }
 
 .flexColumn {
@@ -282,6 +288,20 @@ p {
 .centerContainer {
     margin-left: 150px;
     margin-right: 150px;
+
+    @media screen and (max-width: 1024px) {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+
+    @media screen and (max-width: 950px) {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-left: 0;
+        margin-right: 0;
+    
+    }
 }
 
 .colorOrange {
