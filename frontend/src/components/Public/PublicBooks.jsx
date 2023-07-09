@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { publicService } from "../../services/public.service";
+import { Link } from "react-router-dom";
 
 export const PublicBooks = () => {
 
@@ -33,15 +34,17 @@ export const PublicBooks = () => {
     return (
         <section className="centerContainer divMargin">
             <h2>Livres mis en avant</h2>
-            <div className="flexRowWrap">
+            <div className="flexRowWrap divMarginLeft">
 
                 {Array.isArray(books) ? books
                     .map((book) => (
                         <div key={book.id} className="categoryIdContainer divMargin">
-                            <div className="coverContainer divMargin">
-                                {book.cover ? <img src={urlImage + book.cover} className="cover" alt={"couverture du livre " + book.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
-                            </div>
-                            <div className="divMargin">{book.summary.substring(0, 100) + " ..."}</div>
+                            <Link to={'/livre/' + book.id}>
+                                <div className="coverContainer divLittleMargin">
+                                    {book.cover ? <img src={urlImage + book.cover} className="cover" alt={"couverture du livre " + book.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
+                                </div>
+                                <div className="divMargin">{book.summary.substring(0, 100) + " ..."}</div>
+                            </Link>
                         </div>
                     ))
                     : ""}

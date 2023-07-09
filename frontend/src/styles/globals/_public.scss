@@ -54,6 +54,10 @@
     border-radius: 10px;
     box-shadow: rgba(45, 50, 80, 0.15) 2px 2px 5px 0px, rgba(45, 50, 80, 0.15) -2px 2px 5px 0px;
     margin-top: 10px;
+    a{
+        color: $dark-blue;
+        text-decoration: none;
+    }
 
     .coverContainer {
         width: 95%;
@@ -76,4 +80,8 @@
     @media screen and (max-width: 800px) {
             margin-left: 0;
         }
+}
+
+.divLittleMargin {
+    margin: 6px;
 }

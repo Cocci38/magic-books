@@ -258,6 +258,7 @@ p {
 
 .flexRowWrap {
     @include flexRowWrap;
+
     @media screen and (max-width: 500px) {
         justify-content: center;
     }
@@ -285,11 +286,16 @@ p {
     }
 }
 
-.centerContainer {
-    margin-left: 150px;
-    margin-right: 150px;
 
-    @media screen and (max-width: 1024px) {
+.centerContainer {
+    margin-left: 250px;
+    margin-right: 250px;
+    @media screen and (max-width: 1600px) {
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+
+    @media screen and (max-width: 1280px) {
         margin-left: 100px;
         margin-right: 100px;
     }
@@ -300,7 +306,7 @@ p {
         text-align: center;
         margin-left: 0;
         margin-right: 0;
-    
+
     }
 }
 

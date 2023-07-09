@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { publicService } from "../../services/public.service";
 
 
@@ -42,12 +42,16 @@ export const CategoryById = () => {
                 <div className="flexRowWrap divMarginLeft">
                     {Array.isArray(categories) ? categories
                         .map((category) => (
+
                             <div key={category.book_id} className="categoryIdContainer divMargin">
-                                <div className="coverContainer divMargin">
-                                    {category.cover ? <img src={urlImage + category.cover} className="cover" alt={"couverture du livre " + category.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
-                                </div>
-                                <div className="divMargin">{category.summary.substring(0, 100) + " ..."}</div>
+                                <Link to={'/livre/' + category.book_id}>
+                                    <div className="coverContainer divLittleMargin">
+                                        {category.cover ? <img src={urlImage + category.cover} className="cover" alt={"couverture du livre " + category.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
+                                    </div>
+                                    <div className="divMargin">{category.summary.substring(0, 100) + " ..."}</div>
+                                </Link>
                             </div>
+
                         ))
                         : ""}
                 </div>

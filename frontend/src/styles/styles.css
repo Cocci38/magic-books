@@ -423,6 +423,10 @@ textarea {
   box-shadow: rgba(45, 50, 80, 0.15) 2px 2px 5px 0px, rgba(45, 50, 80, 0.15) -2px 2px 5px 0px;
   margin-top: 10px;
 }
+.categoryIdContainer a {
+  color: #2D3250;
+  text-decoration: none;
+}
 .categoryIdContainer .coverContainer {
   width: 95%;
   align-self: center;
@@ -448,6 +452,10 @@ textarea {
   .divMarginLeft {
     margin-left: 0;
   }
+}
+
+.divLittleMargin {
+  margin: 6px;
 }
 
 :root {
@@ -698,10 +706,16 @@ p {
   }
 }
 .centerContainer {
-  margin-left: 150px;
-  margin-right: 150px;
+  margin-left: 250px;
+  margin-right: 250px;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1600px) {
+  .centerContainer {
+    margin-left: 200px;
+    margin-right: 200px;
+  }
+}
+@media screen and (max-width: 1280px) {
   .centerContainer {
     margin-left: 100px;
     margin-right: 100px;
