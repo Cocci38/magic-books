@@ -16,6 +16,7 @@ export const PublicCategories = () => {
                 console.log(err)
             })
     }
+    
     // Le useEffect se joue lorsque le composant est monté
     useEffect(() => {
         if (flag.current === false) {
