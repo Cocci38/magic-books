@@ -8,12 +8,23 @@ class Route{
     public $action;
     public $matches;
 
+    /**
+     * On passe le chemin et l'action au constructeur
+     *
+     * @param [type] $path
+     * @param [type] $action
+     */
     public function __construct($path, $action)
     {
         $this->path = trim($path, '/');
         $this->action = $action;
     }
 
+    /**
+     * Fonction pour vérifier si l'url match avec l'une des routes
+     *
+     * @param string $url
+     */
     public function matches(string $url)
     {
         $path = preg_replace('#:([\w]+)#', '([^/]+)', $this->path); // On cherche à remplacer (\w est un raccourci)
@@ -26,6 +37,11 @@ class Route{
             return false;
         }
     }
+
+    /**
+     * Fonction pour appeler le bon controller avec la bonne fonction
+     *
+     */
     public function execute()
     {
         $params = explode('@', $this->action); // @ est le délimiteur de notre action

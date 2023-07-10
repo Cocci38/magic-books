@@ -142,6 +142,9 @@ nav {
         li {
             padding: 3px;
         }
+        a {
+            margin-right: 38%;
+        }
 
         .responsiveButton {
             display: block;
@@ -154,6 +157,7 @@ nav {
         .toggleNav {
             z-index: 1;
             left: 0;
+            position: sticky;
         }
 
         .removeBtn {

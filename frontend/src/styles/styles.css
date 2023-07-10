@@ -556,6 +556,9 @@ nav .activeLink {
   nav li {
     padding: 3px;
   }
+  nav a {
+    margin-right: 38%;
+  }
   nav .responsiveButton {
     display: block;
   }
@@ -565,6 +568,7 @@ nav .activeLink {
   nav .toggleNav {
     z-index: 1;
     left: 0;
+    position: sticky;
   }
   nav .removeBtn {
     z-index: 2;
