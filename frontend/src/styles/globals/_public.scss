@@ -49,11 +49,24 @@
     grid-template-rows: 1fr 1fr 1fr;
 }
 
-.gridTwoColumn{
+.gridThreeColumn{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     text-align: center;
+    width: 74%;
+    margin-left: 215px;
+    a{
+        color: $dark-blue;
+        text-decoration: none;
+    }
+}
+.containerCategory {
+    border-radius: 10px;
+    box-shadow: rgba(45, 50, 80, 0.15) 2px 2px 5px 0px, rgba(45, 50, 80, 0.15) -2px 2px 5px 0px;
+    margin: 10px;
+    width: 450px;
+    
 }
 
 .categoryIdContainer {

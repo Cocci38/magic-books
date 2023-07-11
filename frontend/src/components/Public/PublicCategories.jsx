@@ -52,9 +52,9 @@ export const PublicCategories = () => {
 
     return (
 
-        <section className="centerContainer divMargin">
-            <h2>Toutes les catégories</h2>
-            <div className="gridTwoColumn">
+        <section className="divMargin">
+            <h2 className="centerContainer">Toutes les catégories</h2>
+            <div className="gridThreeColumn">
                 {Array.isArray(categories) ? categories
                     .filter((categoryName) =>
                         categoryName.name === "Fantasy" ||
@@ -63,13 +63,13 @@ export const PublicCategories = () => {
                     )
                     .map((category) => (
                         <Link to={'categorie/' + category.id} >{category.name}
-                            <div key={category.id} className="flexRow divMargin">
+                            <div key={category.id} className="flexRow containerCategory">
                                 {Array.isArray(books) ? books.map((book) => (
                                     <div>
                                         {category.name == book.name ?
                                             <div key={book.id} >
                                                 {book.cover !== "" ?
-                                                    <div className="coverContainerMini">
+                                                    <div className="coverContainerMini divLittleMargin">
                                                         <img src={urlImage + book.cover} className="coverMini" alt={"couverture du livre " + book.title} />
                                                     </div>
                                                     : ""}
