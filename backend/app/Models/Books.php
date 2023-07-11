@@ -333,9 +333,9 @@ class Books
      */
     public function create()
     {
-        if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->title)) {
+        if (preg_match("/^[a-zA-Z0-9-\' :,.?!-æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->title)) {
             if (preg_match("/^[a-zA-Z0-9-\' \æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->editor)) {
-                if (preg_match("/^[a-zA-Z0-9-\' ,.?!:æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,500}$/", $this->summary)) {
+                // if (preg_match("/^[a-zA-Z0-9-\' ,.?!:-()æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,1000}$/", $this->summary)) {
 
                     try {
                         $query = $this->connexion->prepare("INSERT INTO $this->table(title, author_id, editor, summary, release_date, cover, category_id)
@@ -367,7 +367,7 @@ class Books
                     } catch (PDOException $exception) {
                         echo "Erreur de connexion : " . $exception->getMessage();
                     }
-                }
+                // }
             }
         }
     }
