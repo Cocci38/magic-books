@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { adminService } from '../../services/admin.service';
 import { Link } from "react-router-dom";
-import { publicService } from "../../services/public.service";
 
 export const PublicCategories = () => {
     const [categories, setCategories] = useState([]);
@@ -12,7 +11,7 @@ export const PublicCategories = () => {
     const fetchCategories = async () => {
         await adminService.getAllCategories()
             .then((res) => {
-                //console.log(res.data)
+                console.log(res.data)
                 setCategories(res.data)
             })
             .catch((err) => {
@@ -29,11 +28,10 @@ export const PublicCategories = () => {
     }, []);
 
     const fetchBooks = async () => {
-        await publicService.getBooksOrderByDate()
+        console.log(categories);
+        await adminService.getAllBooks()
             .then((res) => {
-                console.log(res.data)
                 if (res.data.result !== "ERROR") {
-                    console.log(res.data.cover);
                     setBooks(res.data)
                 }
 
@@ -56,35 +54,36 @@ export const PublicCategories = () => {
 
         <section className="centerContainer divMargin">
             <h2>Toutes les catégories</h2>
-            {Array.isArray(categories) ? categories
-                .filter((categoryName) =>
-                    categoryName.name === "Fantasy" ||
-                    categoryName.name === "Polar" ||
-                    categoryName.name === "Romance"
-                )
-                .map((category) => (
-                    <div key={category.id} className="flexColumn">
-                        <Link to={'categorie/' + category.id} >{category.name}</Link>
-                        <div className="flexRow">
-                            {Array.isArray(books) ? books.map((book) => (
-                                <div>
-                                    {category.name == book.name ?
-                                        <div key={book.id} >
-                                            {book.cover !== "" ?
-                                                <div className="coverContainerMini">
-                                                    <img src={urlImage + book.cover} className="coverMini" alt={"couverture du livre " + book.title} />
-                                                </div>
-                                                : ""}
-                                        </div>
-                                        : <div style={{ display: "none" }}></div>}
-                                </div>
-                            ))
-                                : ""
-                            }
-                        </div>
-                    </div>
-                ))
-                : ""}
+            <div className="gridTwoColumn">
+                {Array.isArray(categories) ? categories
+                    .filter((categoryName) =>
+                        categoryName.name === "Fantasy" ||
+                        categoryName.name === "Polar" ||
+                        categoryName.name === "Romance"
+                    )
+                    .map((category) => (
+                        <Link to={'categorie/' + category.id} >{category.name}
+                            <div key={category.id} className="flexRow divMargin">
+                                {Array.isArray(books) ? books.map((book) => (
+                                    <div>
+                                        {category.name == book.name ?
+                                            <div key={book.id} >
+                                                {book.cover !== "" ?
+                                                    <div className="coverContainerMini">
+                                                        <img src={urlImage + book.cover} className="coverMini" alt={"couverture du livre " + book.title} />
+                                                    </div>
+                                                    : ""}
+                                            </div>
+                                            : <div style={{ display: "none" }}></div>}
+                                    </div>
+                                ))
+                                    : ""
+                                }
+                            </div>
+                        </Link>
+                    ))
+                    : ""}
+            </div>
         </section>
     )
 }

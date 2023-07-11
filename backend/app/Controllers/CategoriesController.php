@@ -64,7 +64,7 @@ class CategoriesController extends Controller
                 // On récupère les données
                 $result = $category->readById();
 
-                if ($result->rowCount() > 1) {
+                if ($result->rowCount() > 0) {
                     //$data = [];
                     $data = $result->fetchAll();
                     // Je compte pour déterminer le nombre de livres présent dans la catégorie sélectionnée

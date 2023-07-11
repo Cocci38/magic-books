@@ -12,7 +12,7 @@ class BooksController extends Controller
     {
         // Méthode autorisée
         header("Access-Control-Allow-Methods: GET");
-        if ($this->Authorization() == "[ROLE_ADMIN]") {
+        // if ($this->Authorization() == "[ROLE_ADMIN]") {
             if ($_SERVER["REQUEST_METHOD"] === "GET") {
                 // On instancie la base de données
                 $database = new Database();
@@ -38,9 +38,9 @@ class BooksController extends Controller
                 http_response_code(405);
                 echo json_encode(["message" => "La méthode n'est pas autorisée"]);
             }
-        } else {
-            echo json_encode(["result" => "ERROR", "message" => "Autorisation refusée"]);
-        }
+        // } else {
+        //     echo json_encode(["result" => "ERROR", "message" => "Autorisation refusée"]);
+        // }
     }
 
     public function readById(int $id)

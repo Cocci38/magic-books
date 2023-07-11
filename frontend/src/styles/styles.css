@@ -417,6 +417,13 @@ textarea {
   grid-template-rows: 1fr 1fr 1fr;
 }
 
+.gridTwoColumn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  text-align: center;
+}
+
 .categoryIdContainer {
   width: 250px;
   border-radius: 10px;
