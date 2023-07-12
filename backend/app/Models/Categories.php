@@ -172,7 +172,7 @@ class Categories
      */
     public function create()
     {
-        if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->name)) {
+        if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûäëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->name)) {
             try {
                 $query = $this->connexion->prepare("INSERT INTO $this->table(name) VALUES(:name)");
 

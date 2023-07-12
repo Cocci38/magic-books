@@ -49,13 +49,8 @@
     grid-template-rows: 1fr 1fr 1fr;
 }
 
-.gridThreeColumn{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
+.blocCategory{
     text-align: center;
-    width: 74%;
-    margin-left: 215px;
     a{
         color: $dark-blue;
         text-decoration: none;
@@ -64,10 +59,41 @@
 .containerCategory {
     border-radius: 10px;
     box-shadow: rgba(45, 50, 80, 0.15) 2px 2px 5px 0px, rgba(45, 50, 80, 0.15) -2px 2px 5px 0px;
-    margin: 10px;
-    width: 450px;
-    
+    // margin: 10px;
+    width: 250px;
+    .coverCategory {
+        width: 50px;
+        .coverMini{
+            width: 100%;
+        }
+    }
 }
+// .centerContainerCat{
+// margin-left: 240px;
+//     margin-right: 270px;
+//     @media screen and (max-width: 1600px) {
+//         margin-left: 273px;
+//         margin-right: 305px;
+//     }
+
+//     @media screen and (max-width: 1280px) {
+//         margin-left: 168px;
+//         margin-right: 168px;
+//     }
+//     @media screen and (max-width: 1024px) {
+//         margin-left: 168px;
+//         margin-right: 168px;
+//     }
+
+//     @media screen and (max-width: 950px) {
+//         display: flex;
+//         flex-direction: column;
+//         text-align: center;
+//         margin-left: 0;
+//         margin-right: 0;
+
+//     }
+// }
 
 .categoryIdContainer {
     width: 250px;

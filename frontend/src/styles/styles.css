@@ -320,7 +320,7 @@ textarea {
 }
 
 .coverContainerMini {
-  width: 100px;
+  width: 75px;
 }
 .coverContainerMini .coverMini {
   width: 100%;
@@ -417,15 +417,10 @@ textarea {
   grid-template-rows: 1fr 1fr 1fr;
 }
 
-.gridThreeColumn {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
+.blocCategory {
   text-align: center;
-  width: 74%;
-  margin-left: 215px;
 }
-.gridThreeColumn a {
+.blocCategory a {
   color: #2D3250;
   text-decoration: none;
 }
@@ -433,8 +428,13 @@ textarea {
 .containerCategory {
   border-radius: 10px;
   box-shadow: rgba(45, 50, 80, 0.15) 2px 2px 5px 0px, rgba(45, 50, 80, 0.15) -2px 2px 5px 0px;
-  margin: 10px;
-  width: 450px;
+  width: 250px;
+}
+.containerCategory .coverCategory {
+  width: 50px;
+}
+.containerCategory .coverCategory .coverMini {
+  width: 100%;
 }
 
 .categoryIdContainer {
