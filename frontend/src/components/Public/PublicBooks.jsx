@@ -33,7 +33,7 @@ export const PublicBooks = () => {
 
     return (
         <section className="centerContainer divMargin">
-            <h2>Livres mis en avant</h2>
+            <h2 style={{textAlign: "center"}}>Livres mis en avant</h2>
             <div className="flexRowWrap divMarginLeft">
 
                 {Array.isArray(books) ? books

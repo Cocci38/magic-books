@@ -483,7 +483,7 @@ class Books
             // On génère le chemin complet
             $newFilename = "C:\laragon\www\magic-books\backend\public\pictures" . DIRECTORY_SEPARATOR . $newName . "." . $extension;
             //var_dump($newFilename);
-            // On déplace le fichier de tmp à assets en le renommant
+            // On déplace le fichier de tmp à pictures en le renommant
             if (!move_uploaded_file($_FILES["image"]["tmp_name"], $newFilename)) {
                 die("L'upload a échoué");
             }

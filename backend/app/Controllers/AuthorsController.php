@@ -59,14 +59,15 @@ class AuthorsController extends Controller
             $author->setId($id);
             // On récupère les données
             $result = $author->readById();
-
+            $resultBook = $author->readAuthorWithBooks();
             if ($result->rowCount() > 0) {
                 //$data = [];
                 $donnees = $result->fetch();
-
+                $donneesBooks = $resultBook->fetchAll();
                 // On renvoie les données au format JSON
                 http_response_code(200);
                 echo json_encode($donnees);
+                // echo json_encode($donneesBooks);
             } else {
                 echo json_encode(["message" => "Aucune données à renvoyer"]);
             }

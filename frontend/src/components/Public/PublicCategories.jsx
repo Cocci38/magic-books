@@ -53,7 +53,7 @@ export const PublicCategories = () => {
     return (
 
         <section className="centerContainer divMargin">
-            <h2 className="centerContainer">Toutes les catégories</h2>
+            <h2 style={{textAlign: "center"}}>Toutes les catégories</h2>
             <div className="blocCategory flexRowWrap divMarginLeft">
                 {Array.isArray(categories) ? categories
                     .filter((categoryName) =>
