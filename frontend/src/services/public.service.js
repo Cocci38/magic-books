@@ -20,7 +20,11 @@ const getBooksOrderByDate = (id) => {
     return Axios.get("book-by-date")
 }
 
+const getBooksByAuthor = (id) => {
+    return Axios.get("book-by-author/" + id)
+}
+
 // Déclaration des services pour l'import
 export const publicService = {
-    getBook, getCategory, getAuthor, getBooksOrderByDate
+    getBook, getCategory, getAuthor, getBooksOrderByDate, getBooksByAuthor
 }

@@ -327,6 +327,32 @@ class Books
     }
 
     /**
+     * Pour afficher un auteur selon son id
+     * @return $query
+     */
+    public function readBookByAuthor()
+    {
+        try {
+            // On écrit la requête préparée
+            $query = $this->connexion->prepare("SELECT b.id as book_id, b.title, b.cover 
+                                                FROM " . $this->table . " b
+                                                LEFT JOIN authors a ON a.id = b.author_id WHERE a.id = :id");
+
+            $this->id = $this->valid_data($this->id);
+
+            $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+
+            //On execute la requête
+            $query->execute();
+
+            // On retourne le résultat
+            return $query;
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
+        }
+    }
+
+    /**
      * Pour insérer un livre dans la base données
      *
      * @return void

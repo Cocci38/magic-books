@@ -197,32 +197,6 @@ class Authors
     }
 
     /**
-     * Pour afficher un auteur selon son id
-     * @return $query
-     */
-    public function readAuthorWithBooks()
-    {
-        try {
-            // On écrit la requête préparée
-            $query = $this->connexion->prepare("SELECT b.id as book_id, b.title, b.cover 
-                                                FROM " . $this->table . " a
-                                                LEFT JOIN books b ON b.author_id = a.id WHERE a.id = :id");
-
-            $this->id = $this->valid_data($this->id);
-
-            $query->bindParam(":id", $this->id, PDO::PARAM_INT);
-
-            //On execute la requête
-            $query->execute();
-
-            // On retourne le résultat
-            return $query;
-        } catch (PDOException $exception) {
-            echo "Erreur de connexion : " . $exception->getMessage();
-        }
-    }
-
-    /**
      * Pour insérer un auteur dans la base données
      *
      * @return void
