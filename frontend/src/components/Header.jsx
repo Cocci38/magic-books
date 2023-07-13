@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const Header = () => {
     return (
@@ -8,7 +9,7 @@ export const Header = () => {
                 <p> Avec Magic Books, découvrez les dernières sorties littéraires,
                     créez votre bibliothèque virtuelle et suivez votre historique de lecture
                 </p>
-                <p>Pas encore de compte ? <span className="colorOrange">S'inscrire</span></p>
+                <p>Pas encore de compte ? <Link to={"authentification"} className="colorOrange">S'inscrire</Link></p>
             </div>
         </div>
     )

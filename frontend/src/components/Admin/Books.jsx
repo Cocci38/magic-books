@@ -58,7 +58,7 @@ export const Books = () => {
             <div className="flexRow barLine">
                 <span className="itemFlex" style={{ width: '30%' }}>Titre</span>
                 <span className="itemFlex" style={{ width: '18%' }}>Auteur</span>
-                <span className="itemFlex" style={{ width: '10%' }}>Date de sortie</span>
+                <span className="itemFlex divNone" style={{ width: '10%' }}>Date de sortie</span>
                 <span className="itemFlex" style={{ width: '13%' }}>Catégorie</span>
                 <span className="itemFlex" style={{ width: '12%' }}>Éditeur</span>
                 <span className="spanEmpty"></span>
@@ -71,7 +71,7 @@ export const Books = () => {
                     </div> */}
                         <span className="itemFlex" style={{ width: '30%' }}>{book.title}</span>
                         <span className="itemFlex" style={{ width: '18%' }}>{book.author}</span>
-                        <span className="itemFlex" style={{ width: '10%' }}> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span>
+                        <span className="itemFlex divNone" style={{ width: '10%' }}> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span>
                         <span className="itemFlex" style={{ width: '13%' }}>{book.name}</span>
                         <span className="itemFlex" style={{ width: '12%' }}>{book.editor}</span>
                         <div className="flexResponsive">

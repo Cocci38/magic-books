@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { publicService } from '../../services/public.service';
 
 export const AuthorById = () => {
@@ -47,23 +47,24 @@ export const AuthorById = () => {
 
     return (
         <main>
-            <section>
-                <div className="bookContainer">
-                <h2>{author.name}</h2>
-                    <p className="paragraphFlex"><span className="paragraphName">Nationalité</span><span>{author.nationality}</span></p>
-                    <p className="paragraphFlex"><span className="paragraphName">Biographie</span><span>{author.biography}</span></p>
-
-                    <h2>Tous les livres de {author.name}</h2>
-                {Array.isArray(books) ? books.map((book) => (
-                    <div key={book.book_id}>
-                    <div className="coverContainer divLittleMargin">
+            <section className="centerContainer flexColumn divMargin">
+                    <h2>{author.name}</h2>
+                    <h3 className="divMarginTop">Nationalité</h3>
+                    <span>{author.nationality}</span>
+                    <h3 className="divMarginTop">Biographie</h3>
+                    <span>{author.biography}</span>
+                    <h2 className="divMarginTop" style={{marginTop: "40px"}}>Tous les livres de {author.name}</h2>
+                    <div className="flexRowWrap bookContainer">
+                        {Array.isArray(books) ? books.map((book) => (
+                            <Link to={"/livre/" + book.book_id} key={book.book_id} className="categoryIdContainer divMargin">
+                                <div className="coverContainer divLittleMargin">
                                     {book.cover ? <img src={urlImage + book.cover} className="cover" alt={"couverture du livre " + book.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas de couverture" />}
                                 </div>
-                    <span>{book.title}</span>
+                                <span>{book.title}</span>
+                            </Link>
+                        ))
+                            : ""}
                     </div>
-                    ))
-                    : ""}
-                </div>
             </section>
         </main>
     )

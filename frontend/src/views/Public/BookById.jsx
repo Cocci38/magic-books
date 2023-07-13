@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { publicService } from '../../services/public.service';
 import { accountService } from "../../services/account.service";
 import { readerService } from "../../services/reader.service";
@@ -56,10 +56,10 @@ export const BookById = () => {
                             {book.cover ? <img src={urlImage + book.cover} className="cover" alt={"couverture du livre " + book.title} /> : <img src='/images/image_vide.png' className="cover" alt="ce livre n'a pas d'image de couverture" />}
                         </div>
                         <div className="flexColumn">
-                            <div className="flexColumn divMargin">
+                            <Link to={"/auteur/" + book.author_id} className="flexColumn divMargin">
                                 <h3>Auteur</h3>
                                 <span>{book.author}</span>
-                            </div>
+                            </Link>
                             <div className="flexColumn divMargin">
                                 <h3>Date de sortie</h3>
                                 <span> {new Date(book.release_date).toLocaleDateString("fr-FR", {year:"numeric", month:"long", day:"numeric"})}</span>
@@ -68,10 +68,10 @@ export const BookById = () => {
                                 <h3>Éditeur</h3>
                                 <span>{book.editor}</span>
                             </div>
-                            <div className="flexColumn divMargin">
+                            <Link to={"/categorie/" + book.category_id} className="flexColumn divMargin">
                                 <h3>Catégorie</h3>
                                 <span>{book.categories_name}</span>
-                            </div>
+                            </Link>
                         </div>
                     </div>
 

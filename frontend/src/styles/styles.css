@@ -129,23 +129,27 @@ textarea {
 
 .list {
   width: 80%;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 @media screen and (max-width: 950px) {
   .list {
     width: 95%;
-    margin-left: 20px;
+    margin-right: 0;
   }
 }
 @media screen and (max-width: 650px) {
   .list {
     margin-left: 10px;
   }
+  .list .divNone {
+    display: none;
+  }
 }
 
 .dashboard {
   display: flex;
   flex-direction: row;
-  gap: 60px;
 }
 .dashboard .boxContainer {
   border: 1px solid #2D3250;
@@ -389,9 +393,6 @@ textarea {
   min-height: 50px;
   padding: 15px 5px 0 5px;
 }
-.bookIdContainer h3 {
-  margin: 0;
-}
 .bookIdContainer .coverContainer {
   width: 200px;
 }
@@ -405,6 +406,14 @@ textarea {
   width: 100%;
 }
 
+h2 {
+  margin: 5px 0;
+}
+
+h3 {
+  margin: 0;
+}
+
 .buttonContainerLibrary {
   display: flex;
   justify-content: center;
@@ -415,6 +424,11 @@ textarea {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
+}
+
+a {
+  color: #2D3250;
+  text-decoration: none;
 }
 
 .blocCategory {
@@ -476,6 +490,10 @@ textarea {
 
 .divLittleMargin {
   margin: 6px;
+}
+
+.divMarginTop {
+  margin-top: 15px;
 }
 
 :root {
