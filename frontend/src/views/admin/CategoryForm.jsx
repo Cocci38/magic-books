@@ -84,7 +84,7 @@ export const CategoryForm = () => {
             <form onSubmit={handlSubmit}>
                 {!id ? <h2 className="h2Form"> Ajouter une catégorie</h2> : <h2 className="h2Form"> Modifier une catégorie</h2>}
                 <label htmlFor="nameCategory">Nom de la catégorie</label>
-                {!id ? <input type="text" name="nameCategory" id="nameCategory" /> : <input type="text" name="nameCategory" id="nameCategory" defaultValue={category.name} />}
+                {!id ? <input type="text" name="nameCategory" id="nameCategory" /> : <input type="text" name="nameCategory" id="nameCategory" defaultValue={category.categoryName} />}
                 <span style={{ color: "red" }}>{errors.nameCategory}</span>
                 <button type="submit" className="button">Enregistrer</button>
             </form>

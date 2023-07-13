@@ -39,6 +39,20 @@ input[type=email], input[type=password], input[type=tel], input[type=text], inpu
   border: 1px solid #F8B179;
   border-radius: 10px;
   box-sizing: border-box;
+  text-align: center;
+  font-family: "Lustria";
+  color: #2D3250;
+}
+
+input[type=file]::file-selector-button {
+  text-align: center;
+  color: #f6f6ee;
+  background-color: #2D3250;
+  font-family: "Lustria";
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin-left: 30%;
 }
 
 input[type=submit] {
@@ -49,6 +63,7 @@ input[type=submit] {
   border: none;
   cursor: pointer;
   width: 100%;
+  font-family: "Lustria";
 }
 
 input[type=submit]:hover {
@@ -65,6 +80,7 @@ input[type=button] {
   border: 1px solid #2D3250;
   cursor: pointer;
   width: 100%;
+  font-family: "Lustria";
 }
 
 .button {
@@ -76,6 +92,7 @@ input[type=button] {
   border: 1px solid #f6f6ee;
   border-radius: 10px;
   cursor: pointer;
+  font-family: "Lustria";
 }
 
 .button:hover {
@@ -93,6 +110,7 @@ select {
   border-radius: 10px;
   box-sizing: border-box;
   text-align: center;
+  font-family: "Lustria";
 }
 
 textarea {
@@ -103,6 +121,8 @@ textarea {
   border: 1px solid #F8B179;
   border-radius: 10px;
   box-sizing: border-box;
+  font-family: "Lustria";
+  color: #2D3250;
 }
 
 /**
@@ -449,6 +469,10 @@ a {
 }
 .containerCategory .coverCategory .coverMini {
   width: 100%;
+}
+
+.textAlign {
+  text-align: center;
 }
 
 .categoryIdContainer {

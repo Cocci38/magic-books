@@ -16,6 +16,13 @@ export const BookForm = () => {
     const [authors, setAuthors] = useState([]);
     const flag = useRef(false);
 
+    const [file, setFile] = useState();
+
+    function handleChange(e) {
+        console.log(e.target.files);
+        setFile(URL.createObjectURL(e.target.files[0]));
+    }
+
     if (id !== undefined) {
 
         const fetchBook = async () => {
@@ -151,12 +158,12 @@ export const BookForm = () => {
                 <input type="date" name="releaseDate" id="releaseDate" defaultValue={!id ? "" : book.release_date} />
                 <span style={{ color: "red" }}>{errors.releaseDate}</span><br></br>
 
-                <label htmlFor="image">Couverture</label>
                 {!id ? "" : <input type="hidden" name="cover" defaultValue={book.cover} />}
-                <input type="file" name="image" id="fileInput" />
-
+                <label htmlFor="image">Image de couverture</label>
+                <input type="file" name="image" onChange={handleChange} />
+                <img src={file} />
                 <label htmlFor="categoryId">Catégorie
-                    <select name="categoryId" >
+                    <select name="categoryId">
                         <option>{"--- Sélectionner une catégorie ---"}</option>
                         {!categories ? '' : categories
                             .map((category) => (

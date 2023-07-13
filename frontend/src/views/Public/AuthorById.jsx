@@ -54,7 +54,7 @@ export const AuthorById = () => {
                     <h3 className="divMarginTop">Biographie</h3>
                     <span>{author.biography}</span>
                     <h2 className="divMarginTop" style={{marginTop: "40px"}}>Tous les livres de {author.name}</h2>
-                    <div className="flexRowWrap bookContainer">
+                    <div className="flexRowWrap textAlign">
                         {Array.isArray(books) ? books.map((book) => (
                             <Link to={"/livre/" + book.book_id} key={book.book_id} className="categoryIdContainer divMargin">
                                 <div className="coverContainer divLittleMargin">

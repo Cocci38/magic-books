@@ -38,6 +38,21 @@ input[type=email], input[type=password],  input[type=tel], input[type=text], inp
     border: 1px solid $orange;
     border-radius: 10px;
     box-sizing: border-box;
+    text-align: center;
+    font-family: $font-style;
+    color: $dark-blue;
+}
+
+input[type=file]::file-selector-button {
+    // display: none;
+    text-align: center;
+    color: $light;
+    background-color: $dark-blue;
+    font-family: $font-style;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-left: 30%;
 }
 
 // Pour définir un style pour tous les boutons
@@ -49,6 +64,7 @@ input[type=submit] {
     border: none;
     cursor: pointer;
     width: 100%;
+    font-family: $font-style;
 }
 input[type=submit]:hover {
     background-color: $light;
@@ -63,6 +79,7 @@ input[type=button] {
     border: 1px solid $dark-blue;
     cursor: pointer;
     width: 100%;
+    font-family: $font-style;
 }
 .button{
     text-decoration: none;
@@ -73,6 +90,7 @@ input[type=button] {
     border: 1px solid $light;
     border-radius: 10px;
     cursor: pointer;
+    font-family: $font-style;
 }
 .button:hover{
     background-color: $light-blue;
@@ -89,6 +107,7 @@ select {
     border-radius: 10px;
     box-sizing: border-box;
     text-align: center;
+    font-family: $font-style;
 }
 textarea {
     width: 100%;
@@ -98,4 +117,6 @@ textarea {
     border: 1px solid $orange;
     border-radius: 10px;
     box-sizing: border-box;
+    font-family: $font-style;
+    color: $dark-blue;
 }
