@@ -93,7 +93,8 @@ input[type=button] {
     font-family: $font-style;
 }
 .button:hover{
-    background-color: $light-blue;
+    background-color: $light;
+    color: $dark-blue;
     border: 1px solid $dark-blue;
     border-radius: 10px;
 }
