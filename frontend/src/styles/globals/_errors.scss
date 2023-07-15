@@ -1,15 +1,20 @@
 .error-page {
-    position: absolute;
-    top: 10%;
-    left: 17%;
-    right: 17%;
-    bottom: 20%;
+    // position: absolute;
+    // top: 28%;
+    // left: 17%;
+    // right: 17%;
+    // bottom: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
     background: $light;
     box-shadow: 0px 5px 10px rgba(45, 50, 80, 0.15);
+    margin: 1% 17%;
     z-index: 10;
+    height: 600px;
+    @media screen and (max-width:1024px){
+        height: 400px;
+    }
 
     .error-content {
         max-width: 600px;
