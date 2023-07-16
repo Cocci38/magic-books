@@ -317,7 +317,7 @@ class Books extends Model
                                                 LEFT JOIN authors a ON a.id = b.author_id
                                                 LEFT JOIN categories c ON c.id = b.category_id 
                                                 WHERE b.category_id = :id
-                                                ORDER BY release_date DESC
+                                                ORDER BY b.release_date DESC
                                                 LIMIT 4");
 
             $this->category_id = $this->valid_data($this->category_id);

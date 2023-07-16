@@ -99,10 +99,11 @@ class Categories extends Model
         try {
             // On prépare et on écrit la requête
             $query = $this->connexion->prepare("SELECT c.id as categorie_id, c.name as categorie_name, b.id as book_id, b.title, b.author_id, a.name as author, b.editor, b.summary, b.release_date, b.cover 
-            FROM " . $this->table . " c
-            LEFT JOIN books b ON c.id = b.category_id
-            LEFT JOIN authors a ON b.author_id = a.id
-            WHERE c.id = :id");
+                                                FROM " . $this->table . " c
+                                                LEFT JOIN books b ON c.id = b.category_id
+                                                LEFT JOIN authors a ON b.author_id = a.id
+                                                WHERE c.id = :id
+                                                ORDER BY b.release_date DESC");
 
             $this->id = $this->valid_data($this->id);
 

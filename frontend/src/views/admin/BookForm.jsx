@@ -159,9 +159,15 @@ export const BookForm = () => {
                 <span style={{ color: "red" }}>{errors.releaseDate}</span><br></br>
 
                 {!id ? "" : <input type="hidden" name="cover" defaultValue={book.cover} />}
-                <label htmlFor="image">Image de couverture</label>
-                <input type="file" name="image" onChange={handleChange} />
-                <img src={file} />
+                <div className="flexColumn">
+                    <label htmlFor="image" >Image de couverture</label>
+                    <div className="labelImage">
+                        <label htmlFor="image" style={{ textAlign: "center" }}>Choisir un fichier</label>
+                        <input type="file" name="image" id="image" onChange={handleChange} style={{ display: "none" }} />
+                        <img src={file} style={{ width: "100px" }} />
+                    </div>
+                </div>
+                
                 <label htmlFor="categoryId">Catégorie
                     <select name="categoryId">
                         <option>{"--- Sélectionner une catégorie ---"}</option>
