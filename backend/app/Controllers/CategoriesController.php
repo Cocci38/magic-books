@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Books;
 use Config\Database;
 use App\Models\Categories;
 
@@ -31,6 +32,47 @@ class CategoriesController extends Controller
                 // On renvoie les données au format JSON
                 http_response_code(200);
                 echo json_encode($data);
+            } else {
+                echo json_encode(["message" => "Aucune données à renvoyer"]);
+            }
+        } else {
+            http_response_code(405);
+            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+        }
+    }
+
+    public function readCategoriesCoverBooks()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+            // On instancie la base de données
+            $database = new Database();
+            $db = $database->getConnexion();
+
+            // On instancie l'objet Categories
+            $category = new Categories($db);
+            $books = new Books($db);
+
+            // On récupère les données
+            $stmt = $category->readAll();
+
+            if ($stmt->rowCount() > 0) {
+                //$data = [];
+                $data = $stmt->fetchAll();
+                
+                foreach ($data as $key => $value) {
+                    // var_dump($value["id"]);
+                    $books->setCategoryId($value["id"]);
+                    // var_dump($books);
+                    $book = $books->readBookByCategory($books->getCategoryId());
+                    // var_dump($book);
+                    $dataBook = $book->fetchAll();
+                    print_r($dataBook);
+                }
+                
+
+                // On renvoie les données au format JSON
+                http_response_code(200);
+                //echo json_encode($data);
             } else {
                 echo json_encode(["message" => "Aucune données à renvoyer"]);
             }

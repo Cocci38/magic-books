@@ -279,7 +279,7 @@ class Books extends Model
     }
 
     /**
-     * Pour afficher un auteur selon son id
+     * Pour afficher les livres d'un auteur selon son id
      * @return $query
      */
     public function readBookByAuthor()
@@ -293,6 +293,36 @@ class Books extends Model
             $this->id = $this->valid_data($this->id);
 
             $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+
+            //On execute la requête
+            $query->execute();
+
+            // On retourne le résultat
+            return $query;
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
+        }
+    }
+
+    /**
+     * Pour afficher les livres d'un auteur selon son id
+     * @return $query
+     */
+    public function readBookByCategory()
+    {
+        try {
+            // On écrit la requête préparée
+            $query = $this->connexion->prepare("SELECT b.id as book_id, b.title, b.cover, a.name as author 
+                                                FROM " . $this->table . " b
+                                                LEFT JOIN authors a ON a.id = b.author_id
+                                                LEFT JOIN categories c ON c.id = b.category_id 
+                                                WHERE b.category_id = :id
+                                                ORDER BY release_date DESC
+                                                LIMIT 4");
+
+            $this->category_id = $this->valid_data($this->category_id);
+
+            $query->bindParam(":id", $this->category_id, PDO::PARAM_INT);
 
             //On execute la requête
             $query->execute();

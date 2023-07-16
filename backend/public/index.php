@@ -42,6 +42,7 @@ $router->delete('/delete/book/:id', 'App\Controllers\BooksController@delete');
 $router->get('/categories', 'App\Controllers\CategoriesController@readAll'); // Un chemin '/' et une action CategoriesController@readAll' (le controller @ la méthode)
 $router->get('/category/:id', 'App\Controllers\CategoriesController@readById'); // Dans l'url on écrit category/id
 $router->get('/categories-books', 'App\Controllers\CategoriesController@readAllAndBook');
+$router->get('/category-books', 'App\Controllers\CategoriesController@readCategoriesCoverBooks');
 $router->post('/create/category', 'App\Controllers\CategoriesController@create');
 $router->put('/update/category/:id', 'App\Controllers\CategoriesController@update');
 $router->delete('/delete/category/:id', 'App\Controllers\CategoriesController@delete');

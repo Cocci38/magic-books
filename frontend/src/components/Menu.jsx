@@ -40,25 +40,8 @@ export const Menu = () => {
 
     return (
         <header>
-            {/* <div className='menu'>
-                <img src='/images/Magic-books.png' alt='logo magic book' />
-                <nav>
-                    <ul>
-                        <li><NavLink to='/' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Accueil</NavLink></li>
-                        {isAdmin ? <li><NavLink to='/admin' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Tableau de bord</NavLink></li> : ""}
-                        {isLogin ? <li><NavLink to='/mon-compte' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Mon compte</NavLink></li> : ""}
-
-                    </ul>
-                </nav>
-                {!accountService.isLogged() ?
-                    <Link to={'/authentification'} className="buttonAdmin"> <FontAwesomeIcon icon={faCircleUser} size="xl" /> Connexion </Link>
-                    :
-                    <button className="buttonAdmin" onClick={logout}><FontAwesomeIcon icon={faArrowRightFromBracket} size="xl" /> Déconnexion</button>
-                }
-            </div> */}
-
             <nav>
-                <img src='/images/Magic-books.png' alt='logo magic book' />
+                <Link to='/'><img src='/images/Magic-books.png' alt='logo magic book' /></Link>
                 <ul className={isToggle ? 'toggleNav' : ''}>
                     <li><NavLink to='/' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Accueil</NavLink></li>
                     {isAdmin ? <li><NavLink to='/admin' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Tableau de bord</NavLink></li> : ""}
