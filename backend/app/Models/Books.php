@@ -312,7 +312,7 @@ class Books extends Model
     {
         try {
             // On écrit la requête préparée
-            $query = $this->connexion->prepare("SELECT b.id as book_id, b.title, b.cover, a.name as author 
+            $query = $this->connexion->prepare("SELECT b.id as book_id, b.title, b.cover, a.name as author, c.name as category
                                                 FROM " . $this->table . " b
                                                 LEFT JOIN authors a ON a.id = b.author_id
                                                 LEFT JOIN categories c ON c.id = b.category_id 

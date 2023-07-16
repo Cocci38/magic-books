@@ -11,7 +11,7 @@ export const PublicBooks = () => {
     const fetchBooks = async () => {
         await publicService.getBooksOrderByDate()
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 if (res.data.result !== "ERROR") {
                     setBooks(res.data)
                 }

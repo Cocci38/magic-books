@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { adminService } from '../../services/admin.service';
 import { Link } from "react-router-dom";
+import { publicService } from "../../services/public.service";
 
 export const PublicCategories = () => {
     const [categories, setCategories] = useState([]);
@@ -8,44 +9,21 @@ export const PublicCategories = () => {
     const urlImage = "http://localhost/magic-books/backend/public/pictures/";
     const flag = useRef(false);
 
-    const fetchCategories = async () => {
-        await adminService.getAllCategories()
+    const fetchCategoriesCover = async () => {
+        await publicService.getBooksByCategory()
             .then((res) => {
-                console.log(res.data)
-                setCategories(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-
-    // Le useEffect se joue lorsque le composant est monté
-    useEffect(() => {
-        if (flag.current === false) {
-            fetchCategories()
-        }
-        return () => flag.current = true
-    }, []);
-
-    const fetchBooks = async () => {
-        console.log(categories);
-        await adminService.getAllBooks()
-            .then((res) => {
-                if (res.data.result !== "ERROR") {
-                    setBooks(res.data)
+                if (res.data.category) {
+                    setCategories(res.data.category)
+                } 
+                if (res.data.book){
+                        setBooks(res.data.book)
                 }
-
-            })
-            .catch((err) => {
-                console.log(err)
-
             })
     }
-    // Le useEffect se joue lorsque le composant est monté
     useEffect(() => {
         // Fonction de nettoyage pour ne faire qu'une seule fois l'appel vers l'api
         if (flag.current === false) {
-            fetchBooks()
+            fetchCategoriesCover()
         }
         return () => flag.current = true
     }, []);
@@ -67,15 +45,15 @@ export const PublicCategories = () => {
                             <div key={category.id} className="flexRow containerCategory divMargin">
                                 {Array.isArray(books) ? books.map((book) => (
                                     <div>
-                                        {category.name == book.name ?
-                                            <div key={book.id} >
+                                        {category.name == book.category ?
+                                            <div key={book.book_id} >
                                                 {book.cover !== "" ?
                                                     <div className="coverCategory divLittleMargin">
                                                         <img src={urlImage + book.cover} className="coverMini" alt={"couverture du livre " + book.title} />
                                                     </div>
-                                                    : ""}
+                                                    : <div style={{ display: "none" }}></div>}
                                             </div>
-                                            : <div style={{ display: "none" }}></div>}
+                                            : ""}
                                     </div>
                                 ))
                                     : ""

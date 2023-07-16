@@ -58,21 +58,25 @@ class CategoriesController extends Controller
             if ($stmt->rowCount() > 0) {
                 //$data = [];
                 $data = $stmt->fetchAll();
-                
-                foreach ($data as $key => $value) {
+                $dataBook = [];
+                foreach ($data as $idCategory) {
                     // var_dump($value["id"]);
-                    $books->setCategoryId($value["id"]);
+                    $books->setCategoryId($idCategory["id"]);
                     // var_dump($books);
                     $book = $books->readBookByCategory($books->getCategoryId());
                     // var_dump($book);
-                    $dataBook = $book->fetchAll();
-                    print_r($dataBook);
+                    $bookData = $book->fetchAll();
+                    foreach ($bookData as $keyBook) {
+                        $dataBook[] = $keyBook;
+                        // var_dump($keyBook);
+                    }
+                    // print_r($dataBook);
+                    
                 }
-                
-
                 // On renvoie les données au format JSON
                 http_response_code(200);
-                //echo json_encode($data);
+                echo json_encode(["category" => $data, "book" => $dataBook]);
+                
             } else {
                 echo json_encode(["message" => "Aucune données à renvoyer"]);
             }
