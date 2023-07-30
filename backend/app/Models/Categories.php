@@ -122,7 +122,7 @@ class Categories extends Model
     /**
      * Pour insérer une catégorie dans la base données
      *
-     * @return void
+     * @return boolean
      */
     public function create()
     {

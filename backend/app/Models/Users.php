@@ -138,7 +138,6 @@ class Users extends Model
      */
     public function signUp()
     {
-
         try {
             // On vérifie si l'email est unique
             $emailUnique = $this->connexion->prepare("SELECT email from users WHERE email = :email");
@@ -152,20 +151,20 @@ class Users extends Model
                         if (preg_match("/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/", $this->email)) {
                             if (preg_match("/^[a-zA-Z0-9-\' \æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->password)) {
                                 $query = $this->connexion->prepare("INSERT INTO $this->table(username, email, password, roles)
-                                                        VALUES(:username, :email, :password, :roles)");
+                                                                    VALUES(:username, :email, :password, :roles)");
 
                                 // Protection contre les injections
                                 $this->username = $this->valid_data($this->username);
                                 $this->email = $this->valid_data($this->email);
                                 $this->email = filter_var($this->email, FILTER_SANITIZE_EMAIL);
-                                $this->password = $this->valid_data($this->password);
-                                $passwordHash = password_hash($this->getPassword(), PASSWORD_DEFAULT);
                                 $this->roles = $this->valid_data($this->roles);
+                                $this->password = $this->valid_data($this->password);
 
+                                $passwordHash = password_hash($this->getPassword(), PASSWORD_DEFAULT);
+                                
                                 $query->bindParam(":username", $this->username, PDO::PARAM_STR);
                                 $query->bindParam(":email", $this->email, PDO::PARAM_STR);
                                 $query->bindParam(":password", $passwordHash, PDO::PARAM_STR);
-                                //$query->bindParam(":roles", $this->getRoles("ROLE_READER"), PDO::PARAM_STR);
                                 $role = json_encode($this->roles);
                                 $query->bindParam(":roles", $role, PDO::PARAM_STR);
 

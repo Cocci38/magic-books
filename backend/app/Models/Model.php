@@ -46,12 +46,10 @@ class Model {
      */
     protected function valid_data($data)
     {
-        //$data = ($data != null) ? trim(stripslashes(strip_tags(htmlspecialchars($data)))) : $data;
-        $data = trim($data);            // Supprime les espaces (ou d'autres caractères) en début et fin de chaîne
-        $data = stripslashes($data);    // Supprime les antislashs d'une chaîne
-        $$data = htmlspecialchars($data, ENT_COMPAT, 'ISO-8859-1', true); // Convertis les caractères spéciaux en entités HTML
-        $data = strip_tags($data);      // Supprime les balises HTML et PHP d'une chaîne
-        //$data = htmlentities($data, ENT_COMPAT);
+        $data = ($data != null) ? trim($data) : ""; 
+        $data = ($data != null) ? stripslashes($data) : "";
+        $data = ($data != null) ? strip_tags($data) : "";
+        $data = ($data != null) ? htmlspecialchars($data, ENT_COMPAT,'ISO-8859-1', true) : "";
         return $data;
     }
 }
