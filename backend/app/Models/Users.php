@@ -134,7 +134,7 @@ class Users extends Model
     /**
      * Pour l'inscription d'un utilisateur dans la base données
      *
-     * @return void
+     * @return boolean
      */
     public function signUp()
     {
@@ -149,7 +149,7 @@ class Users extends Model
                 if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
                     if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->username)) {
                         if (preg_match("/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/", $this->email)) {
-                            if (preg_match("/^[a-zA-Z0-9-\' \æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->password)) {
+                            if (preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/", $this->password)) {
                                 $query = $this->connexion->prepare("INSERT INTO $this->table(username, email, password, roles)
                                                                     VALUES(:username, :email, :password, :roles)");
 
@@ -174,6 +174,9 @@ class Users extends Model
                                 } else {
                                     return false;
                                 }
+                            } else {
+                                http_response_code(409);
+                                echo json_encode(["message" => "Le password n'est pas valide"]);
                             }
                         }
                     }
