@@ -6,6 +6,7 @@ export const SignIn = ({ displaySignUp }) => {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     //console.log(displaySignUp);
+    
     // Fonction qui récupère les données transmis par le formulaire et qui l'envoie vers le serveur
     const handlSubmit = async (e) => {
         e.preventDefault();

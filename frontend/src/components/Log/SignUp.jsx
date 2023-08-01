@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { accountService } from "../../services/account.service";
 
-export const SignUp = () => {
+export const SignUp = ({ displaySignUp }) => {
 
     // Fonction qui récupère les données transmis par le formulaire et qui l'envoie vers le serveur
     const [errors, setErrors] = useState({});
@@ -17,27 +17,32 @@ export const SignUp = () => {
         const username = formData.get("username");
         const email = formData.get("email");
         const password = formData.get("password");
-        console.log(email);
+        //console.log(email);
 
         const validateData = () => {
             let regexPassword = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g);
-            let regexMinuscule = new RegExp(/^(?=.* ?[a-z])$/g);
+            let regexEmail = new RegExp(/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/g)
             let errors = {};
+
+            // Gestion des erreurs pour l'username
             if (!username) {
                 errors.username = "L'username est requis";
             }
+
+            // Gestion des erreurs pour l'email
             if (!email) {
                 errors.email = "L'email est requis";
             }
+            if (!regexEmail.test(email)) {
+                errors.email = "L'adresse mail n'est pas valide";
+            }
+            // Gestion des erreurs pour le mot de passe
             if (!password) {
                 errors.password = "Le mot de passe est requis";
             }
-
             if (!regexPassword.test(password)) {
                 if (password.length < 8) {
                     errors.password = "Le mot de passe doit contenir au moins 8 caractères";
-                } else if (!regexMinuscule.test(password)){
-                    errors.password = "Le mot de passe doit contenir au moins 1 minuscule";
                 } else {
                     errors.password = "Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et un caractère spécial";
                 }
@@ -75,8 +80,10 @@ export const SignUp = () => {
                 <label htmlFor="password">Mot de passe</label>
                 <input type="password" name="password" id="password" />
                 <span style={{ color: "red" }}>{errors.password}</span><br></br>
+                <p style={{textAlign:"center",cursor:"pointer"}}>J'ai déjà un compte ? <a type="button" className="colorOrange" onClick={displaySignUp}>Je me connecte</a></p>
 
                 <button type="submit" className="button">Enregistrer</button>
+                
             </form>
         </div>
     )

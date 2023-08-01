@@ -10,6 +10,7 @@ export const Header = () => {
                     créez votre bibliothèque virtuelle et suivez votre historique de lecture
                 </p>
                 <p>Pas encore de compte ? <Link to={"authentification"} className="colorOrange">S'inscrire</Link></p>
+                {/* <p>Pas encore de compte ? <Link to={"authentification"} state={{ data:"signUp" }} className="colorOrange">S'inscrire</Link></p> */}
             </div>
         </div>
     )
