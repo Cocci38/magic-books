@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { accountService } from "../../services/account.service";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faLockOpen } from "@fortawesome/free-solid-svg-icons";
 
 export const SignIn = ({ displaySignUp }) => {
     const [errors, setErrors] = useState({});
+    const [isToggleLock, setIsToggleLock] = useState(false);
+
     const navigate = useNavigate();
     //console.log(displaySignUp);
-    
+
     // Fonction qui récupère les données transmis par le formulaire et qui l'envoie vers le serveur
     const handlSubmit = async (e) => {
         e.preventDefault();
@@ -45,14 +49,22 @@ export const SignIn = ({ displaySignUp }) => {
                             navigate("/admin");
                         }
                     }
-                    
-                    
+
+
                 })
                 .catch(error => { console.log(error.data) });
         }
 
     }
-    
+
+    const unlockPassword = () => {
+        if (isToggleLock == false) {
+            setIsToggleLock(true);
+        } else if (isToggleLock == true) {
+            setIsToggleLock(false);
+        }
+    }
+
     const handleChange = async (e) => {
         const form = e.target;
 
@@ -66,11 +78,17 @@ export const SignIn = ({ displaySignUp }) => {
                     <h2 className="h2Form"> Se connecter</h2>
 
                     <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" onChange={handleChange} />
+                    <div className="flexRow flexAttribute">
+                        <input type="email" name="email" id="email" style={{marginRight:"25px"}} onChange={handleChange} />
+                    </div>
                     <span style={{ color: "red" }}>{errors.email}</span><br></br>
 
                     <label htmlFor="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" />
+                    <div className="flexRow flexAttribute">
+                        <input type={ isToggleLock ? "text" : "password"} name="password" id="password" />
+                        {isToggleLock ? <FontAwesomeIcon icon={faLockOpen} size="s" style={{marginLeft:"10px"}} onClick={unlockPassword} /> 
+                        : <FontAwesomeIcon icon={faLock} size="s" style={{marginLeft:"10px"}} onClick={unlockPassword} /> }
+                    </div>
                     <span style={{ color: "red" }}>{errors.password}</span><br></br>
 
                     <button type="submit" className="button">Connexion</button>
