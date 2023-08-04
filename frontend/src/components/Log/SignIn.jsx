@@ -86,8 +86,8 @@ export const SignIn = ({ displaySignUp }) => {
                     <label htmlFor="password">Mot de passe</label>
                     <div className="flexRow flexAttribute">
                         <input type={ isToggleLock ? "text" : "password"} name="password" id="password" />
-                        {isToggleLock ? <FontAwesomeIcon icon={faLockOpen} size="s" style={{marginLeft:"10px"}} onClick={unlockPassword} /> 
-                        : <FontAwesomeIcon icon={faLock} size="s" style={{marginLeft:"10px"}} onClick={unlockPassword} /> }
+                        {isToggleLock ? <FontAwesomeIcon icon={faLockOpen} size="lg" style={{marginLeft:"10px"}} onClick={unlockPassword} /> 
+                        : <FontAwesomeIcon icon={faLock} size="lg" style={{marginLeft:"10px"}} onClick={unlockPassword} /> }
                     </div>
                     <span style={{ color: "red" }}>{errors.password}</span><br></br>
 

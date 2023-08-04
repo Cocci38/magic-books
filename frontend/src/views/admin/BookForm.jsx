@@ -7,6 +7,7 @@ export const BookForm = () => {
 
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
+    const urlImage = "http://localhost/magic-books/backend/public/pictures/";
 
     const { id } = useParams();
     //console.log(id);
@@ -86,7 +87,7 @@ export const BookForm = () => {
         //console.log(e.target);
         const formData = new FormData(form);
 
-        console.log([...formData]);
+        //console.log([...formData]);
         const validateData = () => {
             let errors = {};
             if (!title) {
@@ -164,6 +165,7 @@ export const BookForm = () => {
                     <div className="labelImage">
                         <label htmlFor="image" style={{ textAlign: "center" }}>Choisir un fichier</label>
                         <input type="file" name="image" id="image" onChange={handleChange} style={{ display: "none" }} />
+                        
                         <img src={file} style={{ width: "100px" }} />
                     </div>
                 </div>
