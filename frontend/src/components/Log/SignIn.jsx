@@ -38,14 +38,18 @@ export const SignIn = ({ displaySignUp }) => {
             await accountService.signIn(email, password)
                 .then(res => {
                     if (res.data.result === "Ok") {
-                        console.log(res.data.id);
-                        let cookies = res.data.token
-                        accountService.saveToken(cookies)
-                        accountService.saveId(res.data.id)
-                        navigate("/")
-                        accountService.saveRole(JSON.parse(res.data.role))
-                        if (accountService.isLogged()) {
-                            window.location.reload();
+                        console.log(res.data.role);
+                        let cookies = res.data.token;
+                        accountService.saveToken(cookies);
+                        accountService.saveId(res.data.id);
+                        accountService.saveRole(JSON.parse(res.data.role));
+
+                        if (accountService.isReader()) {
+                            navigate("/");
+                        }
+                    
+                        if (accountService.isAdmin()) {
+                            // console.log("ADMIN");
                             navigate("/admin");
                         }
                     }

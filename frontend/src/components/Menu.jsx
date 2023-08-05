@@ -44,7 +44,7 @@ export const Menu = () => {
             <nav>
                 <Link to='/'><img src='/images/Magic-books.png' alt='logo magic book' /></Link>
                 <ul className={isToggle ? 'toggleNav' : ''}>
-                    <li><NavLink to='/' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Accueil</NavLink></li>
+                    <li style={{marginLeft:"0"}}><NavLink to='/' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Accueil</NavLink></li>
                     {isAdmin ? <li><NavLink to='/admin' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Tableau de bord</NavLink></li> : ""}
                     {isLogin ? <li><NavLink to='/mon-compte' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Mon compte</NavLink></li> : ""}
                     {!accountService.isLogged() ?

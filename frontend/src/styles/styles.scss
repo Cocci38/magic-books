@@ -89,13 +89,17 @@ nav {
 
     ul {
         @include flexRow;
-        justify-content: space-between;
+        // justify-content: space-between;
+        justify-content: flex-start;
         width: 60%;
         list-style: none;
-
-        @media screen and (min-width: 650px) and (max-width: 1024px) {
-            justify-content: space-around;
+        li {
+            margin-left: 20%;
         }
+
+        // @media screen and (min-width: 650px) and (max-width: 1024px) {
+        //     justify-content: space-around;
+        // }
 
         a {
             text-decoration: none;
