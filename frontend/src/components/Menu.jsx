@@ -42,9 +42,9 @@ export const Menu = () => {
     return (
         <header>
             <nav>
-                <Link to='/'><img src='/images/Magic-books.png' alt='logo magic book' /></Link>
+                <Link to='/' className='imageMenu'><img src='/src/assets/Logo_Magic_Books.png' alt='logo magic book' /></Link>
                 <ul className={isToggle ? 'toggleNav' : ''}>
-                    <li style={{marginLeft:"0"}}><NavLink to='/' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Accueil</NavLink></li>
+                    <li><NavLink to='/' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Accueil</NavLink></li>
                     {isAdmin ? <li><NavLink to='/admin' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Tableau de bord</NavLink></li> : ""}
                     {isLogin ? <li><NavLink to='/mon-compte' className={({ isActive }) => (isActive ? "activeLink" : undefined)}>Mon compte</NavLink></li> : ""}
                     {!accountService.isLogged() ?
