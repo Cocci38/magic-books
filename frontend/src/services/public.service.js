@@ -16,6 +16,7 @@ const getAuthor = (id) => {
     return Axios.get("author/" + id)
 }
 
+// Services de connexion vers l'api pour l'affichage des livres (par date, par auteur et par catégorie)
 const getBooksOrderByDate = (id) => {
     return Axios.get("book-by-date")
 }

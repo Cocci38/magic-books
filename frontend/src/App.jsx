@@ -7,36 +7,39 @@ import ReaderRouter from './views/Reader/ReaderRouter';
 
 function App() {
   let isLogin = "";
+  let isAdmin = "";
   let admin = accountService.isAdmin();
   let reader = accountService.isReader();
   if (admin) {
     isLogin = true;
-  }else if (reader){
+    isAdmin = true;
+  } else if (reader) {
     isLogin = true;
-  } else{
+  } else {
     isLogin = false;
   }
-  //console.log(admin);
-  return (
-    <>
-      {/* Quand on fait des routes enfants, il faut préciser au router qu'il y a des routes après, donc on met une astérisque (*) */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="*" element={<PublicRouter />} />
-          {/* <Route path="/admin/*" element={accountService.isLogged() ? <AdminRouter /> : <Navigate to="/authentification"/>} /> */}
-          {/* <Route path="/admin/*" element={accountService.isLogged() ? <AdminRouter /> : <PublicRouter />} />
+
+//console.log(admin);
+return (
+  <>
+    {/* Quand on fait des routes enfants, il faut préciser au router qu'il y a des routes après, donc on met une astérisque (*) */}
+    <BrowserRouter>
+      <Routes>
+        <Route path="*" element={<PublicRouter />} />
+        {/* <Route path="/admin/*" element={accountService.isLogged() ? <AdminRouter /> : <Navigate to="/authentification"/>} /> */}
+        {/* <Route path="/admin/*" element={accountService.isLogged() ? <AdminRouter /> : <PublicRouter />} />
           {/* <Route path="/admin/*" element={<AdminRouter />} /> */}
-          {/* <Route path="/mon-compte/*" element={<ReaderRouter/> } /> } */}
+        {/* <Route path="/mon-compte/*" element={<ReaderRouter/> } /> } */}
 
         {/* {admin ? <Route path="/admin/*" element={<AdminRouter />} /> : <Route path="*" element={<PublicRouter />} />} */}
-        {admin && <Route path="/admin/*" element={<AdminRouter />} />}
-        {isLogin && <Route path="/mon-compte/*" element={<ReaderRouter/> } />}
+        {isAdmin && <Route path="/admin/*" element={<AdminRouter />} />}
+        {isLogin && <Route path="/mon-compte/*" element={<ReaderRouter />} />}
 
-          
-        </Routes>
-      </BrowserRouter>
-    </>
-  )
+
+      </Routes>
+    </BrowserRouter>
+  </>
+)
 }
 
 export default App

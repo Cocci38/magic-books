@@ -55,22 +55,24 @@ export const Books = () => {
 
     return (
         <section className="list">
+            <h1 className="h1">Liste des livres</h1>
             <div className="flexRow barLine">
-                <span className="itemFlex" style={{ width: '30%' }}>Titre</span>
+                <span className="itemFlex" style={{ width: '35%' }}>Titre</span>
                 <span className="itemFlex" style={{ width: '18%' }}>Auteur</span>
-                <span className="itemFlex divNone" style={{ width: '10%' }}>Date de sortie</span>
-                <span className="itemFlex" style={{ width: '13%' }}>Catégorie</span>
-                <span className="itemFlex" style={{ width: '12%' }}>Éditeur</span>
+                <span className="itemFlex divNone" style={{ width: '15%' }}>Date de sortie</span>
+                <span className="itemFlex" style={{ width: '20%' }}>Catégorie</span>
+                <span className="itemFlex divNone" style={{ width: '12%' }}>Éditeur</span>
                 <span className="spanEmpty"></span>
             </div>
             {Array.isArray(books) ? books
                 .map((book) => (
                     <div className="flexRow barLine" key={book.id}>
-                        <span className="itemFlex" style={{ width: '30%' }}>{book.title}</span>
+                        <span className="itemFlex" style={{ width: '35%' }}>{book.title}</span>
                         <span className="itemFlex" style={{ width: '18%' }}>{book.author}</span>
-                        <span className="itemFlex divNone" style={{ width: '10%' }}> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span>
-                        <span className="itemFlex" style={{ width: '13%' }}>{book.name}</span>
-                        <span className="itemFlex" style={{ width: '12%' }}>{book.editor}</span>
+                        <span className="itemFlex divNone" style={{ width: '15%' }}> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span>
+                        <span className="itemFlex" style={{ width: '20%' }}>{book.name}</span>
+                        <span className="itemFlex divNone" style={{ width: '12%' }}>{book.editor}</span>
+
                         <div className="flexResponsive">
                             <Link to={'/livre/' + book.id} style={{ height: "20px", width: "19px" }} className="iconButton eye" aria-label="voir la fiche du livre"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
                             <Link to={'/admin/livre/editer/' + book.id} style={{ height: "20px", width: "18px" }} className="iconButton pen" aria-label="modifier le livre"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>

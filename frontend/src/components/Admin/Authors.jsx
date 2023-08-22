@@ -50,6 +50,7 @@ export const Authors = () => {
 
     return (
         <section className="list">
+            <h1 className="h1">Liste des Auteurs</h1>
             <div className="flexRow barLine">
                 <span className="itemFlex" style={{ width: '30%' }}>Nom</span>
                 <span className="itemFlex" style={{ width: '20%' }}>Nationalité</span>

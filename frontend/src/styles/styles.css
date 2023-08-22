@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative&display=swap"); /**
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative&display=swap");
+/**
  * Page du style pour les formulaires
  */
 .mainRow {
@@ -161,7 +162,8 @@ textarea {
 }
 @media screen and (max-width: 650px) {
   .list {
-    margin-left: 10px;
+    margin-left: 0;
+    width: 100%;
   }
   .list .divNone {
     display: none;
@@ -660,7 +662,7 @@ nav .activeLink {
 }
 @media screen and (max-width: 650px) {
   nav ul {
-    position: fixed;
+    position: absolute;
     left: -100%;
     top: 1%;
     flex-direction: column;
@@ -668,6 +670,7 @@ nav .activeLink {
     width: 100%;
     text-align: center;
     transition: 0.25s;
+    display: none;
   }
   nav li {
     padding: 3px;
@@ -677,6 +680,7 @@ nav .activeLink {
   }
   nav .responsiveButton {
     display: block;
+    margin-left: 33%;
   }
   nav .activeButton {
     display: none;
@@ -684,6 +688,7 @@ nav .activeLink {
   nav .toggleNav {
     z-index: 1;
     left: 0;
+    display: block;
   }
   nav .removeBtn {
     z-index: 2;
@@ -851,6 +856,17 @@ p {
   }
 }
 
+.h1 {
+  font-size: larger;
+  margin: 0 0 15px;
+  display: flex;
+  justify-content: center;
+}
+
 .colorOrange {
+  color: #F8B179;
+}
+
+.aHover:hover {
   color: #F8B179;
 }/*# sourceMappingURL=styles.css.map */

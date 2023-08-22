@@ -27,9 +27,9 @@ export const Categories = () => {
     // Le useEffect se joue lorsque le composant est monté
     useEffect(() => {
         if (flag.current === false) {
-        fetchCategories()
-    }
-    return () => flag.current = true
+            fetchCategories()
+        }
+        return () => flag.current = true
     }, []);
 
     // const updateCategory = (idCat) => {
@@ -66,20 +66,24 @@ export const Categories = () => {
     }
     return (
 
-        <section className="flexRowWrap list">{Array.isArray(categories) ? categories
-            .map((category) => (
-                <div key={category.id} className="categoryContainer">
-                    <span className="paragraphName">Nom de la catégorie</span>
-                    {!showCategory && <span>{category.name}</span>}
-                    {showCategory && <input type="text" name="nameCategory" defaultValue={category.name} onChange={changeHandler} ref={nomInput}></input>}
-                    <div className="buttonContainer">
-                        <Link to={'/categorie/' + category.id} className="iconButton eye" aria-label="voir la fiche catégorie"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
-                        <Link to={`/admin/categorie/editer/${category.id}`} className="iconButton pen" aria-label="modifier la catégorie"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                        <button onClick={() => { deleteCategory(category.id) }} className="iconButton trash" aria-label="supprimer la catégorie"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
+        <section >
+            <h1 className="h1">Liste des catégories</h1>
+            <div className="flexRowWrap list">
+            {Array.isArray(categories) ? categories
+                .map((category) => (
+                    <div key={category.id} className="categoryContainer">
+                        {/* <span className="paragraphName">Nom de la catégorie</span> */}
+                        {!showCategory && <span>{category.name}</span>}
+                        {showCategory && <input type="text" name="nameCategory" defaultValue={category.name} onChange={changeHandler} ref={nomInput}></input>}
+                        <div className="buttonContainer">
+                            <Link to={'/categorie/' + category.id} className="iconButton eye" aria-label="voir la fiche catégorie"><FontAwesomeIcon icon={faEye} size="lg" /></Link>
+                            <Link to={`/admin/categorie/editer/${category.id}`} className="iconButton pen" aria-label="modifier la catégorie"><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                            <button onClick={() => { deleteCategory(category.id) }} className="iconButton trash" aria-label="supprimer la catégorie"><FontAwesomeIcon icon={faTrashCan} size="xl" /></button>
+                        </div>
                     </div>
+                ))
+                : <Navigate to={"/"} />}
                 </div>
-            ))
-            : <Navigate to={"/"} />}
         </section>
     )
 }
