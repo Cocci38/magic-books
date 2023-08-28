@@ -3,7 +3,7 @@ import { accountService } from "./account.service";
 
 // Paramétrage de base d'axios avec l'url de de l'api
 const Axios = axios.create({
-    baseURL: "http://localhost/magic-books/backend/"
+    baseURL: import.meta.env.VITE_BASE_URL
 });
 
 /**
