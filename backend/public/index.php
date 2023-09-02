@@ -31,38 +31,38 @@ $router = new Router($url);
 
 // On appelle les fonctions readAll, readById, create, update and delete dans le bloc BooksController
 $router->get('/books', 'App\Controllers\BooksController@readAll'); // Un chemin '/' et une action BooksController@readAll' (le controller @ la méthode)
-$router->get('/book/:id', 'App\Controllers\BooksController@readById'); // Dans l'url on écrit book/id
 $router->get('/book-by-date', 'App\Controllers\BooksController@readOrderByDate');
-$router->get('/book-by-author/:id', 'App\Controllers\BooksController@readBookByAuthor');
+$router->post('/book-by-author/:id', 'App\Controllers\BooksController@readBookByAuthor');
+$router->post('/book/:id', 'App\Controllers\BooksController@readById'); // Dans l'url on écrit book/id
 $router->post('/create/book', 'App\Controllers\BooksController@create');
 $router->post('/update/book/:id', 'App\Controllers\BooksController@update');
 $router->delete('/delete/book/:id', 'App\Controllers\BooksController@delete');
 
 // On appelle les fonctions readAll, readById, create, update and delete dans le bloc CategoriesController
 $router->get('/categories', 'App\Controllers\CategoriesController@readAll'); // Un chemin '/' et une action CategoriesController@readAll' (le controller @ la méthode)
-$router->get('/category/:id', 'App\Controllers\CategoriesController@readById'); // Dans l'url on écrit category/id
 $router->get('/categories-books', 'App\Controllers\CategoriesController@readAllAndBook');
 $router->get('/category-books', 'App\Controllers\CategoriesController@readCategoriesCoverBooks');
+$router->post('/category/:id', 'App\Controllers\CategoriesController@readById'); // Dans l'url on écrit category/id
 $router->post('/create/category', 'App\Controllers\CategoriesController@create');
 $router->put('/update/category/:id', 'App\Controllers\CategoriesController@update');
 $router->delete('/delete/category/:id', 'App\Controllers\CategoriesController@delete');
 
 // On appelle les fonctions readAll, readById, create, update and delete dans le bloc AuthorsController
 $router->get('/authors', 'App\Controllers\AuthorsController@readAll'); // Un chemin '/' et une action AuthorsController@readAll' (le controller @ la méthode)
-$router->get('/author/:id', 'App\Controllers\AuthorsController@readById'); // Dans l'url on écrit authors/id
+$router->post('/author/:id', 'App\Controllers\AuthorsController@readById'); // Dans l'url on écrit authors/id
 $router->post('/create/author', 'App\Controllers\AuthorsController@create');
 $router->put('/update/author/:id', 'App\Controllers\AuthorsController@update');
 $router->delete('/delete/author/:id', 'App\Controllers\AuthorsController@delete');
 
 // On appelle les fonctions signUp, signIn, updateAccount and deleteAccount dans le bloc UsersController
-$router->get('/user/:id', 'App\Controllers\UsersController@readById'); // Dans l'url on écrit users/id
+$router->post('/user/:id', 'App\Controllers\UsersController@readById'); // Dans l'url on écrit users/id
 $router->post('/signup', 'App\Controllers\UsersController@signUp');
 $router->post('/signin', 'App\Controllers\UsersController@signIn');
 $router->put('/update/account/:id', 'App\Controllers\UsersController@updateAccount');
 $router->delete('/delete/account/:id', 'App\Controllers\UsersController@deleteAccount');
 
 // On appelle les fonctions readAllByReaderId, create, delete dans le bloc ReaderHasBookController
-$router->get('/library/:id', 'App\Controllers\ReaderHasBookController@readAllByReaderId');
+$router->post('/library/:id', 'App\Controllers\ReaderHasBookController@readAllByReaderId');
 $router->post('/create/library', 'App\Controllers\ReaderHasBookController@create');
 $router->delete('/delete/library-book/:id', 'App\Controllers\ReaderHasBookController@delete');
 

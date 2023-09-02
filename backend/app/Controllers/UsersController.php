@@ -16,9 +16,6 @@ class UsersController
      */
     public function signUp()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: POST");
-
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // On instancie la base de données
@@ -62,9 +59,6 @@ class UsersController
      */
     public function signIn()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: POST");
-
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $header = [];
             $secret = '';
@@ -124,10 +118,7 @@ class UsersController
 
     public function readById()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: GET");
-
-        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // On instancie la base de données
             $database = new Database();
             $db = $database->getConnexion();
@@ -135,9 +126,10 @@ class UsersController
             // On instancie l'objet Authors
             $user = new Users($db);
             // file_get_contents => c'est le fichier d'entrée php
-            //$data = json_decode(file_get_contents("php://input"));
-            $url = $_GET['url'];
-            $id = basename(parse_url($url, PHP_URL_PATH));
+            $data = json_decode(file_get_contents("php://input"));
+            $id = $data->id;
+            // $url = $_GET['url'];
+            // $id = basename(parse_url($url, PHP_URL_PATH));
             //$user->setId($data->id);
             $user->setId($id);
             // On récupère les données
@@ -162,9 +154,6 @@ class UsersController
 
     public function updateAccount()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: PUT");
-
         if ($_SERVER["REQUEST_METHOD"] === "PUT") {
             // On instancie la base de données
             $database = new Database();
@@ -202,9 +191,6 @@ class UsersController
 
     public function deleteAccount()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: DELETE");
-
         if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
             // On instancie la base de données
             $database = new Database();

@@ -11,9 +11,6 @@ class CategoriesController extends Controller
 
     public function readAll()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: GET");
-
         if ($_SERVER["REQUEST_METHOD"] === "GET") {
             // On instancie la base de données
             $database = new Database();
@@ -88,10 +85,7 @@ class CategoriesController extends Controller
 
     public function readById()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: GET");
-
-        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // On instancie la base de données
             $database = new Database();
             $db = $database->getConnexion();
@@ -99,10 +93,10 @@ class CategoriesController extends Controller
             // On instancie l'objet Categories
             $category = new Categories($db);
             // file_get_contents => c'est le fichier d'entrée php
-            //$data = json_decode(file_get_contents("php://input"));
-
-            $url = $_GET['url'];
-            $id = basename(parse_url($url, PHP_URL_PATH));
+            $data = json_decode(file_get_contents("php://input"));
+            $id = $data->id;
+            // $url = $_GET['url'];
+            // $id = basename(parse_url($url, PHP_URL_PATH));
 
             if (isset($id) && $id !== null) {
                 $count = 0;
@@ -144,8 +138,6 @@ class CategoriesController extends Controller
 
     public function create()
     {
-        // Méthode autorisée
-        //header("Access-Control-Allow-Methods: POST");
         if ($this->Authorization() == "[ROLE_ADMIN]") {
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -186,8 +178,6 @@ class CategoriesController extends Controller
 
     public function update()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: PUT");
         if ($this->Authorization() == "[ROLE_ADMIN]") {
             if ($_SERVER["REQUEST_METHOD"] === "PUT") {
                 // On instancie la base de données
@@ -227,8 +217,6 @@ class CategoriesController extends Controller
 
     public function delete()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: DELETE");
         if ($this->Authorization() == "[ROLE_ADMIN]") {
             if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
                 // On instancie la base de données
