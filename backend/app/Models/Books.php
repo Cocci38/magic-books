@@ -212,7 +212,7 @@ class Books extends Model
     {
         try {
             // On écrit la requête préparée
-            $query = $this->connexion->prepare("SELECT b.id, b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name 
+            $query = $this->connexion->prepare("SELECT b.id, b.title, a.name as author, b.editor, b.summary, b.release_date, b.cover, c.name as category 
                                             FROM $this->table b 
                                             LEFT JOIN categories c ON b.category_id = c.id 
                                             LEFT JOIN authors a ON b.author_id = a.id ORDER BY b.title ASC");
@@ -305,7 +305,7 @@ class Books extends Model
     }
 
     /**
-     * Pour afficher les livres d'un auteur selon son id
+     * Pour afficher les livres d'une catégorie selon son id
      * @return $query
      */
     public function readBookByCategory()
@@ -337,7 +337,7 @@ class Books extends Model
     /**
      * Pour insérer un livre dans la base données
      *
-     * @return void
+     * @return boolean
      */
     public function create()
     {
@@ -383,7 +383,7 @@ class Books extends Model
     /**
      * Pour la modification d'un livre
      *
-     * @return void
+     * @return boolean
      */
     public function update()
     {
@@ -430,7 +430,7 @@ class Books extends Model
     /**
      * Pour supprimer un livre
      *
-     * @return void
+     * @return boolean
      */
     public function delete()
     {

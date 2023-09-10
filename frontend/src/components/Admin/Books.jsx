@@ -70,7 +70,7 @@ export const Books = () => {
                         <span className="itemFlex" style={{ width: '35%' }}>{book.title}</span>
                         <span className="itemFlex" style={{ width: '18%' }}>{book.author}</span>
                         <span className="itemFlex divNone" style={{ width: '15%' }}> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span>
-                        <span className="itemFlex" style={{ width: '20%' }}>{book.name}</span>
+                        <span className="itemFlex" style={{ width: '20%' }}>{book.category}</span>
                         <span className="itemFlex divNone" style={{ width: '12%' }}>{book.editor}</span>
 
                         <div className="flexResponsive">

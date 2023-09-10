@@ -71,7 +71,7 @@ class Categories extends Model
     /**
      * Pour lire toutes les catégories
      *
-     * @return query
+     * @return $query
      */
     public function readAll()
     {
@@ -92,7 +92,7 @@ class Categories extends Model
     /**
      * Pour lire une catégorie
      * 
-     * @return
+     * @return $query
      */
     public function readById()
     {

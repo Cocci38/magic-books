@@ -178,7 +178,7 @@ class CategoriesController extends Controller
 
     public function update()
     {
-        // if ($this->Authorization() == "[ROLE_ADMIN]") {
+        if ($this->Authorization() == "[ROLE_ADMIN]") {
             if ($_SERVER["REQUEST_METHOD"] === "PUT") {
                 // On instancie la base de données
                 $database = new Database();
@@ -209,10 +209,10 @@ class CategoriesController extends Controller
                 http_response_code(405);
                 echo json_encode(["message" => "La méthode n'est pas autorisée"]);
             }
-        // } else {
-        //     http_response_code(401);
-        //     echo json_encode(["result" => "ERROR", "message" => "Autorisation refusée"]);
-        // }
+        } else {
+            http_response_code(401);
+            echo json_encode(["result" => "ERROR", "message" => "Autorisation refusée"]);
+        }
     }
 
     public function delete()

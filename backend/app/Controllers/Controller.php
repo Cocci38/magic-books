@@ -22,7 +22,6 @@ class Controller
                 $token = trim($requestHeaders['Authorization']);
             }
         }
-
         $dotEnv = new ConfigDotEnvEnvironment;
         $dotEnv->load(__DIR__ . '/../../');
         $secret = getenv('SECRET');
@@ -33,33 +32,27 @@ class Controller
             echo json_encode(['message' => 'Token introuvable']);
             exit;
         }
-
         // On extrait le token
         $token = str_replace('Bearer ', '', $token);
-
         $jwt = new JWT();
-
         // On vérifie la validité du token
         if (!$jwt->isValid($token)) {
             http_response_code(400);
             echo json_encode(['message' => 'Token invalide']);
             exit;
         }
-
         // On vérifie la signature du token
         if (!$jwt->check($token, $secret)) {
             http_response_code(403);
             echo json_encode(['message' => 'Le Token est invalide']);
             exit;
         }
-
         // On vérifie l'expiration du token
         if ($jwt->isExpired($token)) {
             http_response_code(403);
             echo json_encode(['message' => 'Le token a expiré']);
             exit;
         }
-
         $roles = $jwt->getPayload($token)['roles'][0];
         $roles = trim($roles, '"');
         //var_dump(trim($roles, '"'));
