@@ -228,9 +228,9 @@ class CategoriesController extends Controller
 
                 // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
                 $data = json_decode(file_get_contents("php://input"));
-
+                
                 if (!empty($data)) {
-                    $category->setId($data->id);
+                    $category->setId($data);
                     $result = $category->delete();
                     if ($result) {
                         http_response_code(200);

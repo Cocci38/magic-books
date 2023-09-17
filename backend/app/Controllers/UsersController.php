@@ -202,8 +202,8 @@ class UsersController
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
 
-            if (!empty($data->id)) {
-                $users->setId($data->id);
+            if (!empty($data)) {
+                $users->setId($data);
 
                 $result = $users->deleteAccount();
                 if ($result) {

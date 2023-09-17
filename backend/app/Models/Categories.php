@@ -132,7 +132,6 @@ class Categories extends Model
 
                 // Protection contre les injections
                 $this->name = $this->valid_data($this->name);
-
                 $query->bindParam(":name", $this->name, PDO::PARAM_STR);
 
                 //On execute la requête
