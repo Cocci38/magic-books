@@ -613,7 +613,7 @@ nav .imageMenu {
 }
 @media screen and (max-width: 768px) {
   nav .imageMenu {
-    width: auto;
+    width: 150px;
   }
 }
 nav img {
@@ -621,7 +621,7 @@ nav img {
 }
 @media screen and (max-width: 768px) {
   nav img {
-    width: 30%;
+    width: 80%;
     position: relative;
     z-index: 2;
   }
@@ -633,8 +633,19 @@ nav ul {
   width: 60%;
   list-style: none;
 }
+@media screen and (min-width: 650px) and (max-width: 900px) {
+  nav ul {
+    justify-content: flex-start;
+    gap: 50px;
+  }
+}
 nav ul li {
-  margin-left: 20%;
+  margin-left: 0;
+}
+@media screen and (min-width: 650px) and (max-width: 1024px) {
+  nav ul li {
+    margin-left: 0;
+  }
 }
 nav ul a {
   text-decoration: none;
@@ -672,8 +683,9 @@ nav .activeLink {
     transition: 0.25s;
     display: none;
   }
-  nav li {
+  nav ul li {
     padding: 3px;
+    margin-left: 20%;
   }
   nav a {
     margin-right: 38%;

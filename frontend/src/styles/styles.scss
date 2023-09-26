@@ -80,8 +80,9 @@ nav {
 
     .imageMenu {
         width: 125px;
+
         @media screen and (max-width: 768px) {
-            width: auto;
+            width: 150px;
         }
     }
 
@@ -89,7 +90,7 @@ nav {
         width: 100%;
 
         @media screen and (max-width: 768px) {
-            width: 30%;
+            width: 80%;
             position: relative;
             z-index: 2;
         }
@@ -98,12 +99,19 @@ nav {
     ul {
         @include flexRow;
         justify-content: space-between;
-        // justify-content: flex-start;
         width: 60%;
         list-style: none;
+        @media screen and (min-width: 650px) and (max-width: 900px) {
+            justify-content: flex-start;
+            gap: 50px;
+        }
 
         li {
-            margin-left: 20%;
+            margin-left: 0;
+
+            @media screen and (min-width: 650px) and (max-width: 1024px) {
+                margin-left: 0;
+            }
         }
 
         // @media screen and (min-width: 650px) and (max-width: 1024px) {
@@ -140,6 +148,14 @@ nav {
         color: $orange;
     }
 
+    // @media screen and (max-width: 800px) {
+    //     ul {
+    //         li {
+    //             margin-left: 0;
+    //         }
+    //     }
+
+    // }
 
     @media screen and (max-width: 650px) {
         ul {
@@ -152,11 +168,13 @@ nav {
             text-align: center;
             transition: 0.25s;
             display: none;
+            li {
+                padding: 3px;
+                margin-left: 20%;
+            }
         }
 
-        li {
-            padding: 3px;
-        }
+        
 
         a {
             margin-right: 38%;
@@ -333,6 +351,7 @@ p {
 
     }
 }
+
 .h1 {
     font-size: larger;
     margin: 0 0 15px;
@@ -343,6 +362,7 @@ p {
 .colorOrange {
     color: $orange;
 }
+
 .aHover:hover {
     color: $orange;
 }
