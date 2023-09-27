@@ -60,7 +60,7 @@ export const SignUp = ({ displaySignUp }) => {
             await accountService.signUp(username, email, password)
                 .then(res => {
                     console.log(res.data);
-                    navigate("/admin");
+                    navigate("/");
                 })
                 .catch(error => { console.log(error.data) });
         }

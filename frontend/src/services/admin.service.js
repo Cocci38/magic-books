@@ -68,7 +68,7 @@ const updateAuthor = (id, nameAuthor, nationality, biography) => {
 
 const deleteAuthor = (id) => {
     return Axios.delete("delete/author/" + id, {
-        id: id,
+        data: id,
     })
 }
 
