@@ -12,7 +12,7 @@ export const ReaderLibrary = () => {
     const flag = useRef(false);
 
     const readerId = accountService.getReaderId();
-    const urlImage = "http://localhost/magic-books/backend/public/pictures/";
+    const urlImage = import.meta.env.VITE_BASE_URL_IMAGE;
 
     const fetchLibrary = async () => {
         await readerService.getLibrary(readerId)

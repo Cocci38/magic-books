@@ -4,7 +4,7 @@ export const Footer = () => {
     return (
         <footer>
             <div className="flexRow">
-                <img src="/src/assets/Logo_ter.png" alt='logo magic book' />
+                <img src="/images/Logo_ter.png" alt='logo magic book' />
                 <p>Magic-books est une application dédié aux livres et aux lecteurs.<br></br>
                 Il permet de créer et d’organiser sa bibliothèque en ligne, d’obtenir des informations sur des œuvres.
                 </p>

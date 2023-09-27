@@ -9,7 +9,7 @@ import { adminService } from '../../services/admin.service';
 export const Books = () => {
 
     const [books, setBooks] = useState([]);
-    const urlImage = "http://localhost/magic-books/backend/public/pictures/";
+    const urlImage = import.meta.env.VITE_BASE_URL_IMAGE;
     const flag = useRef(false);
 
     const fetchBooks = async () => {

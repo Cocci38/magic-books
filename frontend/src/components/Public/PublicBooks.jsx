@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const PublicBooks = () => {
 
     const [books, setBooks] = useState([]);
-    const urlImage = "http://localhost/magic-books/backend/public/pictures/";
+    const urlImage = import.meta.env.VITE_BASE_URL_IMAGE;
     const flag = useRef(false);
 
     const fetchBooks = async () => {
