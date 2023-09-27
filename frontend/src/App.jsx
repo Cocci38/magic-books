@@ -10,6 +10,8 @@ function App() {
   let isAdmin = "";
   let admin = accountService.isAdmin();
   let reader = accountService.isReader();
+  console.log("admin "+admin);
+  console.log("reader "+reader);
   if (admin) {
     isLogin = true;
     isAdmin = true;

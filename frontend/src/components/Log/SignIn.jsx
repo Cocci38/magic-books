@@ -38,7 +38,7 @@ export const SignIn = ({ displaySignUp }) => {
             await accountService.signIn(email, password)
                 .then(res => {
                     if (res.data.result === "Ok") {
-                        console.log(res.data.role);
+                        // console.log(res.data.role);
                         let cookies = res.data.token;
                         accountService.saveToken(cookies);
                         accountService.saveId(res.data.id);
@@ -53,12 +53,9 @@ export const SignIn = ({ displaySignUp }) => {
                             navigate("/admin");
                         }
                     }
-
-
                 })
                 .catch(error => { console.log(error.data) });
         }
-
     }
 
     const unlockPassword = () => {
@@ -71,8 +68,7 @@ export const SignIn = ({ displaySignUp }) => {
 
     const handleChange = async (e) => {
         const form = e.target;
-
-        console.log(form);
+        // console.log(form);
     }
 
     return (
