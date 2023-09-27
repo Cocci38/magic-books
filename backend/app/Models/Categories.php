@@ -71,7 +71,7 @@ class Categories extends Model
     /**
      * Pour lire toutes les catégories
      *
-     * @return query
+     * @return $query
      */
     public function readAll()
     {
@@ -92,7 +92,7 @@ class Categories extends Model
     /**
      * Pour lire une catégorie
      * 
-     * @return
+     * @return $query
      */
     public function readById()
     {
@@ -132,7 +132,6 @@ class Categories extends Model
 
                 // Protection contre les injections
                 $this->name = $this->valid_data($this->name);
-
                 $query->bindParam(":name", $this->name, PDO::PARAM_STR);
 
                 //On execute la requête
@@ -150,12 +149,11 @@ class Categories extends Model
     /**
      * Pour la modification d'une catégorie
      *
-     * @return void
+     * @return boolean
      */
     public function update()
     {
         if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->name)) {
-
             try {
                 $query = $this->connexion->prepare("UPDATE " . $this->table . " SET name = :name WHERE id=:id");
 
@@ -181,7 +179,7 @@ class Categories extends Model
     /**
      * Pour supprimer une catégorie
      *
-     * @return void
+     * @return boolean
      */
     public function delete()
     {

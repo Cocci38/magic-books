@@ -7,7 +7,7 @@ export const BookForm = () => {
 
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
-    const urlImage = "http://localhost/magic-books/backend/public/pictures/";
+    const urlImage = import.meta.env.VITE_BASE_URL_IMAGE;
 
     const { id } = useParams();
     //console.log(id);

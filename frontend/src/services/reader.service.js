@@ -3,12 +3,16 @@ import Axios from "./services";
 // Services pour la partie "reader"
 // Service de connexion vers l'api pour l'affichage d'un utilisateur
 const getReader = (id) => {
-    return Axios.get("user/" + id)
+    return Axios.post("user/" + id, {
+        id: id
+    })
 }
 
 // Service de connexion vers l'api pour l'affichage de la bibliothèque du lecteur
 const getLibrary = (readerId) => {
-    return Axios.get("library/" + readerId)
+    return Axios.post("library/" + readerId, {
+        readerId: readerId
+    })
 }
 
 const postBookLibrary = (readerId, bookId) => {

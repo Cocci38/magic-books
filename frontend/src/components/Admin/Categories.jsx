@@ -52,7 +52,7 @@ export const Categories = () => {
             // console.log(id);
             await adminService.deleteCategory(id)
                 .then((res) => {
-                    console.log(res.data.result);
+                    // console.log(res.data.result);
                     if (res.data.result === "Ok") {
                         fetchCategories();
                     } else {

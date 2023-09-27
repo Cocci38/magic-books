@@ -11,10 +11,8 @@ class ReaderHasBookController extends Controller
 {
     public function readAllByReaderId()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: GET");
         // if ($this->Authorization() == "[ROLE_READER]") {
-        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // On instancie la base de données
             $database = new Database();
             $db = $database->getConnexion();
@@ -24,9 +22,10 @@ class ReaderHasBookController extends Controller
 
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
+            $id = $data->readerId;
             //print_r($book);
-            $url = $_GET['url'];
-            $id = basename(parse_url($url, PHP_URL_PATH));
+            // $url = $_GET['url'];
+            // $id = basename(parse_url($url, PHP_URL_PATH));
             //var_dump($id);
             $readerHasBook->setReaderId($id);
             // On récupère les données
@@ -53,8 +52,6 @@ class ReaderHasBookController extends Controller
 
     public function create()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: POST");
         // if ($this->Authorization() == "[ROLE_READER]") {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // On instancie la base de données
@@ -126,8 +123,6 @@ class ReaderHasBookController extends Controller
 
     public function delete()
     {
-        // Méthode autorisée
-        header("Access-Control-Allow-Methods: DELETE");
         // if ($this->Authorization() == "[ROLE_READER]") {
         if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
             // On instancie la base de données

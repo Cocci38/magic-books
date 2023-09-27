@@ -35,7 +35,8 @@ export const CategoryForm = () => {
     }
 
 
-    // Fonction qui récupère les données transmis par le formulaire et qui l'envoie vers le serveur
+    // Fonction qui récupère les données transmises par le formulaire 
+    // Et qui les envoient vers le serveur
     const handlSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -74,7 +75,6 @@ export const CategoryForm = () => {
                     })
                     .catch(error => { console.log(error.data) });
             }
-
         }
         form.reset();
     }

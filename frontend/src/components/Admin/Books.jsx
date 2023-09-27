@@ -9,7 +9,7 @@ import { adminService } from '../../services/admin.service';
 export const Books = () => {
 
     const [books, setBooks] = useState([]);
-    const urlImage = "http://localhost/magic-books/backend/public/pictures/";
+    const urlImage = import.meta.env.VITE_BASE_URL_IMAGE;
     const flag = useRef(false);
 
     const fetchBooks = async () => {
@@ -70,7 +70,7 @@ export const Books = () => {
                         <span className="itemFlex" style={{ width: '35%' }}>{book.title}</span>
                         <span className="itemFlex" style={{ width: '18%' }}>{book.author}</span>
                         <span className="itemFlex divNone" style={{ width: '15%' }}> {new Date(book.release_date).toLocaleDateString("fr-FR")}</span>
-                        <span className="itemFlex" style={{ width: '20%' }}>{book.name}</span>
+                        <span className="itemFlex" style={{ width: '20%' }}>{book.category}</span>
                         <span className="itemFlex divNone" style={{ width: '12%' }}>{book.editor}</span>
 
                         <div className="flexResponsive">

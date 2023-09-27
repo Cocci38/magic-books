@@ -8,7 +8,7 @@ export const AuthorById = () => {
     //console.log(id);
     const [author, setAuthor] = useState([]);
     const [books, setBooks] = useState([]);
-    const urlImage = "http://localhost/magic-books/backend/public/pictures/";
+    const urlImage = import.meta.env.VITE_BASE_URL_IMAGE;
     const flag = useRef(false);
 
 
