@@ -90,15 +90,14 @@ class Categories extends Model
     }
 
     /**
-     * Pour lire une catégorie
-     * 
+     * Pour lire une catégorie et les livres associés
      * @return $query
      */
     public function readById()
     {
         try {
             // On prépare et on écrit la requête
-            $query = $this->connexion->prepare("SELECT c.id as categorie_id, c.name as categorie_name, b.id as book_id, b.title, b.author_id, a.name as author, b.editor, b.summary, b.release_date, b.cover 
+            $query = $this->connexion->prepare("SELECT c.id AS categorie_id, c.name AS categorie_name, b.id AS book_id, b.title, b.author_id, a.name AS author, b.editor, b.summary, b.release_date, b.cover 
                                                 FROM " . $this->table . " c
                                                 LEFT JOIN books b ON c.id = b.category_id
                                                 LEFT JOIN authors a ON b.author_id = a.id

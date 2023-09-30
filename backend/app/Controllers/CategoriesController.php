@@ -92,11 +92,10 @@ class CategoriesController extends Controller
 
             // On instancie l'objet Categories
             $category = new Categories($db);
+
             // file_get_contents => c'est le fichier d'entrée php
             $data = json_decode(file_get_contents("php://input"));
             $id = $data->id;
-            // $url = $_GET['url'];
-            // $id = basename(parse_url($url, PHP_URL_PATH));
 
             if (isset($id) && $id !== null) {
                 $count = 0;
@@ -105,7 +104,6 @@ class CategoriesController extends Controller
                 $result = $category->readById();
 
                 if ($result->rowCount() > 0) {
-                    //$data = [];
                     $data = $result->fetchAll();
                     // Je compte pour déterminer le nombre de livres présent dans la catégorie sélectionnée
                     if ($data > 0) {
