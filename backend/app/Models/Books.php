@@ -389,7 +389,7 @@ class Books extends Model
     {
         if (preg_match("/^[a-zA-Z0-9-\' :,.?!æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->title)) {
             if (preg_match("/^[a-zA-Z0-9-\' \æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{3,100}$/", $this->editor)) {
-                if (preg_match("/^[a-zA-Z0-9-\' ,.?!:æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,500}$/", $this->summary)) {
+                // if (preg_match("/^[a-zA-Z0-9-\' ,.?!:æœçéàèùâêîôûëïüÿÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]{10,500}$/", $this->summary)) {
 
                     try {
                         $query = $this->connexion->prepare("UPDATE " . $this->table . " SET title = :title, author_id = :author_id, editor = :editor, summary = :summary, release_date = :release_date, cover = :cover, category_id = :category_id WHERE id=:id");
@@ -422,7 +422,7 @@ class Books extends Model
                     } catch (PDOException $exception) {
                         echo "Erreur de connexion : " . $exception->getMessage();
                     }
-                }
+                // }
             }
         }
     }

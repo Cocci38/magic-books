@@ -220,11 +220,11 @@ class BooksController extends Controller
                 // On instancie l'objet Books
                 $book = new Books($db);
 
-                // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
-                //$data = json_decode(file_get_contents("php://input"));
+                //On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+                // $data = json_decode(file_get_contents("php://input"));
 
-                //print_r($data);
-                //var_dump($_REQUEST);
+                // print_r($data);
+                //var_dump($_REQUEST['categoryId']);
 
                 // On procède à la modification du livre
                 if (!empty($_REQUEST['id']) && !empty($_REQUEST['title']) && !empty($_REQUEST['authorId']) && !empty($_REQUEST['editor']) && !empty($_REQUEST['summary'])) {
@@ -254,8 +254,9 @@ class BooksController extends Controller
                     $book->setReleaseDate($_REQUEST['releaseDate']);
                     $book->setCover($cover);
                     $book->setCategoryId($_REQUEST['categoryId']);
-
+                    
                     $result = $book->update();
+                    var_dump($result);
                     if ($result) {
                         http_response_code(201);
                         echo json_encode(["result" => "Ok", "message" => "Le livre a été modifié avec succès"]);
