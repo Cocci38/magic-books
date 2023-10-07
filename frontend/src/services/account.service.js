@@ -24,7 +24,8 @@ const signIn = (email, password) => {
  * @param {string} token 
  */
 let saveToken = (token) => {
-    localStorage.setItem('token', token)
+    // localStorage.setItem('token', token)
+    sessionStorage.setItem('token', token)
 }
 
 /**
@@ -32,7 +33,8 @@ let saveToken = (token) => {
  * @param {string} role 
  */
 let saveRole = (role) => {
-    localStorage.setItem('role', role)
+    // localStorage.setItem('role', role)
+    sessionStorage.setItem('role', role)
 }
 
 /**
@@ -40,30 +42,58 @@ let saveRole = (role) => {
  * @param {string} id 
  */
 let saveId = (id) => {
-    localStorage.setItem('id', id)
+    // localStorage.setItem('id', id)
+    sessionStorage.setItem('id', id)
 }
 
-/**
- * Suppression du token du localStorage
- */
-let logout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('id')
-    localStorage.removeItem('role')
-    
-}
+
+
+// /**
+//  * État de la présence d'un token dans le localStorage
+//  * @returns {boolean}
+//  */
+// let isLogged = () => {
+//     let token = localStorage.getItem('token')
+//     return !!token
+// }
+
+// let isAdmin = () => {
+//     let role = localStorage.getItem('role')
+//     if (role === "[ROLE_ADMIN]") {
+//         return !!role
+//     } else {
+//         return false
+//     }
+// }
+
+// let isReader = () => {
+//     let role = localStorage.getItem('role')
+//     if (role === "[ROLE_READER]") {
+//         return !!role
+//     } else {
+//         return false
+//     }
+// }
+
+// let getToken = () => {
+//     return localStorage.getItem('token')
+// }
+
+// let getReaderId = () => {
+//     return localStorage.getItem('id')
+// }
 
 /**
  * État de la présence d'un token dans le localStorage
  * @returns {boolean}
  */
 let isLogged = () => {
-    let token = localStorage.getItem('token')
+    let token = sessionStorage.getItem('token')
     return !!token
 }
 
 let isAdmin = () => {
-    let role = localStorage.getItem('role')
+    let role = sessionStorage.getItem('role')
     if (role === "[ROLE_ADMIN]") {
         return !!role
     } else {
@@ -72,7 +102,7 @@ let isAdmin = () => {
 }
 
 let isReader = () => {
-    let role = localStorage.getItem('role')
+    let role = sessionStorage.getItem('role')
     if (role === "[ROLE_READER]") {
         return !!role
     } else {
@@ -81,11 +111,26 @@ let isReader = () => {
 }
 
 let getToken = () => {
-    return localStorage.getItem('token')
+    return sessionStorage.getItem('token')
 }
 
 let getReaderId = () => {
-    return localStorage.getItem('id')
+    return sessionStorage.getItem('id')
+}
+
+/**
+ * Suppression du token du localStorage
+ */
+let logout = () => {
+    // localStorage.removeItem('token')
+    // localStorage.removeItem('id')
+    // localStorage.removeItem('role')
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('id')
+    sessionStorage.removeItem('role')
+    sessionStorage.clear();
+    isAdmin();
+    isReader();
 }
 
 // Déclaration des services pour import
