@@ -43,7 +43,7 @@ export const SignIn = ({ displaySignUp }) => {
                         accountService.saveToken(cookies);
                         accountService.saveId(res.data.id);
                         accountService.saveRole(JSON.parse(res.data.role));
-
+                        console.log(accountService.isAdmin());
                         if (accountService.isReader()) {
                             navigate("/");
                         }

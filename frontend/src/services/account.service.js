@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Axios from "./services";
 
 // Services de connexion vers l'api pour l'inscription des utilisateurs
