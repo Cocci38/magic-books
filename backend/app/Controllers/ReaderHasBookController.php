@@ -30,7 +30,7 @@ class ReaderHasBookController extends Controller
             $readerHasBook->setReaderId($id);
             // On récupère les données
             $stmt = $readerHasBook->readAllByReaderId($readerHasBook->getReaderId());
-
+            /** @var object $stmt */
             if ($stmt->rowCount() > 0) {
                 //$data = [];
                 $data = $stmt->fetchAll();
@@ -72,6 +72,7 @@ class ReaderHasBookController extends Controller
                 // On vérifie que l'utilisateur existe
                 $reader->setId($data->readerId);
                 $readerExists = $reader->readById();
+                /** @var object $readerExists */
                 if ($readerExists->rowCount() > 0) {
 
                     // On vérifie que le livre existe
@@ -83,6 +84,7 @@ class ReaderHasBookController extends Controller
                         $book->setReaderId($data->readerId);
                         $book->setBookId($data->bookId);
                         $bookResult = $book->readByBookId($book->getReaderId(), $book->getBookId());
+                        /** @var object $bookResult */
                         if ($bookResult->rowCount() > 0) {
                             http_response_code(503);
                             echo json_encode(["message" => "Ce livre est déjà présent dans la bibliothèque"]);

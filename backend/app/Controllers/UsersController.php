@@ -134,7 +134,7 @@ class UsersController
             $user->setId($id);
             // On récupère les données
             $result = $user->readById();
-
+            /** @var object $result */
             if ($result->rowCount() > 0) {
                 //$data = [];
                 $donnees = $result->fetch();

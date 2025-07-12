@@ -13,6 +13,7 @@ class Authors extends Model
     private $name;
     private $nationality;
     private $biography;
+    private $search;
 
     
 
@@ -107,6 +108,24 @@ class Authors extends Model
     }
 
     /**
+     * Get the value of search
+     */
+    public function getSearch()
+    {
+        return $this->search;
+    }
+
+    /**
+     * Set the value of search
+     * @return $this
+     */
+    public function setSearch($search): self
+    {     
+        $this->search = "%".$search."%";
+        return $this;
+    }
+
+    /**
      * Pour lire la liste des auteurs
      * 
      */
@@ -140,6 +159,29 @@ class Authors extends Model
 
             $query->bindParam(":id", $this->id, PDO::PARAM_INT);
 
+            //On execute la requête
+            $query->execute();
+
+            // On retourne le résultat
+            return $query;
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
+        }
+    }
+
+    /**
+     * Pour afficher un auteur selon son id
+     * @return $query
+     */
+    public function searchAuthor()
+    {
+        try {
+            // On écrit la requête préparée
+            $query = $this->connexion->prepare("SELECT id, name, nationality, biography FROM " . $this->table . " WHERE 1 = 1 AND name like :search");
+
+            $this->search = $this->valid_data($this->search);
+            $query->bindParam(":search", $this->search, PDO::PARAM_STR);
+            
             //On execute la requête
             $query->execute();
 

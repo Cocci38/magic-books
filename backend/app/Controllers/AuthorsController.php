@@ -54,6 +54,8 @@ class AuthorsController extends Controller
             $author->setId($id);
             // On récupère les données
             $result = $author->readById();
+            
+            /** @var object $result */
             if ($result->rowCount() > 0) {
                 //$data = [];
                 $donnees = $result->fetch();
@@ -62,6 +64,47 @@ class AuthorsController extends Controller
                 echo json_encode($donnees);
             } else {
                 echo json_encode(["message" => "Aucune données à renvoyer"]);
+            }
+        } else {
+            http_response_code(405);
+            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+        }
+    }
+
+    public function searchAuthor()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            // On instancie la base de données
+            $database = new Database();
+            $db = $database->getConnexion();
+
+            // On instancie l'objet authors
+            $author = new Authors($db);
+
+            // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+            $data = json_decode(file_get_contents("php://input"));
+            
+            $search = $data->search;
+            if (!empty($search)) {
+                // On récupère les données
+                $author->setSearch($search);
+                
+                $result = $author->searchAuthor($author->getSearch());
+
+                /** @var object $result */
+                if ($result->rowCount() > 0) {
+                    //$data = [];
+                    $donnees = $result->fetchAll();
+                    // On envoie le code réponse 200 OK
+                    http_response_code(200);
+
+                    // On encode en json et on envoie
+                    echo json_encode($donnees);
+                } else {
+                    // 404 Not found
+                    http_response_code(404);
+                    echo json_encode(array("message" => "Aucun auteur n'a été trouvé."));
+                }
             }
         } else {
             http_response_code(405);

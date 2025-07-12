@@ -51,6 +51,7 @@ $router->delete('/delete/category/:id', 'App\Controllers\CategoriesController@de
 // On appelle les fonctions readAll, readById, create, update and delete dans le bloc AuthorsController
 $router->get('/authors', 'App\Controllers\AuthorsController@readAll'); // Un chemin '/' et une action AuthorsController@readAll' (le controller @ la méthode)
 $router->post('/author/:id', 'App\Controllers\AuthorsController@readById'); // Dans l'url on écrit authors/id
+$router->post('/searchAuthor', 'App\Controllers\AuthorsController@searchAuthor');
 $router->post('/create/author', 'App\Controllers\AuthorsController@create');
 $router->put('/update/author/:id', 'App\Controllers\AuthorsController@update');
 $router->delete('/delete/author/:id', 'App\Controllers\AuthorsController@delete');

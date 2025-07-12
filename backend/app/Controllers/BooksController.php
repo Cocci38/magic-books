@@ -178,13 +178,13 @@ class BooksController extends Controller
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
             
-            $search = $data->title;
+            $search = $data->search;
             if (!empty($search)) {
                 // On récupère les données
                 $book->setSearch($search);
                 
                 $result = $book->searchBook($book->getSearch());
-                //var_dump($result);
+
                 /** @var object $result */
                 if ($result->rowCount() > 0) {
                     //$data = [];
@@ -197,7 +197,7 @@ class BooksController extends Controller
                 } else {
                     // 404 Not found
                     http_response_code(404);
-                    echo json_encode(array("message" => "Le livre n'existe pas."));
+                    echo json_encode(array("message" => "Aucun livre n'a été trouvé."));
                 }
             }
         } else {
