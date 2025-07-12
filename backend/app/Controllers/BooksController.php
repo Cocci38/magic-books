@@ -21,7 +21,8 @@ class BooksController extends Controller
 
             // On récupère les données
             $stmt = $book->readAll();
-
+            
+            /** @var object $stmt */
             if ($stmt->rowCount() > 0) {
                 //$data = [];
                 $data = $stmt->fetchAll();
@@ -53,6 +54,7 @@ class BooksController extends Controller
 
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
+            
             $id = $data->id;
             //print_r($book);
             // $url = $_GET['url'];
@@ -105,6 +107,7 @@ class BooksController extends Controller
             // On récupère les données
             $stmt = $book->readOrderByDate();
 
+            /** @var object $stmt */
             if ($stmt->rowCount() > 0) {
                 //$data = [];
                 $data = $stmt->fetchAll();
@@ -141,6 +144,7 @@ class BooksController extends Controller
                 // On récupère les données
                 $stmt = $book->readBookByAuthor($book->getId());
 
+                /** @var object $stmt */ 
                 if ($stmt->rowCount() > 0) {
                     //$data = [];
                     $data = $stmt->fetchAll();
@@ -153,6 +157,48 @@ class BooksController extends Controller
                 }
             } else {
                 echo json_encode(["message" => "Aucune données à renvoyer"]);
+            }
+        } else {
+            http_response_code(405);
+            echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+        }
+    }
+
+    
+    public function searchBook()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            // On instancie la base de données
+            $database = new Database();
+            $db = $database->getConnexion();
+
+            // On instancie l'objet Books
+            $book = new Books($db);
+
+            // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
+            $data = json_decode(file_get_contents("php://input"));
+            
+            $search = $data->title;
+            if (!empty($search)) {
+                // On récupère les données
+                $book->setSearch($search);
+                
+                $result = $book->searchBook($book->getSearch());
+                //var_dump($result);
+                /** @var object $result */
+                if ($result->rowCount() > 0) {
+                    //$data = [];
+                    $donnees = $result->fetchAll();
+                    // On envoie le code réponse 200 OK
+                    http_response_code(200);
+
+                    // On encode en json et on envoie
+                    echo json_encode($donnees);
+                } else {
+                    // 404 Not found
+                    http_response_code(404);
+                    echo json_encode(array("message" => "Le livre n'existe pas."));
+                }
             }
         } else {
             http_response_code(405);

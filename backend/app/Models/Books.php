@@ -19,6 +19,7 @@ class Books extends Model
     private $cover;
     private $category_id;
     private $categories_name;
+    private $search;
 
 
     /**
@@ -204,6 +205,24 @@ class Books extends Model
     }
 
     /**
+     * Get the value of search
+     */
+    public function getSearch()
+    {
+        return $this->search;
+    }
+
+    /**
+     * Set the value of search
+     * @return $this
+     */
+    public function setSearch($search): self
+    {     
+        $this->search = "%".$search."%";
+        return $this;
+    }
+
+    /**
      * Pour lire la liste des livres
      * 
      * @return $query
@@ -328,6 +347,32 @@ class Books extends Model
             $query->execute();
 
             // On retourne le résultat
+            return $query;
+        } catch (PDOException $exception) {
+            echo "Erreur de connexion : " . $exception->getMessage();
+        }
+    }
+
+
+    /**
+     * Recherche d'un livre par son titre
+     *
+     * @return string
+     */
+    public function searchBook()
+    {
+        try {
+            // On écrit la requête
+            $query = $this->connexion->prepare("SELECT b.id, b.title, b.author_id, a.name as author, b.editor, b.summary, b.release_date, b.cover, b.category_id, c.name as categories_name FROM " . $this->table . " b 
+                                            LEFT JOIN categories c ON b.category_id = c.id 
+                                            LEFT JOIN authors a ON b.author_id = a.id
+                                            WHERE 1 = 1 AND b.title like :search");
+
+            $this->search = $this->valid_data($this->search);
+            $query->bindParam(":search", $this->search, PDO::PARAM_STR);
+
+            $query->execute();
+
             return $query;
         } catch (PDOException $exception) {
             echo "Erreur de connexion : " . $exception->getMessage();

@@ -29,11 +29,12 @@ require '../vendor/autoload.php';
 $url = "/".substr($_SERVER["QUERY_STRING"],4);
 $router = new Router($url);
 
-// On appelle les fonctions readAll, readById, create, update and delete dans le bloc BooksController
+// On appelle les fonctions readAll, readById,searchBook, create, update and delete dans le bloc BooksController
 $router->get('/books', 'App\Controllers\BooksController@readAll'); // Un chemin '/' et une action BooksController@readAll' (le controller @ la méthode)
 $router->get('/book-by-date', 'App\Controllers\BooksController@readOrderByDate');
 $router->post('/book-by-author/:id', 'App\Controllers\BooksController@readBookByAuthor');
 $router->post('/book/:id', 'App\Controllers\BooksController@readById'); // Dans l'url on écrit book/id
+$router->post('/searchBook', 'App\Controllers\BooksController@searchBook'); 
 $router->post('/create/book', 'App\Controllers\BooksController@create');
 $router->post('/update/book/:id', 'App\Controllers\BooksController@update');
 $router->delete('/delete/book/:id', 'App\Controllers\BooksController@delete');
