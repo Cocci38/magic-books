@@ -366,7 +366,7 @@ class Books extends Model
             $query = $this->connexion->prepare("SELECT b.id, b.title, b.author_id, a.name as author, b.editor, b.summary, b.release_date, b.cover, b.category_id, c.name as categories_name FROM " . $this->table . " b 
                                             LEFT JOIN categories c ON b.category_id = c.id 
                                             LEFT JOIN authors a ON b.author_id = a.id
-                                            WHERE 1 = 1 AND b.title like :search");
+                                            WHERE 1 = 1 AND b.title like :search limit 8");
 
             $this->search = $this->valid_data($this->search);
             $query->bindParam(":search", $this->search, PDO::PARAM_STR);

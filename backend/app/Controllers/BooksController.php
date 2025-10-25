@@ -191,13 +191,12 @@ class BooksController extends Controller
                     $donnees = $result->fetchAll();
                     // On envoie le code réponse 200 OK
                     http_response_code(200);
-
                     // On encode en json et on envoie
-                    echo json_encode($donnees);
+                    //echo json_encode($donnees);
+                    echo json_encode(array("count"=>count($donnees),"data" => $donnees));
                 } else {
-                    // 404 Not found
-                    http_response_code(404);
-                    echo json_encode(array("message" => "Aucun livre n'a été trouvé."));
+                    http_response_code(200);
+                    echo json_encode(array("count"=>$result->rowCount(),"message" => "Aucun livre n'a été trouvé."));
                 }
             }
         } else {
