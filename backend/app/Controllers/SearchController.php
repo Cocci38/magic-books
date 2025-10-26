@@ -20,9 +20,9 @@ class SearchController extends Controller
 
             // On récupère les informations envoyées et je décode le JSON pour que php puisse le lire
             $data = json_decode(file_get_contents("php://input"));
-            
-            $search = $data->search;
-            if (!empty($search)) {
+
+            if (!empty($data->search)) {
+                $search = $data->search;
                 // On récupère les données
                 $book->setSearch($search);
                 $author->setSearch($search);
