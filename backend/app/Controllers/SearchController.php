@@ -32,20 +32,23 @@ class SearchController extends Controller
 
                 /** @var object $resultBook */
                 /** @var object $resultAuthor */
-                /** @var object $countData */
+                $countData = 0;
+                $countBook = $resultBook->rowCount();
+                $countAuthor = $resultAuthor->rowCount();
                 if ($resultBook->rowCount() > 0 || $resultAuthor->rowCount() > 0) {
                     //$data = [];
                     $donneesBook = $resultBook->fetchAll();
                     $donneesAuthor = $resultAuthor->fetchAll();
-                    $countData = $donneesBook + $donneesAuthor;
+                    
+                    $countData = $countBook + $countAuthor;
                     // On envoie le code réponse 200 OK
                     http_response_code(200);
                     // On encode en json et on envoie
                     //echo json_encode($donnees);
-                    echo json_encode(array("count"=>count($countData),"dataBooks" => $donneesBook,"dataAuthors"=>$donneesAuthor));
+                    echo json_encode(array("count"=>$countData,"dataBooks" => $donneesBook,"dataAuthors"=>$donneesAuthor));
                 } else {
                     http_response_code(200);
-                    echo json_encode(array("count"=>count($countData),"message" => "Aucun livre, ni aucun auteur n'a été trouvé."));
+                    echo json_encode(array("count"=>$countData,"message" => "Aucun livre, ni aucun auteur n'a été trouvé."));
                 }
             }
         } else {

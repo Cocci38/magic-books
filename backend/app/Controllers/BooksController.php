@@ -184,8 +184,8 @@ class BooksController extends Controller
                 $book->setSearch($search);
                 
                 $result = $book->searchBook($book->getSearch());
-
                 /** @var object $result */
+                $countBook = $result->rowCount();
                 if ($result->rowCount() > 0) {
                     //$data = [];
                     $donnees = $result->fetchAll();
@@ -193,10 +193,10 @@ class BooksController extends Controller
                     http_response_code(200);
                     // On encode en json et on envoie
                     //echo json_encode($donnees);
-                    echo json_encode(array("count"=>count($donnees),"data" => $donnees));
+                    echo json_encode(array("count"=>$countBook,"data" => $donnees));
                 } else {
                     http_response_code(200);
-                    echo json_encode(array("count"=>$result->rowCount(),"message" => "Aucun livre n'a été trouvé."));
+                    echo json_encode(array("count"=>$countBook,"message" => "Aucun livre n'a été trouvé."));
                 }
             }
         } else {

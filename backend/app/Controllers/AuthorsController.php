@@ -92,6 +92,7 @@ class AuthorsController extends Controller
                 $result = $author->searchAuthor($author->getSearch());
 
                 /** @var object $result */
+                $countAuthor = $result->rowCount();
                 if ($result->rowCount() > 0) {
                     //$data = [];
                     $donnees = $result->fetchAll();
@@ -99,11 +100,10 @@ class AuthorsController extends Controller
                     http_response_code(200);
 
                     // On encode en json et on envoie
-                    echo json_encode($donnees);
+                    echo json_encode(array("count"=>$countAuthor,"data" => $donnees));
                 } else {
-                    // 404 Not found
-                    http_response_code(404);
-                    echo json_encode(array("message" => "Aucun auteur n'a été trouvé."));
+                    http_response_code(200);
+                    echo json_encode(array("count"=>$countAuthor,"message" => "Aucun auteur n'a été trouvé."));
                 }
             }
         } else {
