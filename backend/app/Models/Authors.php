@@ -177,7 +177,7 @@ class Authors extends Model
     {
         try {
             // On écrit la requête préparée
-            $query = $this->connexion->prepare("SELECT id, name, nationality, biography FROM " . $this->table . " WHERE 1 = 1 AND name like :search");
+            $query = $this->connexion->prepare("SELECT id, name, nationality, biography FROM " . $this->table . " WHERE 1 = 1 AND name like :search limit 5");
 
             $this->search = $this->valid_data($this->search);
             $query->bindParam(":search", $this->search, PDO::PARAM_STR);

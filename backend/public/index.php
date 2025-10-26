@@ -68,5 +68,8 @@ $router->post('/library/:id', 'App\Controllers\ReaderHasBookController@readAllBy
 $router->post('/create/library', 'App\Controllers\ReaderHasBookController@create');
 $router->delete('/delete/library-book/:id', 'App\Controllers\ReaderHasBookController@delete');
 
+// On appelle la fonction 
+$router->post('/search','App\Controllers\SearchController@searchBookAndAuthor'); // Recherche les livres et les auteurs
+
 // Pour vérifier que nos routes fonctionnent
 $router->run();
