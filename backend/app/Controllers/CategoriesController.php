@@ -20,6 +20,7 @@ class CategoriesController extends Controller
             $category = new Categories($db);
 
             // On récupère les données
+            /** @var object $stmt */
             $stmt = $category->readAll();
 
             if ($stmt->rowCount() > 0) {
@@ -50,6 +51,8 @@ class CategoriesController extends Controller
             $books = new Books($db);
 
             // On récupère les données
+            /** @var object $stmt */
+            
             $stmt = $category->readAll();
 
             if ($stmt->rowCount() > 0) {
@@ -59,7 +62,8 @@ class CategoriesController extends Controller
                 foreach ($data as $idCategory) {
                     // var_dump($value["id"]);
                     $books->setCategoryId($idCategory["id"]);
-                    // var_dump($books);
+
+                    /** @var object $book */
                     $book = $books->readBookByCategory($books->getCategoryId());
                     // var_dump($book);
                     $bookData = $book->fetchAll();
@@ -101,6 +105,7 @@ class CategoriesController extends Controller
                 $count = 0;
                 $category->setId($id);
                 // On récupère les données
+                /** @var object $result */
                 $result = $category->readById();
 
                 if ($result->rowCount() > 0) {
